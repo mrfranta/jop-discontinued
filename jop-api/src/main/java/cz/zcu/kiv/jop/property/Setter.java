@@ -14,7 +14,7 @@ import cz.zcu.kiv.jop.property.exception.PropertyAccessException;
 public interface Setter<T> extends PropertyAccess<T> {
 
   /**
-   * Sets entered value to property of given <code>owner</code>.
+   * Sets given value to property of given <code>owner</code>.
    *
    * @param owner the owner of the property.
    * @param value the value which will be set to property.

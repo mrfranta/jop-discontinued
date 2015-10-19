@@ -3,6 +3,8 @@ package cz.zcu.kiv.jop.property;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 
+import cz.zcu.kiv.jop.property.exception.PropertyAccessException;
+
 /**
  * Abstract implementation of {@link PropertyAccess} interface which provides an
  * implementation of the common methods for handling of / accessing to the
@@ -28,7 +30,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 6346392989765731679L;
+  private static final long serialVersionUID = -7677437009464962597L;
 
   /** Name of property. */
   protected final String propertyName;
@@ -81,6 +83,30 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    */
   public String getMethodName() {
     return null;
+  }
+
+  /**
+   * Creates exception which can be thrown by getter in case of some problem
+   * during getting of the property value.
+   *
+   * @param message the detail message of exception.
+   * @param cause the cause of exception.
+   * @return Created {@link PropertyAccessException} for getter method.
+   */
+  protected PropertyAccessException createGetterAccessException(String message, Throwable cause) {
+    return new PropertyAccessException(message, cause, getObjectClass(), getPropertyName());
+  }
+
+  /**
+   * Creates exception which can be thrown by setter in case of some problem
+   * during setting of the value to property.
+   *
+   * @param message the detail message of exception.
+   * @param cause the cause of exception.
+   * @return Created {@link PropertyAccessException} for setter method.
+   */
+  protected PropertyAccessException createSetterAccessException(String message, Throwable cause) {
+    return new PropertyAccessException(message, cause, getObjectClass(), getPropertyName(), true);
   }
 
   /**

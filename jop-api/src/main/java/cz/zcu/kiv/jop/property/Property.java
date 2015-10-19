@@ -36,7 +36,7 @@ public interface Property<T> extends Serializable {
    *
    * @return The <em>getter</em> for the property.
    * @throws GetterNotFoundException If some error occurs during interpretation
-   *           of the getter name (getter for property was not found).
+   *           of the getter name or if getter for property was not found.
    */
   public Getter<T> getGetter() throws GetterNotFoundException;
 
@@ -46,7 +46,7 @@ public interface Property<T> extends Serializable {
    *
    * @return The <em>getter</em> for the property.
    * @throws GetterNotFoundException If some error occurs during interpretation
-   *           of the setter name (setter for property was not found).
+   *           of the setter name or if setter for property was not found.
    */
   public Setter<T> getSetter() throws SetterNotFoundException;
 
