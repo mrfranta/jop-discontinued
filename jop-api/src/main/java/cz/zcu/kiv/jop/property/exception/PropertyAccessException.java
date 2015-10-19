@@ -1,5 +1,7 @@
 package cz.zcu.kiv.jop.property.exception;
 
+import cz.zcu.kiv.jop.util.StringUtils;
+
 /**
  * This exception may occur in case that some problem occurred during
  * manipulation with property.
@@ -95,7 +97,6 @@ public class PropertyAccessException extends PropertyException {
    *         if the exception raised in {@link cz.zcu.kiv.jop.property.Setter
    *         getter}.
    */
-
   public boolean isFromSetter() {
     return fromSetter;
   }
@@ -108,12 +109,14 @@ public class PropertyAccessException extends PropertyException {
    */
   @Override
   public String getMessage() {
+    String message = super.getMessage();
+
     // @formatter:off
-    StringBuilder sb = new StringBuilder(super.getMessage())
+    StringBuilder sb = new StringBuilder(StringUtils.hasText(message) ? "" : message)
         .append(fromSetter ? " setter of " : " getter of ")
         .append(objectClass)
         .append(".")
-        .append("propertyName");
+        .append(propertyName);
     // @formatter:on
 
     return sb.toString();

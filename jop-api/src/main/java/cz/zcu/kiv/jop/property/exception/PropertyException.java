@@ -21,7 +21,7 @@ public class PropertyException extends Exception {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = -262578988095486918L;
+  private static final long serialVersionUID = 1584248425297226L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;
@@ -98,6 +98,26 @@ public class PropertyException extends Exception {
    */
   public String getPropertyName() {
     return propertyName;
+  }
+
+  /**
+   * Returns the detail message string of this exception.
+   *
+   * @return The detail message string of this {@link PropertyException}
+   *         instance.
+   */
+  @Override
+  public String getMessage() {
+    String message = super.getMessage();
+    if (message == null) {
+      // if message is null (because of complex constructors), overtake the message from cause
+      Throwable cause = getCause();
+      if (cause != null) {
+        return cause.getMessage();
+      }
+    }
+
+    return message;
   }
 
 }
