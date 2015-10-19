@@ -375,7 +375,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
       }
       catch (NullPointerException exc) {
         if (value == null && member.getParameterTypes()[0].isPrimitive()) {
-          throw createSetterAccessException("Null value was assigned to a property of primitive type", exc);
+          throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
         }
         else {
           throw createSetterAccessException("NullPointerException occurred while calling", exc);
@@ -390,7 +390,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
       }
       catch (IllegalArgumentException exc) {
         if (value == null && member.getParameterTypes()[0].isPrimitive()) {
-          throw createSetterAccessException("Null value was assigned to a property of primitive type", exc);
+          throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
         }
         else {
           logger.error("IllegalArgumentException in class: " + getObjectClass() + ", setter method of property: " + getPropertyName());
