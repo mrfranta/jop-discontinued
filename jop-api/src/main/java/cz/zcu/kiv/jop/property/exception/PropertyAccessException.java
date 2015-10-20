@@ -23,7 +23,7 @@ public class PropertyAccessException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = -4273163593064986138L;
+  private static final long serialVersionUID = 20151020L;
 
   /** Information whether the exception raised in setter. */
   protected final boolean fromSetter;

@@ -20,7 +20,7 @@ public class PropertyNotFoundException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 6219982632312688024L;
+  private static final long serialVersionUID = 20151020L;
 
   /**
    * Constructs an exception.

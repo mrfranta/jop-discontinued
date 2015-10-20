@@ -35,7 +35,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 5188420974672368425L;
+  private static final long serialVersionUID = 20151020L;
 
   /**
    * Constructs a basic property.

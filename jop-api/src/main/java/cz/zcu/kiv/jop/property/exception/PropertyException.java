@@ -21,7 +21,7 @@ public class PropertyException extends Exception {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 1584248425297226L;
+  private static final long serialVersionUID = 20151020L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;

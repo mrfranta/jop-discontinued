@@ -30,7 +30,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = -7677437009464962597L;
+  private static final long serialVersionUID = 20151020L;
 
   /** Name of property. */
   protected final String propertyName;
