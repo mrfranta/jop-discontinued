@@ -12,4 +12,11 @@
   <artifactId>jop-impl</artifactId>
   <name>API for Java Objects Populator</name>
 
+  <dependencies>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+    </dependency>
+  </dependencies>
+
 </project>
