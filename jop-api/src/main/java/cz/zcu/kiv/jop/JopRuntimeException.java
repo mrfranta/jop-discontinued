@@ -14,7 +14,6 @@ import cz.zcu.kiv.jop.util.StringUtils;
 public class JopRuntimeException extends RuntimeException {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this
