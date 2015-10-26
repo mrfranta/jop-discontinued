@@ -15,6 +15,8 @@ import java.lang.annotation.Target;
  * @since 1.0
  */
 @Documented
-@Target({ElementType.CONSTRUCTOR})
+@Target(ElementType.CONSTRUCTOR)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Constructor {}
+public @interface Constructor {
+
+}
