@@ -2,10 +2,6 @@ package cz.zcu.kiv.jop.property;
 
 import java.lang.reflect.Field;
 
-import cz.zcu.kiv.jop.property.exception.GetterNotFoundException;
-import cz.zcu.kiv.jop.property.exception.PropertyAccessException;
-import cz.zcu.kiv.jop.property.exception.PropertyNotFoundException;
-import cz.zcu.kiv.jop.property.exception.SetterNotFoundException;
 import cz.zcu.kiv.jop.util.ReflectionUtils;
 
 /**
@@ -31,7 +27,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151020L;
+  private static final long serialVersionUID = 20151026L;
 
   /**
    * Constructs a direct access property.

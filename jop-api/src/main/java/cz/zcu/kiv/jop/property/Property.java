@@ -2,9 +2,6 @@ package cz.zcu.kiv.jop.property;
 
 import java.io.Serializable;
 
-import cz.zcu.kiv.jop.property.exception.GetterNotFoundException;
-import cz.zcu.kiv.jop.property.exception.SetterNotFoundException;
-
 /**
  * This interface serves as abstraction of <em>Object</em>'s property. It
  * provides the appropriate getter and setter for manipulation with property.

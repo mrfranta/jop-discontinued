@@ -3,8 +3,6 @@ package cz.zcu.kiv.jop.property;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 
-import cz.zcu.kiv.jop.property.exception.PropertyAccessException;
-
 /**
  * Abstract implementation of {@link PropertyAccess} interface which provides an
  * implementation of the common methods for handling of / accessing to the
@@ -30,7 +28,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151020L;
+  private static final long serialVersionUID = 20151026L;
 
   /** Name of property. */
   protected final String propertyName;

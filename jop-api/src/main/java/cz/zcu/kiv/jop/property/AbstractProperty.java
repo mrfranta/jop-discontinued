@@ -1,8 +1,5 @@
 package cz.zcu.kiv.jop.property;
 
-import cz.zcu.kiv.jop.property.exception.GetterNotFoundException;
-import cz.zcu.kiv.jop.property.exception.SetterNotFoundException;
-
 /**
  * Abstract implementation of {@link Property} interface which provides an
  * implementation of the common methods for all properties.
@@ -26,7 +23,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151020L;
+  private static final long serialVersionUID = 20151026L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;

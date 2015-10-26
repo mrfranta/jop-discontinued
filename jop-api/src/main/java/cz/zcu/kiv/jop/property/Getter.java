@@ -1,7 +1,5 @@
 package cz.zcu.kiv.jop.property;
 
-import cz.zcu.kiv.jop.property.exception.PropertyAccessException;
-
 /**
  * This interface extends {@code PropertyAccess} interface for getting of
  * property value.

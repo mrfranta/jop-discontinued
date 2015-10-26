@@ -1,4 +1,4 @@
-package cz.zcu.kiv.jop.property.exception;
+package cz.zcu.kiv.jop.property;
 
 import cz.zcu.kiv.jop.util.StringUtils;
 
@@ -23,7 +23,7 @@ public class PropertyAccessException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151020L;
+  private static final long serialVersionUID = 20151026L;
 
   /** Information whether the exception raised in setter. */
   protected final boolean fromSetter;
