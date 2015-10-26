@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * This annotation may be used for determination of an access type of specific
  * attribute or all attributes of generated class.
  * </p>

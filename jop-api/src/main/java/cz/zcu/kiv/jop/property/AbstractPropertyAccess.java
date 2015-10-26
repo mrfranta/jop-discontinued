@@ -17,7 +17,6 @@ import java.lang.reflect.Method;
 public abstract class AbstractPropertyAccess<T, M extends Member> implements PropertyAccess<T> {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this

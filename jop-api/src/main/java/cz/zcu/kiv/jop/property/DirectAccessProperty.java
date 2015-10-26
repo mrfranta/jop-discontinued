@@ -16,7 +16,6 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
 public class DirectAccessProperty<T> extends AbstractProperty<T> {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this

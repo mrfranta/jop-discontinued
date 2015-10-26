@@ -12,7 +12,6 @@ package cz.zcu.kiv.jop.property;
 public abstract class AbstractProperty<T> implements Property<T> {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this

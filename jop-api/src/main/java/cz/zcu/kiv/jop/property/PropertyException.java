@@ -12,7 +12,6 @@ import cz.zcu.kiv.jop.JopException;
 public class PropertyException extends JopException {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this

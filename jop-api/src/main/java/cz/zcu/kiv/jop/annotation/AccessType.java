@@ -18,7 +18,7 @@ public enum AccessType {
    * <b>Property-based access</b> - access to fields using getters and setters
    * which may not have public access.
    */
-  PROPERTY
+  PROPERTY,
 
   /* Next field, */;
 

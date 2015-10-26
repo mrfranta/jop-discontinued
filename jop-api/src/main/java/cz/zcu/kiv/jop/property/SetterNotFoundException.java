@@ -10,7 +10,6 @@ package cz.zcu.kiv.jop.property;
 public class SetterNotFoundException extends PropertyException {
 
   /**
-   * <p>
    * Determines if a de-serialized file is compatible with this class.
    * <p>
    * Maintainers must change this value if and only if the new version of this
