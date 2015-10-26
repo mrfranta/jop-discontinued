@@ -1,7 +1,5 @@
 package cz.zcu.kiv.jop.property;
 
-import cz.zcu.kiv.jop.util.StringUtils;
-
 /**
  * This exception may occur in case that no <em>setter</em> for the property was
  * not found.
@@ -76,19 +74,13 @@ public class SetterNotFoundException extends PropertyException {
   }
 
   /**
-   * Returns the detail message string of this exception.
+   * Returns default message in case that the detail message given in exception
+   * constructor is <code>null</code>.
    *
-   * @return The detail message string of this {@link SetterNotFoundException}
-   *         instance.
+   * @return Default message of exception.
    */
   @Override
-  public String getMessage() {
-    String message = super.getMessage();
-    if (StringUtils.hasText(message)) {
-      return message; // returns custom message passed in constructor.
-    }
-
-    // default message
+  protected String getDefaultMessage() {
     return "Could not find a setter for " + propertyName + " in class " + objectClass.getName();
   }
 

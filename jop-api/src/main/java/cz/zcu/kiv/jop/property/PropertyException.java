@@ -1,5 +1,7 @@
 package cz.zcu.kiv.jop.property;
 
+import cz.zcu.kiv.jop.JopException;
+
 /**
  * The general exception which can occur during manipulation with
  * <em>Object</em>'s properties.
@@ -7,7 +9,7 @@ package cz.zcu.kiv.jop.property;
  * @author Mr.FrAnTA
  * @since 1.0
  */
-public class PropertyException extends Exception {
+public class PropertyException extends JopException {
 
   /**
    * <p>
@@ -98,26 +100,6 @@ public class PropertyException extends Exception {
    */
   public String getPropertyName() {
     return propertyName;
-  }
-
-  /**
-   * Returns the detail message string of this exception.
-   *
-   * @return The detail message string of this {@link PropertyException}
-   *         instance.
-   */
-  @Override
-  public String getMessage() {
-    String message = super.getMessage();
-    if (message == null) {
-      // if message is null (because of complex constructors), overtake the message from cause
-      Throwable cause = getCause();
-      if (cause != null) {
-        return cause.getMessage();
-      }
-    }
-
-    return message;
   }
 
 }

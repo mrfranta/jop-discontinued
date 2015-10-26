@@ -33,14 +33,13 @@ public class PropertyNotFoundException extends PropertyException {
   }
 
   /**
-   * Returns the detail message string of this exception.
+   * Returns default message in case that the detail message given in exception
+   * constructor is <code>null</code>.
    *
-   * @return The detail message string of this {@link PropertyNotFoundException}
-   *         instance.
+   * @return Default message of exception.
    */
   @Override
-  public String getMessage() {
+  protected String getDefaultMessage() {
     return "Could not find a property " + propertyName + " in class " + objectClass.getName();
   }
-
 }
