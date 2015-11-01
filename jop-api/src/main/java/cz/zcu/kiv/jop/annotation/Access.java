@@ -9,19 +9,16 @@ import java.lang.annotation.Target;
 /**
  * This annotation may be used for determination of an access type of specific
  * attribute or all attributes of generated class.
- * </p>
  *
  * <p>
  * This annotation isn't inherited and each class may specify a type of access
  * for its attributes. If is used for class, then each attribute can change an
  * access type for itself using this annotation.
- * </p>
  *
  * <p>
  * If this annotation isn't used, the default access type is used - each
  * attribute is property with getter and setter (which may not have public
  * access).
- * </p>
  *
  * @author Mr.FrAnTA
  * @since 1.0
