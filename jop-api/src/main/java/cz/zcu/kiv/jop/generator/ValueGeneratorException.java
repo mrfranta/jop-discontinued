@@ -1,16 +1,17 @@
 package cz.zcu.kiv.jop.generator;
 
-import cz.zcu.kiv.jop.JopException;
+import cz.zcu.kiv.jop.JopRuntimeException;
 
 /**
- * This exception can be thrown in case of some error occurs during
- * {@link Generator} creation - for example if no implementation of generator
- * found for given annotation.
+ * Runtime exception which can be thrown if some error occurs during value
+ * generation. Also can be thrown in case of value of some parameter is not
+ * valid. It's recommended to not throw another exception from
+ * {@link ValueGenerator#getValue generating method}.
  *
  * @author Mr.FrAnTA
  * @since 1.0
  */
-public class GeneratorFactoryException extends JopException {
+public class ValueGeneratorException extends JopRuntimeException {
 
   /**
    * Determines if a de-serialized file is compatible with this class.
@@ -26,43 +27,43 @@ public class GeneratorFactoryException extends JopException {
   private static final long serialVersionUID = 20151103L;
 
   /**
-   * Constructs a new generator factory exception with <code>null</code> as its
-   * detail message. The cause is not initialized, and may subsequently be
+   * Constructs a new exception for value generator with <code>null</code> as
+   * its detail message. The cause is not initialized, and may subsequently be
    * initialized by a call to {@link #initCause}.
    */
-  public GeneratorFactoryException() {
+  public ValueGeneratorException() {
     super();
   }
 
   /**
-   * Constructs a new generator factory exception with the specified detail
+   * Constructs a new exception for value generator with the specified detail
    * message. The cause is not initialized, and may subsequently be initialized
    * by a call to {@link #initCause}.
    *
    * @param message the detail message. The detail message is saved for later
    *          retrieval by the {@link #getMessage()} method.
    */
-  public GeneratorFactoryException(String message) {
+  public ValueGeneratorException(String message) {
     super(message);
   }
 
   /**
-   * Constructs a new generator factory exception with the specified cause and
+   * Constructs a new exception for value generator with the specified cause and
    * <code>null</code> as its detail message. This constructor is different to
-   * parent {@link Exception#Exception(Throwable) constructor} which sets detail
-   * message as message from cause. This constructor brings possibility to use
-   * {@link #getDefaultMessage} instead.
+   * parent {@link RuntimeException#RuntimeException(Throwable) constructor}
+   * which sets detail message as message from cause. This constructor brings
+   * possibility to use {@link #getDefaultMessage} instead.
    *
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
    */
-  public GeneratorFactoryException(Throwable cause) {
+  public ValueGeneratorException(Throwable cause) {
     super(null, cause);
   }
 
   /**
-   * Constructs a new generator factory exception with the specified detail
+   * Constructs a new exception for value generator with the specified detail
    * message and cause.
    * <p>
    * Note that the detail message associated with <code>cause</code> is
@@ -74,7 +75,7 @@ public class GeneratorFactoryException extends JopException {
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
    */
-  public GeneratorFactoryException(String message, Throwable cause) {
+  public ValueGeneratorException(String message, Throwable cause) {
     super(message, cause);
   }
 
