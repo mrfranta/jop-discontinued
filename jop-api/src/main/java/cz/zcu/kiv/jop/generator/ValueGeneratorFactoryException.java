@@ -5,8 +5,8 @@ import cz.zcu.kiv.jop.JopException;
 /**
  * This exception can be thrown in case of some error occurs during
  * {@link ValueGenerator} creation in {@link ValueGeneratorFactory} - for
- * example: if no implementation of value generator found for given annotation
- * or if entered annotation is not for value generators.
+ * example: if no implementation of value generator was found for given
+ * annotation or if entered annotation is not for value generators.
  *
  * @author Mr.FrAnTA
  * @since 1.0

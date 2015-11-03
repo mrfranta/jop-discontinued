@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
  * The interface is generic where first type parameter is for class type of
  * generated values. Second parameter is for annotation type of parameters for
  * generator. The parameters for {@link #getValue method} which generates the
- * value is always stored in annotation (by which is annotated the field for
+ * value are always stored in annotation (by which is annotated the field for
  * which will be generated value).
  *
  * @author Mr.FrAnTA
