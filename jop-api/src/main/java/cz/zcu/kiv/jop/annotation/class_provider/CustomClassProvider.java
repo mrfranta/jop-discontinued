@@ -11,7 +11,7 @@ import cz.zcu.kiv.jop.class_provider.ClassProvider;
 
 /**
  * Class provider annotation which determines the specific {@link ClassProvider
- * class provider} which provides class type that will be used for new instance
+ * class provider} which provides class type that may be used for new instance
  * creation.
  * <p>
  * This annotation can be also used as generator annotation which marks property

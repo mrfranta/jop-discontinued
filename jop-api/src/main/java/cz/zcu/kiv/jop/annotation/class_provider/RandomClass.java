@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
- * Class provider annotation which will select random class which will be used
+ * Class provider annotation which will select random class which may be used
  * for new instance creation. For selection of random class will be used
  * <em>Categorical distribution</em> - it will be used one of value from
  * {@link #values() values} based on their {@link #probabilities()

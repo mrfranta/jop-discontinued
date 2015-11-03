@@ -10,7 +10,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
  * Class provider annotation which determines the specific (target) class which
- * will be used for new instance creation.
+ * may be used for new instance creation.
  * <p>
  * This annotation can be also used as generator annotation which marks property
  * for which will be generated of class (<code>Class&lt;?&gt;</code>) value.
