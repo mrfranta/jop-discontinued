@@ -8,7 +8,7 @@ import java.lang.annotation.Annotation;
  * types. The provided class types can be also for types which extends the
  * defined type - for example when the <code>T</code> will be
  * <code>Animal</code> (class) then the provider can provide class type
- * <code>Class&lt;Cat&gt;</code> or <code>Class&lt;Cat&gt;</code> in case that
+ * <code>Class&lt;Cat&gt;</code> or <code>Class&lt;Dog&gt;</code> in case that
  * classes <code>Cat</code> and <code>Dog</code> extends the <code>Animal</code>
  * class.
  *
