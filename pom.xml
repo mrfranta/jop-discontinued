@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cz.zcu.kiv.jop</groupId>
   <artifactId>jop-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Parent for Java Objects Populator</name>
@@ -42,8 +43,10 @@
       <name>Michal Dékány</name>
       <email>mrfranta@students.zcu.cz</email>
       <roles>
+        <role>owner</role>
         <role>developer</role>
       </roles>
+      <timezone>GTM+1</timezone>
     </developer>
   </developers>
 
@@ -69,8 +72,17 @@
     <project.build.source>1.5</project.build.source>
     <project.build.target>1.5</project.build.target>
 
-    <junit.version>4.12</junit.version>
+    <!-- dependencies versions -->
+    <jop-api.version>1.0.0-SNAPSHOT</jop-api.version>
     <commons-logging.version>1.1.1</commons-logging.version>
+    <log4j.version>1.2.17</log4j.version>
+    <junit.version>4.12</junit.version>
+
+    <!-- plugins versions -->
+    <compiler.plugin.version>3.3</compiler.plugin.version>
+    <resources.plugin.version>2.7</resources.plugin.version>
+    <javadoc.plugin.version>2.10.3</javadoc.plugin.version>
+    <source.plugin.version>2.4</source.plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -86,8 +98,26 @@
         <artifactId>commons-logging</artifactId>
         <version>${commons-logging.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <profiles>
+    <profile>
+      <id>java8</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <properties>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
+      </properties>
+    </profile>
+  </profiles>
 
   <build>
     <pluginManagement>
@@ -95,15 +125,18 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.2</version>
+          <version>${compiler.plugin.version}</version>
           <configuration>
             <fork>true</fork>
+            <showDeprecation>true</showDeprecation>
+            <showWarnings>true</showWarnings>
             <encoding>${project.build.sourceEncoding}</encoding>
             <compilerVersion>${project.build.target}</compilerVersion>
             <source>${project.build.source}</source>
             <target>${project.build.target}</target>
             <compilerArguments>
               <verbose />
+              <Xlint />
             </compilerArguments>
           </configuration>
         </plugin>
@@ -111,13 +144,64 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.7</version>
+          <version>${resources.plugin.version}</version>
           <configuration>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${javadoc.plugin.version}</version>
+          <configuration>
+            <show>protected</show>
+            <charset>${project.build.sourceEncoding}</charset>
+            <splitindex>true</splitindex>
+            <additionalparam>${javadoc.opts}</additionalparam>
+          </configuration>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${source.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
-  </build>
 
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/log4j.xml</exclude>
+          <exclude>**/log4j.dtd</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>../</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>LICENSE.txt</include>
+          <include>NOTICE.txt</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 </project>
