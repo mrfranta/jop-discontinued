@@ -191,11 +191,11 @@ public class BasicProperty<T> extends AbstractProperty<T> {
    * @param propertyName the name of property.
    * @return Found setter method for property or <code>null</code>.
    */
-  protected static Method getSetterMethod(Class<?> theClass, String propertyName) {
-    Getter<?> getter = getGetterOrNull(theClass, propertyName);
+  protected static Method getSetterMethod(Class<?> clazz, String propertyName) {
+    Getter<?> getter = getGetterOrNull(clazz, propertyName);
     Class<?> returnType = (getter == null) ? null : getter.getPropertyType();
 
-    Method[] methods = theClass.getDeclaredMethods();
+    Method[] methods = clazz.getDeclaredMethods();
     Method potentialSetter = null;
     for (Method method : methods) {
       final String methodName = method.getName();

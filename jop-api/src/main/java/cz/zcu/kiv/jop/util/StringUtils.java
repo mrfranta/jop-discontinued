@@ -18,7 +18,7 @@ public abstract class StringUtils {
    * Checks whatever the given char sequence is <code>null</code> or empty
    * (length is equal to 0).
    *
-   * @param str the char sequence to check (may be <code>null</code>).
+   * @param cs the char sequence to check (may be <code>null</code>).
    * @return <code>true</code> if char sequence is <code>null</code> or empty;
    *         <code>false</code> otherwise.
    */
@@ -56,7 +56,7 @@ public abstract class StringUtils {
    * (length is greater than 0). Notice that for String made only by whitespace
    * will be returned <code>true</code>.
    *
-   * @param cs the String to check (may be <code>null</code>).
+   * @param str the String to check (may be <code>null</code>).
    * @return <code>true</code> if String is not <code>null</code> and has
    *         length; <code>false</code> otherwise.
    */
@@ -94,10 +94,10 @@ public abstract class StringUtils {
    * non-whitespace text - has length greater than 0 and contains at least one
    * non-whitespace character.
    *
-   * @param cs the String to check (may be <code>null</code>).
-   * @return <code>true</code> if String is not <code>null</code> and
-   *         contains a at least one non-whitespace character;
-   *         <code>false</code> otherwise.
+   * @param str the String to check (may be <code>null</code>).
+   * @return <code>true</code> if String is not <code>null</code> and contains a
+   *         at least one non-whitespace character; <code>false</code>
+   *         otherwise.
    */
   public static boolean hasText(String str) {
     return hasText((CharSequence)str);
