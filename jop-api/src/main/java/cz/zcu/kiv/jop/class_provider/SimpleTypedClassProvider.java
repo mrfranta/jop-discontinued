@@ -25,7 +25,7 @@ public abstract class SimpleTypedClassProvider<T> implements TypedClassProvider<
    * @param params the parameters for choice of provided class (unused).
    * @return Provided class type.
    * @throws ClassProviderException if some error occurs during providing of
-   *           class type or if given parameters are not valid.
+   *           class type.
    */
   public final Class<? extends T> get(Empty params) throws ClassProviderException {
     return get();
