@@ -23,7 +23,7 @@ public interface ClassProvider<P extends Annotation> {
   /**
    * Provides the the class type according to given parameters.
    *
-   * @param params the parameters for .
+   * @param params the parameters for choice of provided class.
    * @return Provided class type.
    * @throws ClassProviderException if some error occurs during providing of
    *           class type or if given parameters are not valid.
