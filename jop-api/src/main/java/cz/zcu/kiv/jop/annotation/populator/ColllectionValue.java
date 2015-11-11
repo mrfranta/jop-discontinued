@@ -48,7 +48,7 @@ public @interface ColllectionValue {
    * {@link java.util.Set Sets} consumes equals objects - it prevents infinite
    * loops for populating.
    */
-  public int max();
+  public int max() default -1;
 
   /**
    * Optional parameter for exact size of populated collection property. If the
