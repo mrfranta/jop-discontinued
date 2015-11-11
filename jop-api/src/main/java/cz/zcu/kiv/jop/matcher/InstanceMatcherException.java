@@ -27,7 +27,7 @@ public class InstanceMatcherException extends JopRuntimeException {
   private static final long serialVersionUID = 20151112L;
 
   /**
-   * Constructs a new exception for value generator with <code>null</code> as
+   * Constructs a new exception for instance matcher with <code>null</code> as
    * its detail message. The cause is not initialized, and may subsequently be
    * initialized by a call to {@link #initCause}.
    */
@@ -36,7 +36,7 @@ public class InstanceMatcherException extends JopRuntimeException {
   }
 
   /**
-   * Constructs a new exception for value generator with the specified detail
+   * Constructs a new exception for instance matcher with the specified detail
    * message. The cause is not initialized, and may subsequently be initialized
    * by a call to {@link #initCause}.
    *
@@ -48,7 +48,7 @@ public class InstanceMatcherException extends JopRuntimeException {
   }
 
   /**
-   * Constructs a new exception for value generator with the specified cause and
+   * Constructs a new exception for instance matcher with the specified cause and
    * <code>null</code> as its detail message. This constructor is different to
    * parent {@link RuntimeException#RuntimeException(Throwable) constructor}
    * which sets detail message as message from cause. This constructor brings
@@ -63,7 +63,7 @@ public class InstanceMatcherException extends JopRuntimeException {
   }
 
   /**
-   * Constructs a new exception for value generator with the specified detail
+   * Constructs a new exception for instance matcher with the specified detail
    * message and cause.
    * <p>
    * Note that the detail message associated with <code>cause</code> is
