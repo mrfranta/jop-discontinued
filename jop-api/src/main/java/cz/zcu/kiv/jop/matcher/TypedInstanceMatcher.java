@@ -30,7 +30,9 @@ public interface TypedInstanceMatcher<T, P extends Annotation> {
    *          parameters for conditions).
    * @return <code>true</code> in case that given object matches to conditions;
    *         <code>false</code> otherwise.
+   * @throws InstanceMatcherException if some error occurs during checking of
+   *           given object or if given parameters are not valid.
    */
-  public boolean matches(T obj, P params);
+  public boolean matches(T obj, P params) throws InstanceMatcherException;
 
 }

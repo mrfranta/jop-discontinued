@@ -25,6 +25,8 @@ public abstract class SimpleTypedInstanceMatcher<T> implements TypedInstanceMatc
    * @param params the parameters for matching of given object (unused).
    * @return <code>true</code> in case that given object matches to conditions;
    *         <code>false</code> otherwise.
+   * @throws InstanceMatcherException if some error occurs during checking of
+   *           given object or if given parameters are not valid.
    */
   public final boolean matches(T obj, Empty params) {
     return matches(obj);
@@ -36,6 +38,8 @@ public abstract class SimpleTypedInstanceMatcher<T> implements TypedInstanceMatc
    * @param obj the object (instance) to check.
    * @return <code>true</code> in case that given object matches to conditions;
    *         <code>false</code> otherwise.
+   * @throws InstanceMatcherException if some error occurs during checking of
+   *           given object.
    */
   public abstract boolean matches(T obj);
 
