@@ -3,9 +3,12 @@ package cz.zcu.kiv.jop.factory;
 import cz.zcu.kiv.jop.JopException;
 
 /**
+ * This exception can be thrown by {@link Factory} or their extensions if some
+ * error occurs during creation of instance for implementation of interface
+ * <code>T</code>.
  *
  * @author Mr.FrAnTA
- *
+ * @since 1.0
  */
 public class FactoryException extends JopException {
 
