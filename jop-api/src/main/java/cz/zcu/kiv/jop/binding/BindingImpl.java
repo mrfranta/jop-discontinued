@@ -3,6 +3,8 @@ package cz.zcu.kiv.jop.binding;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 
+import javax.inject.Singleton;
+
 import cz.zcu.kiv.jop.util.Preconditions;
 
 /**
@@ -116,10 +118,21 @@ public class BindingImpl<T> implements Binding<T> {
   }
 
   /**
+   * Returns information whatever the bound type is annotated by
+   * {@link Singleton} annotation - this type is always singleton.
+   *
+   * @return <code>true</code> if bound type is annotated by {@link Singleton}
+   *         annotation; <code>false</code> otherwise.
+   */
+  final boolean isAnnotatedAsSingleton() {
+    return (type != null && type.getAnnotation(Singleton.class) != null);
+  }
+
+  /**
    * {@inheritDoc}
    */
   public boolean isSingleton() {
-    return isSingleton;
+    return isSingleton || isAnnotatedAsSingleton();
   }
 
   /**
@@ -173,7 +186,7 @@ public class BindingImpl<T> implements Binding<T> {
       constructor.setAccessible(true);
 
       try {
-        if (!isSingleton) {
+        if (!isSingleton()) {
           return constructor.newInstance();
         }
 
