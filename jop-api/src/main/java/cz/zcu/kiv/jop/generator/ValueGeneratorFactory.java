@@ -2,30 +2,37 @@ package cz.zcu.kiv.jop.generator;
 
 import java.lang.annotation.Annotation;
 
+import cz.zcu.kiv.jop.factory.BindingFactory;
+import cz.zcu.kiv.jop.factory.FactoryException;
+
 /**
- * The interface for factory which serve for creation of {@link ValueGenerator
- * ValueGenerators}. The generators should be created using this factory. The
- * created generators can be also cached so the returned instances will be
- * "singletons".
+ * The interface for factory which serves for creation of {@link ValueGenerator
+ * ValueGenerators}. Value generators should be created primary by this factory.
  *
  * @author Mr.FrAnTA
  * @since 1.0
  */
-public interface ValueGeneratorFactory {
+public interface ValueGeneratorFactory extends BindingFactory<ValueGenerator<?, ?>> {
 
   /**
-   * Creates and returns value generator for given annotation. The generators
-   * can be cached so the returned instance can be "singleton". In case that
-   * there was no appropriate implementation of generator found for given
-   * annotation the exception may be thrown - the <code>null</code> value should
-   * not be returned.
+   * Returns created instance of bound implementation of value generator for
+   * given annotation. If the given class is annotated by
+   * {@link javax.inject.Singleton Singleton} annotation it will be cached so
+   * the returned instances will be singletons. Otherwise the factory always
+   * creates new instance for each call of this method.
+   * <p>
+   * In case that there is no bound implementation of class value generator for
+   * given annotation the exception may be thrown - the <code>null</code> value
+   * should not be returned.
    *
-   * @param annotation the generator annotation for which will be created
-   *          appropriate generator.
-   * @return Created value generator for given annotation.
-   * @throws ValueGeneratorFactoryException if some error occurs during value
-   *           generator creation.
+   * @param annotation the annotation for which will be created bound instance
+   *          of value generator implementation.
+   * @return Created instance of value generator implementation which was bound
+   *         to given annotation.
+   * @throws FactoryException if some error occurs during creation of (new)
+   *           instance of given class or if no implementation was bound to
+   *           given annotation.
    */
-  public <A extends Annotation> ValueGenerator<?, A> createValueGenerator(A annotation) throws ValueGeneratorFactoryException;
+  public <A extends Annotation> ValueGenerator<?, A> createInstance(A annotation) throws FactoryException;
 
 }

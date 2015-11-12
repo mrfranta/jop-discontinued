@@ -2,30 +2,37 @@ package cz.zcu.kiv.jop.matcher;
 
 import java.lang.annotation.Annotation;
 
+import cz.zcu.kiv.jop.factory.BindingFactory;
+import cz.zcu.kiv.jop.factory.FactoryException;
+
 /**
- * The interface for factory which serve for creation of {@link InstanceMatcher
- * InstanceMatchers}. The instance matchers should be created using this
- * factory. The created matchers can be also cached so the returned instances
- * will be "singletons".
+ * The interface for factory which serves for creation of {@link TypedInstanceMatcher
+ * TypedInstanceMatchers}. Instance matchers should be created primary by this factory.
  *
  * @author Mr.FrAnTA
  * @since 1.0
  */
-public interface InstanceMatcherFactory {
+public interface InstanceMatcherFactory extends BindingFactory<TypedInstanceMatcher<?, ?>> {
 
   /**
-   * Creates and returns instance matcher for given annotation. The matchers can
-   * be cached so the returned instance can be "singleton". In case that there
-   * was no appropriate implementation of matcher found for given annotation the
-   * exception may be thrown - the <code>null</code> value should not be
-   * returned.
+   * Returns created instance of bound implementation of instance matcher for
+   * given annotation. If the given class is annotated by
+   * {@link javax.inject.Singleton Singleton} annotation it will be cached so
+   * the returned instances will be singletons. Otherwise the factory always
+   * creates new instance for each call of this method.
+   * <p>
+   * In case that there is no bound implementation of class instance matcher for
+   * given annotation the exception may be thrown - the <code>null</code> value
+   * should not be returned.
    *
-   * @param annotation the instance matcher annotation for which will be created
-   *          appropriate instance matcher.
-   * @return Created instance matcher for given annotation.
-   * @throws InstanceMatcherFactoryException if some error occurs during
-   *           instance matcher creation.
+   * @param annotation the annotation for which will be created bound instance
+   *          of instance matcher implementation.
+   * @return Created instance of instance matcher implementation which was bound
+   *         to given annotation.
+   * @throws FactoryException if some error occurs during creation of (new)
+   *           instance of given class or if no implementation was bound to
+   *           given annotation.
    */
-  public <A extends Annotation> TypedInstanceMatcher<?, A> createInstanceMatcher(A annotation) throws InstanceMatcherFactoryException;
+  public <A extends Annotation> TypedInstanceMatcher<?, A> createInstance(A annotation) throws FactoryException;
 
 }
