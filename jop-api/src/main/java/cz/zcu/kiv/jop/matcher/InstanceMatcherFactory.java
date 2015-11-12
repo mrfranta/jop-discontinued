@@ -6,8 +6,9 @@ import cz.zcu.kiv.jop.factory.BindingFactory;
 import cz.zcu.kiv.jop.factory.FactoryException;
 
 /**
- * The interface for factory which serves for creation of {@link TypedInstanceMatcher
- * TypedInstanceMatchers}. Instance matchers should be created primary by this factory.
+ * The interface for factory which serves for creation of
+ * {@link TypedInstanceMatcher TypedInstanceMatchers}. Instance matchers should
+ * be created primary by this factory.
  *
  * @author Mr.FrAnTA
  * @since 1.0
