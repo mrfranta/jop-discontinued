@@ -15,6 +15,13 @@
   <name>API for Java Objects Populator</name>
 
   <dependencies>
+    <!-- utilities -->
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+
+    <!-- logging -->
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
@@ -27,6 +34,7 @@
       <optional>true</optional>
     </dependency>
 
+    <!-- testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
