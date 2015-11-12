@@ -39,12 +39,18 @@ public @interface RandomClassForName {
   public String[] values();
 
   /**
-   * Required parameter for probabilities of outcome values. The number of
-   * probabilities has to be same like number of values. Also value of each
-   * probability should be greater or equal to 0 and lesser or equal to 1.To
-   * ensure that the sum of probabilities will be always 1, the values are
-   * automatically normalized.
+   * Optional parameter for probabilities of outcome values. If the
+   * probabilities won't be set the uniform distribution will be used (all
+   * values has same probability).
+   * <p>
+   * The number of probabilities should be lesser that or equals to number of
+   * values. In case of lesser number of probabilities, the value 0.0 will be
+   * used for rest of values.
+   * <p>
+   * Values of probabilities should be greater or equal to 0 and lesser or equal
+   * to 1.0. To ensure that the summary of probabilities will be always 1.0, the
+   * values are automatically normalized.
    */
-  public double[] probabilities();
+  public double[] probabilities() default {};
 
 }
