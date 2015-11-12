@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.annotation.Empty;
-import cz.zcu.kiv.jop.class_provider.ClassProvider;
 import cz.zcu.kiv.jop.matcher.TypedInstanceMatcher;
 
 /**
@@ -17,7 +16,7 @@ import cz.zcu.kiv.jop.matcher.TypedInstanceMatcher;
  * cannot support parameters (only supported is {@link Empty} annotation for
  * empty parameters).
  *
- * @see ClassProvider
+ * @see TypedInstanceMatcher
  *
  * @author Mr.FrAnTA
  * @since 1.0
