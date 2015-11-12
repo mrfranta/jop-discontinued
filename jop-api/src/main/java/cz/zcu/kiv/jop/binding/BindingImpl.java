@@ -83,17 +83,15 @@ public class BindingImpl<T> implements Binding<T> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
-  public Class<Annotation> getAnnotation() {
-    return (Class<Annotation>)annotation;
+  public Class<? extends Annotation> getAnnotation() {
+    return annotation;
   }
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
-  public Class<T> getType() {
-    return (Class<T>)type;
+  public Class<? extends T> getType() {
+    return type;
   }
 
   /**

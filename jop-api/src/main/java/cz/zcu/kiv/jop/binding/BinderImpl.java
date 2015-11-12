@@ -27,13 +27,13 @@ public class BinderImpl<T> implements Binder<T> {
    * Map of all created bindings. The map is used because of simpler getting of
    * created binding because each annotation can have only one binding.
    */
-  protected final Map<Class<Annotation>, Binding<T>> bindings;
+  protected final Map<Class<? extends Annotation>, Binding<T>> bindings;
 
   /**
    * Constructs a new binder.
    */
   public BinderImpl() {
-    bindings = new ConcurrentHashMap<Class<Annotation>, Binding<T>>();
+    bindings = new ConcurrentHashMap<Class<? extends Annotation>, Binding<T>>();
   }
 
   /**

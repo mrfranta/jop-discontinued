@@ -23,7 +23,7 @@ public interface Binding<T> {
    *
    * @return Class type of annotation.
    */
-  public Class<Annotation> getAnnotation();
+  public Class<? extends Annotation> getAnnotation();
 
   /**
    * Returns class type of object which was bound to annotation for which was
@@ -31,7 +31,7 @@ public interface Binding<T> {
    *
    * @return Class type of bound object.
    */
-  public Class<T> getType();
+  public Class<? extends T> getType();
 
   /**
    * Returns information whether the bound object will be singleton or each call
