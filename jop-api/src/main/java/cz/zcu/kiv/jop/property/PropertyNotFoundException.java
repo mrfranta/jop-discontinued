@@ -19,7 +19,7 @@ public class PropertyNotFoundException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20151113L;
 
   /**
    * Constructs an exception.
@@ -39,6 +39,6 @@ public class PropertyNotFoundException extends PropertyException {
    */
   @Override
   protected String getDefaultMessage() {
-    return "Could not find a property " + propertyName + " in class " + objectClass.getName();
+    return "Could not find a property '" + propertyName + "' in class " + objectClass.getName();
   }
 }

@@ -1,6 +1,7 @@
 package cz.zcu.kiv.jop.property;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 
 /**
  * This interface serves as abstraction of <em>Object</em>'s property. It
@@ -26,6 +27,18 @@ public interface Property<T> extends Serializable {
    * @return The property name.
    */
   public String getPropertyName();
+
+  /**
+   * Returns array of annotations by which is annotated property. If there is no
+   * annotation for the property it returns empty array (it never returns
+   * <code>null</code> value).
+   *
+   * @return Array of annotations by which is annotated property.
+   * @throws PropertyException if some error occurs during obtaining of property
+   *           annotations - for example when this property was created for
+   *           non-existing field.
+   */
+  public Annotation[] getAnnotations() throws PropertyException;
 
   /**
    * Creates and returns the instance of appropriate <em>getter</em> for the

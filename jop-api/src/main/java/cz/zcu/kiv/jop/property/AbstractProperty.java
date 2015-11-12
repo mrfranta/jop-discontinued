@@ -1,5 +1,10 @@
 package cz.zcu.kiv.jop.property;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+
+import cz.zcu.kiv.jop.util.ReflectionUtils;
+
 /**
  * Abstract implementation of {@link Property} interface which provides an
  * implementation of the common methods for all properties.
@@ -22,12 +27,15 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20151113L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;
   /** Name of property. */
   protected final String propertyName;
+
+  /** Cache for array of annotations by which is annotated property. */
+  private Annotation[] annotations;
 
   /** Created getter for property. */
   protected Getter<T> getter;
@@ -57,6 +65,18 @@ public abstract class AbstractProperty<T> implements Property<T> {
    */
   public String getPropertyName() {
     return propertyName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Annotation[] getAnnotations() throws PropertyException {
+    if (annotations == null) {
+      Field field = getField(objectClass, propertyName);
+      annotations = field.getAnnotations();
+    }
+
+    return annotations;
   }
 
   /**
@@ -98,5 +118,47 @@ public abstract class AbstractProperty<T> implements Property<T> {
    *           of the setter name (setter for property was not found).
    */
   protected abstract Setter<T> createSetter() throws SetterNotFoundException;
+
+  /**
+   * Recursively searches for declared field with given name in given class and
+   * in all parent classes or implemented interfaces. If the field is not found,
+   * the exception is thrown.
+   *
+   * @param clazz the class type of a field owner.
+   * @param fieldName the name of field.
+   * @return Found declared field.
+   * @throws PropertyNotFoundException If the declared field with given name was
+   *           not found.
+   */
+  protected static Field getField(Class<?> clazz, String fieldName) throws PropertyNotFoundException {
+    return getField(clazz, clazz, fieldName);
+  }
+
+  /**
+   * Recursively searches for declared field with given name in given class and
+   * in all parent classes or implemented interfaces. If the field is not found,
+   * the exception is thrown.
+   *
+   * @param root the root class type of a field owner (the class from the
+   *          recursion started).
+   * @param clazz the class type of a field owner.
+   * @param fieldName the name of field.
+   * @return Found declared field.
+   * @throws PropertyNotFoundException If the declared field with given name was
+   *           not found.
+   */
+  protected static Field getField(Class<?> root, Class<?> clazz, String fieldName) throws PropertyNotFoundException {
+    if (clazz == null || clazz == Object.class) {
+      throw new PropertyNotFoundException(root, fieldName);
+    }
+
+    // the declared field will be accessible, no additional setting is needed.
+    Field field = ReflectionUtils.getDeclaredField(clazz, fieldName);
+    if (field == null) {
+      field = getField(root, clazz.getSuperclass(), fieldName);
+    }
+
+    return field;
+  }
 
 }

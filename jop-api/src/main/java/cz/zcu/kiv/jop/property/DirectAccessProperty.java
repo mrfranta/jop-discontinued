@@ -2,8 +2,6 @@ package cz.zcu.kiv.jop.property;
 
 import java.lang.reflect.Field;
 
-import cz.zcu.kiv.jop.util.ReflectionUtils;
-
 /**
  * The implementation of <em>Object</em>'s property. It provides the getter and
  * setter, which use the {@link Field} for manipulation with property.
@@ -26,7 +24,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20151113L;
 
   /**
    * Constructs a direct access property.
@@ -62,48 +60,6 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
     catch (PropertyNotFoundException exc) {
       throw new SetterNotFoundException(exc, objectClass, propertyName);
     }
-  }
-
-  /**
-   * Recursively searches for declared field with given name in given class and
-   * in all parent classes or implemented interfaces. If the field is not found,
-   * the exception is thrown.
-   *
-   * @param clazz the class type of a field owner.
-   * @param fieldName the name of field.
-   * @return Found declared field.
-   * @throws PropertyNotFoundException If the declared field with given name was
-   *           not found.
-   */
-  protected static Field getField(Class<?> clazz, String fieldName) throws PropertyNotFoundException {
-    return getField(clazz, clazz, fieldName);
-  }
-
-  /**
-   * Recursively searches for declared field with given name in given class and
-   * in all parent classes or implemented interfaces. If the field is not found,
-   * the exception is thrown.
-   *
-   * @param root the root class type of a field owner (the class from the
-   *          recursion started).
-   * @param clazz the class type of a field owner.
-   * @param fieldName the name of field.
-   * @return Found declared field.
-   * @throws PropertyNotFoundException If the declared field with given name was
-   *           not found.
-   */
-  protected static Field getField(Class<?> root, Class<?> clazz, String fieldName) {
-    if (clazz == null || clazz == Object.class) {
-      return null;
-    }
-
-    // the declared field will be accessible, no additional setting is needed.
-    Field field = ReflectionUtils.getDeclaredField(clazz, fieldName);
-    if (field == null) {
-      field = getField(root, clazz.getSuperclass(), fieldName);
-    }
-
-    return field;
   }
 
   /**
