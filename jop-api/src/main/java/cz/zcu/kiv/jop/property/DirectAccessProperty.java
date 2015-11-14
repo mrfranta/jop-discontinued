@@ -24,7 +24,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151113L;
+  private static final long serialVersionUID = 20151114L;
 
   /**
    * Constructs a direct access property.
@@ -42,7 +42,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   @Override
   protected Getter<T> createGetter() throws GetterNotFoundException {
     try {
-      return new DirectGetter<T>(propertyName, getField(objectClass, propertyName));
+      return new DirectGetter<T>(propertyName, getField());
     }
     catch (PropertyNotFoundException exc) {
       throw new GetterNotFoundException(exc, objectClass, propertyName);
@@ -55,7 +55,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   @Override
   protected Setter<T> createSetter() throws SetterNotFoundException {
     try {
-      return new DirectSetter<T>(propertyName, getField(objectClass, propertyName));
+      return new DirectSetter<T>(propertyName, getField());
     }
     catch (PropertyNotFoundException exc) {
       throw new SetterNotFoundException(exc, objectClass, propertyName);

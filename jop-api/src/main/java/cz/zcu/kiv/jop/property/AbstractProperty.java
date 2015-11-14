@@ -27,20 +27,23 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151113L;
+  private static final long serialVersionUID = 20151114L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;
   /** Name of property. */
   protected final String propertyName;
 
-  /** Cache for array of annotations by which is annotated property. */
-  private Annotation[] annotations;
+  /**
+   * Field for property which can be lazy loaded (when is required) - use getter
+   * {@link #getField()} instead of direct access.
+   */
+  transient Field field;
 
   /** Created getter for property. */
-  protected Getter<T> getter;
+  protected transient Getter<T> getter;
   /** Created setter for property. */
-  protected Setter<T> setter;
+  protected transient Setter<T> setter;
 
   /**
    * Constructs an abstract property.
@@ -69,14 +72,74 @@ public abstract class AbstractProperty<T> implements Property<T> {
 
   /**
    * {@inheritDoc}
+   *
+   * @throws PropertyRuntimeException If some error occurs during getting
+   *           annotation for property.
    */
-  public Annotation[] getAnnotations() throws PropertyException {
-    if (annotations == null) {
-      Field field = getField(objectClass, propertyName);
-      annotations = field.getAnnotations();
+  public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
+    try {
+      return getField().isAnnotationPresent(annotationType);
     }
+    catch (PropertyNotFoundException exc) {
+      throw new PropertyRuntimeException(exc, objectClass, propertyName);
+    }
+  }
 
-    return annotations;
+  /**
+   * {@inheritDoc}
+   *
+   * @throws PropertyRuntimeException If some error occurs during getting
+   *           annotation for property.
+   */
+  public <A extends Annotation> A getAnnotation(Class<A> annotationType) {
+    try {
+      return getField().getAnnotation(annotationType);
+    }
+    catch (PropertyNotFoundException exc) {
+      throw new PropertyRuntimeException(exc, objectClass, propertyName);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @throws PropertyRuntimeException If some error occurs during getting
+   *           annotation for property.
+   */
+  public Annotation[] getAnnotations() {
+    try {
+      return getField().getAnnotations();
+    }
+    catch (PropertyNotFoundException exc) {
+      throw new PropertyRuntimeException(exc, objectClass, propertyName);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @throws PropertyRuntimeException If some error occurs during getting
+   *           annotation for property.
+   */
+  public Annotation[] getDeclaredAnnotations() {
+    try {
+      return getField().getDeclaredAnnotations();
+    }
+    catch (PropertyNotFoundException exc) {
+      throw new PropertyRuntimeException(exc, objectClass, propertyName);
+    }
+  }
+
+  /**
+   * Returns field for property which is lazy loaded. Because of that is
+   * strongly suggested to use this getter instead of direct access.
+   *
+   * @return
+   * @throws PropertyNotFoundException If the field with given name was not
+   *           found in <code>objectClass</code>.
+   */
+  protected Field getField() throws PropertyNotFoundException {
+    return field == null ? field = getField(objectClass, propertyName) : field;
   }
 
   /**
