@@ -22,30 +22,36 @@ public class PropertyAccessException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20151114L;
 
   /** Information whether the exception raised in setter. */
   protected final boolean fromSetter;
 
   /**
-   * Constructs an exception.
+   * Constructs a new property access exception with the specified detail
+   * message. The cause is not initialized, and may subsequently be initialized
+   * by a call to {@link #initCause}.
+   * <p>
+   * This exception was raised from getter.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyAccessException(String message, Class<?> objectClass, String propertyName) {
     this(message, null, objectClass, propertyName, false);
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property access exception with the specified detail
+   * message. The cause is not initialized, and may subsequently be initialized
+   * by a call to {@link #initCause}.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    * @param fromSetter information whether the exception raised in
    *          {@link cz.zcu.kiv.jop.property.Setter setter}.
    */
@@ -54,30 +60,40 @@ public class PropertyAccessException extends PropertyException {
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property access exception with the specified detail
+   * message and cause.
+   * <p>
+   * Note that the detail message associated with <code>cause</code> is
+   * <i>not</i> automatically incorporated in this exception's detail message.
+   * <p>
+   * This exception was raised from getter.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyAccessException(String message, Throwable cause, Class<?> objectClass, String propertyName) {
     this(message, cause, objectClass, propertyName, false);
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property access exception with the specified detail
+   * message and cause.
+   * <p>
+   * Note that the detail message associated with <code>cause</code> is
+   * <i>not</i> automatically incorporated in this exception's detail message.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    * @param fromSetter information whether the exception raised in
    *          {@link cz.zcu.kiv.jop.property.Setter setter}.
    */
@@ -112,10 +128,10 @@ public class PropertyAccessException extends PropertyException {
 
     // @formatter:off
     StringBuilder sb = new StringBuilder(StringUtils.hasText(message) ? "" : message)
-        .append(fromSetter ? " setter of " : " getter of ")
-        .append(objectClass)
+        .append(isFromSetter() ? " setter of " : " getter of ")
+        .append(getObjectClassName())
         .append(".")
-        .append(propertyName);
+        .append(getPropertyName());
     // @formatter:on
 
     return sb.toString();

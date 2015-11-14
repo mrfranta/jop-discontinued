@@ -19,13 +19,15 @@ public class PropertyNotFoundException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151113L;
+  private static final long serialVersionUID = 20151114L;
 
   /**
-   * Constructs an exception.
+   * Constructs a new runtime exception with <code>null</code> as its detail
+   * message. The cause is not initialized, and may subsequently be initialized
+   * by a call to {@link #initCause}.
    *
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property
    */
   public PropertyNotFoundException(Class<?> objectClass, String propertyName) {
     super(objectClass, propertyName);
@@ -39,6 +41,7 @@ public class PropertyNotFoundException extends PropertyException {
    */
   @Override
   protected String getDefaultMessage() {
-    return "Could not find a property '" + propertyName + "' in class " + objectClass.getName();
+    return "Could not find a property '" + getPropertyName() + "' in class " + getObjectClassName();
   }
+
 }

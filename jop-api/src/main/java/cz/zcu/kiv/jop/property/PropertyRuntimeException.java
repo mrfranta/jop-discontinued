@@ -1,13 +1,15 @@
 package cz.zcu.kiv.jop.property;
 
+import cz.zcu.kiv.jop.JopRuntimeException;
+
 /**
- * This exception may occur in case that no <em>setter</em> for the property was
- * not found.
+ * The general runtime exception which can occur during manipulation with
+ * <em>Object</em>'s properties.
  *
  * @author Mr.FrAnTA
  * @since 1.0
  */
-public class SetterNotFoundException extends PropertyException {
+public class PropertyRuntimeException extends JopRuntimeException {
 
   /**
    * Determines if a de-serialized file is compatible with this class.
@@ -22,20 +24,26 @@ public class SetterNotFoundException extends PropertyException {
    */
   private static final long serialVersionUID = 20151114L;
 
+  /** Class type of a property owner. */
+  protected final Class<?> objectClass;
+
+  /** Name of property. */
+  protected final String propertyName;
+
   /**
-   * Constructs a new exception for not found setter with <code>null</code> as
-   * its detail message. The cause is not initialized, and may subsequently be
+   * Constructs a new property runtime exception with <code>null</code> as its
+   * detail message. The cause is not initialized, and may subsequently be
    * initialized by a call to {@link #initCause}.
    *
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public SetterNotFoundException(Class<?> objectClass, String propertyName) {
+  public PropertyRuntimeException(Class<?> objectClass, String propertyName) {
     this(null, null, objectClass, propertyName);
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified detail
+   * Constructs a new property runtime exception with the specified detail
    * message. The cause is not initialized, and may subsequently be initialized
    * by a call to {@link #initCause}.
    *
@@ -44,16 +52,16 @@ public class SetterNotFoundException extends PropertyException {
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public SetterNotFoundException(String message, Class<?> objectClass, String propertyName) {
+  public PropertyRuntimeException(String message, Class<?> objectClass, String propertyName) {
     this(message, null, objectClass, propertyName);
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified cause
-   * and <code>null</code> as its detail message. This constructor is different
-   * to parent {@link Exception#Exception(Throwable) constructor} which sets
-   * detail message as message from cause. This constructor brings possibility
-   * to use {@link #getDefaultMessage} instead.
+   * Constructs a new property runtime exception with the specified cause and
+   * <code>null</code> as its detail message. This constructor is different to
+   * parent {@link RuntimeException#RuntimeException(Throwable) constructor}
+   * which sets detail message as message from cause. This constructor brings
+   * possibility to use {@link #getDefaultMessage} instead.
    *
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
@@ -61,12 +69,12 @@ public class SetterNotFoundException extends PropertyException {
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public SetterNotFoundException(Throwable cause, Class<?> objectClass, String propertyName) {
+  public PropertyRuntimeException(Throwable cause, Class<?> objectClass, String propertyName) {
     this(null, cause, objectClass, propertyName);
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified detail
+   * Constructs a new property runtime exception with the specified detail
    * message and cause.
    * <p>
    * Note that the detail message associated with <code>cause</code> is
@@ -80,19 +88,38 @@ public class SetterNotFoundException extends PropertyException {
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public SetterNotFoundException(String message, Throwable cause, Class<?> objectClass, String propertyName) {
-    super(message, cause, objectClass, propertyName);
+  public PropertyRuntimeException(String message, Throwable cause, Class<?> objectClass, String propertyName) {
+    super(message, cause);
+
+    this.objectClass = objectClass;
+    this.propertyName = propertyName;
   }
 
   /**
-   * Returns default message in case that the detail message given in exception
-   * constructor is <code>null</code>.
+   * Returns the class type of a property owner.
    *
-   * @return Default message of exception.
+   * @return Class type of property owner.
    */
-  @Override
-  protected String getDefaultMessage() {
-    return "Could not find a setter for " + getPropertyName() + " in class " + getObjectClassName();
+  public Class<?> getObjectClass() {
+    return objectClass;
+  }
+
+  /**
+   * Returns the class type name of a property owner.
+   *
+   * @return Class type name of property owner.
+   */
+  public String getObjectClassName() {
+    return (objectClass == null) ? null : objectClass.getName();
+  }
+
+  /**
+   * Returns the name of property.
+   *
+   * @return The property name.
+   */
+  public String getPropertyName() {
+    return propertyName;
   }
 
 }

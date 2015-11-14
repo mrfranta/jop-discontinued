@@ -22,7 +22,7 @@ public class PropertyException extends JopException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20151114L;
 
   /** Class type of a property owner. */
   protected final Class<?> objectClass;
@@ -31,50 +31,62 @@ public class PropertyException extends JopException {
   protected final String propertyName;
 
   /**
-   * Constructs an exception.
+   * Constructs a new property exception with <code>null</code> as its detail
+   * message. The cause is not initialized, and may subsequently be initialized
+   * by a call to {@link #initCause}.
    *
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyException(Class<?> objectClass, String propertyName) {
     this(null, null, objectClass, propertyName);
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property exception with the specified detail message. The
+   * cause is not initialized, and may subsequently be initialized by a call to
+   * {@link #initCause}.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyException(String message, Class<?> objectClass, String propertyName) {
     this(message, null, objectClass, propertyName);
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property exception with the specified cause and
+   * <code>null</code> as its detail message. This constructor is different to
+   * parent {@link Exception#Exception(Throwable) constructor} which sets detail
+   * message as message from cause. This constructor brings possibility to use
+   * {@link #getDefaultMessage} instead.
    *
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyException(Throwable cause, Class<?> objectClass, String propertyName) {
     this(null, cause, objectClass, propertyName);
   }
 
   /**
-   * Constructs an exception.
+   * Constructs a new property exception with the specified detail message and
+   * cause.
+   * <p>
+   * Note that the detail message associated with <code>cause</code> is
+   * <i>not</i> automatically incorporated in this exception's detail message.
    *
    * @param message the detail message (which is saved for later retrieval by
    *          the {@link #getMessage()} method).
    * @param cause the cause (which is saved for later retrieval by the
    *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
    *          and indicates that the cause is nonexistent or unknown.)
-   * @param objectClass class type of a property owner.
-   * @param propertyName name of property.
+   * @param objectClass the class type of a property owner.
+   * @param propertyName the name of property.
    */
   public PropertyException(String message, Throwable cause, Class<?> objectClass, String propertyName) {
     super(message, cause);
@@ -90,6 +102,15 @@ public class PropertyException extends JopException {
    */
   public Class<?> getObjectClass() {
     return objectClass;
+  }
+
+  /**
+   * Returns the class type name of a property owner.
+   *
+   * @return Class type name of property owner.
+   */
+  public String getObjectClassName() {
+    return (objectClass == null) ? null : objectClass.getName();
   }
 
   /**
