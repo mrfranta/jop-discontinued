@@ -3,6 +3,8 @@ package cz.zcu.kiv.jop.property;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 
+import cz.zcu.kiv.jop.util.Preconditions;
+
 /**
  * Abstract implementation of {@link PropertyAccess} interface which provides an
  * implementation of the common methods for handling of / accessing to the
@@ -41,8 +43,8 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    * @param member the member which will be used for access to property.
    */
   public AbstractPropertyAccess(String propertyName, M member) {
-    this.propertyName = propertyName;
-    this.member = member;
+    this.propertyName = Preconditions.checkArgumentNotNull(propertyName, "Name of property cannot be null");
+    this.member = Preconditions.checkArgumentNotNull(member, "Member cannot be null");
   }
 
   /**

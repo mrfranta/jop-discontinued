@@ -3,6 +3,7 @@ package cz.zcu.kiv.jop.property;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import cz.zcu.kiv.jop.util.Preconditions;
 import cz.zcu.kiv.jop.util.ReflectionUtils;
 
 /**
@@ -52,8 +53,8 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * @param propertyName the name of property.
    */
   public AbstractProperty(Class<?> objectClass, String propertyName) {
-    this.objectClass = objectClass;
-    this.propertyName = propertyName;
+    this.objectClass = Preconditions.checkArgumentNotNull(objectClass, "Class type cannot be null");
+    this.propertyName = Preconditions.checkArgumentNotNull(propertyName, "Name of property cannot be null");
   }
 
   /**
