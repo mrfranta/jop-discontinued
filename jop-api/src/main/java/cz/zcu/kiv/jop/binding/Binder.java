@@ -21,7 +21,8 @@ public interface Binder<T> {
    * Creates builder for binding of given annotation type. In case that given
    * annotation type was already bound the exception can be thrown.
    *
-   * @param annotation
+   * @param annotation the class type of annotation of which will be created
+   *          binding (builder).
    * @return Binding builder for binding creation.
    * @throws BindingException If some binding for given annotation already
    *           exists.
@@ -33,7 +34,8 @@ public interface Binder<T> {
    * annotation type was already bound no exception is thrown but already
    * created binding is replaced with this one.
    *
-   * @param annotation
+   * @param annotation the class type of annotation of which will be created
+   *          binding (builder).
    * @return Binding builder for binding creation.
    */
   public BindingBuilder<T> rebind(Class<? extends Annotation> annotation);
