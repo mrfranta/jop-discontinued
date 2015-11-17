@@ -1,11 +1,12 @@
 package cz.zcu.kiv.jop.binding;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 
 import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.util.Preconditions;
+import cz.zcu.kiv.jop.util.ReflectionException;
+import cz.zcu.kiv.jop.util.ReflectionUtils;
 
 /**
  * Basic implementation of {@link Binding} interface which allows to create
@@ -175,25 +176,16 @@ public class BindingImpl<T> implements Binding<T> {
         throw new BindingException("No class bound for annotation " + annotation.getName());
       }
 
-      Constructor<? extends T> constructor = null;
       try {
-        constructor = type.getDeclaredConstructor();
-      }
-      catch (Exception exc) {
-        throw new BindingException("Cannot get declared parameterless constructor of " + type.getName());
-      }
-
-      constructor.setAccessible(true);
-
-      try {
-        if (!isSingleton()) {
-          return constructor.newInstance();
+        T instance = ReflectionUtils.createInstance(type);
+        if (isSingleton()) {
+          this.instance = instance;
         }
 
-        instance = constructor.newInstance();
+        return instance;
       }
-      catch (Exception exc) {
-        throw new BindingException("Cannot create new instance of " + type.getName());
+      catch (ReflectionException exc) {
+        throw new BindingException(exc);
       }
     }
 

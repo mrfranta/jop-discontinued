@@ -1,5 +1,6 @@
 package cz.zcu.kiv.jop.util;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -30,6 +31,89 @@ public abstract class ReflectionUtils {
    */
   public static boolean isAccessible(Member member) {
     return (member != null && Modifier.isPublic(member.getModifiers()) && !member.isSynthetic());
+  }
+
+  /**
+   * Creates a new instance of given class type in case that given class has
+   * declared parameterless constructor. In case that some problem occurs during
+   * new instance creation the exception will be thrown.
+   *
+   * @param clazz the class type for which will be created a new instance.
+   * @return New instance of given class.
+   * @throws ReflectionException If some error occurs during new instance
+   *           creation or if there is no declared parameterless constructor in
+   *           given class.
+   */
+  public static <T> T createInstance(Class<T> clazz) throws ReflectionException {
+    Constructor<T> constructor = null;
+    try {
+      constructor = clazz.getDeclaredConstructor();
+    }
+    catch (Exception exc) {
+      throw new ReflectionException("Cannot get declared parameterless constructor of " + clazz.getName(), exc);
+    }
+
+    return createInstance(constructor);
+  }
+
+  /**
+   * Creates a new instance of given class type in case that given class has
+   * declared constructor accepting given parameters. In case that some problem
+   * occurs during new instance creation the exception will be thrown.
+   *
+   * @param clazz the class type for which will be created a new instance.
+   * @param params variable argument for parameters of class constructor.
+   * @return New instance of given class.
+   * @throws ReflectionException If some error occurs during new instance
+   *           creation or if there is no declared constructor matching given
+   *           parameters in given class.
+   */
+  public static <T> T createInstance(Class<T> clazz, Object... params) throws ReflectionException {
+    Constructor<T> constructor = null;
+    try {
+      Class<?>[] classes = null;
+      if (params != null && params.length > 0) {
+        classes = new Class<?>[params.length];
+        for (int i = 0; i < params.length; i++) {
+          classes[i] = params[i].getClass();
+        }
+      }
+
+      constructor = clazz.getDeclaredConstructor(classes);
+    }
+    catch (Exception exc) {
+      // @formatter:off
+      throw new ReflectionException("Cannot get declared constructor of " + clazz.getName() +
+          " with given parameters: " + java.util.Arrays.toString(params), exc);
+      // @formatter:on
+    }
+
+    return createInstance(constructor, params);
+  }
+
+  /**
+   * Creates a new instance of object which owns given constructor in case that
+   * given constructor accepts given parameters otherwise the exception will be
+   * thrown.
+   *
+   * @param constructor the constructor which will be used for creation of new
+   *          instance.
+   * @param params variable argument for parameters of given constructor.
+   * @return New instance of owner of given constructor.
+   * @throws ReflectionException If some error occurs during new instance
+   *           creation or if given constructor doesn't accept given parameters.
+   */
+  public static <T> T createInstance(Constructor<T> constructor, Object... params) throws ReflectionException {
+    if (!isAccessible(constructor)) {
+      constructor.setAccessible(true);
+    }
+
+    try {
+      return constructor.newInstance(params);
+    }
+    catch (Exception exc) {
+      throw new ReflectionException("Cannot create new instance of " + constructor.getDeclaringClass().getName(), exc);
+    }
   }
 
   /**
