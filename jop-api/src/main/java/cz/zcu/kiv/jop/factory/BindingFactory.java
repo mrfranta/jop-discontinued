@@ -7,8 +7,8 @@ import java.lang.annotation.Annotation;
  * and adds method which returns created instance of implementation of interface
  * <code>T</code> bound to some annotation. So this factory can contains some
  * {@link cz.zcu.kiv.jop.binding.Binding Bindings} between annotations and
- * classes and method. Method {@link #createInstance(Annotation)} provides
- * created instances of bound class to given annotation as parameter.
+ * classes. Method {@link #createInstance(Annotation)} provides created
+ * instances of bound class to given annotation as parameter.
  *
  * @author Mr.FrAnTA
  * @since 1.0
