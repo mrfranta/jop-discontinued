@@ -59,7 +59,7 @@ public class GeneratingStrategyException extends JopRuntimeException {
    *          and indicates that the cause is nonexistent or unknown.)
    */
   public GeneratingStrategyException(Throwable cause) {
-    super(null, cause);
+    super(cause);
   }
 
   /**

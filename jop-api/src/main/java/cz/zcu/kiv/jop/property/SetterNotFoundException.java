@@ -31,7 +31,7 @@ public class SetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public SetterNotFoundException(Class<?> objectClass, String propertyName) {
-    this(null, null, objectClass, propertyName);
+    super(null, null, objectClass, propertyName);
   }
 
   /**
@@ -45,7 +45,7 @@ public class SetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public SetterNotFoundException(String message, Class<?> objectClass, String propertyName) {
-    this(message, null, objectClass, propertyName);
+    super(message, null, objectClass, propertyName);
   }
 
   /**
@@ -62,7 +62,7 @@ public class SetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public SetterNotFoundException(Throwable cause, Class<?> objectClass, String propertyName) {
-    this(null, cause, objectClass, propertyName);
+    super(null, cause, objectClass, propertyName);
   }
 
   /**

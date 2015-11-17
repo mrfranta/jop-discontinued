@@ -24,7 +24,7 @@ public class ClassProviderException extends JopRuntimeException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151104L;
+  private static final long serialVersionUID = 20151117L;
 
   /**
    * Constructs a new class provider exception with <code>null</code> as its
@@ -59,7 +59,7 @@ public class ClassProviderException extends JopRuntimeException {
    *          and indicates that the cause is nonexistent or unknown.)
    */
   public ClassProviderException(Throwable cause) {
-    super(null, cause);
+    super(cause);
   }
 
   /**

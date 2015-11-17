@@ -20,7 +20,7 @@ public class GetterNotFoundException extends PropertyException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151114L;
+  private static final long serialVersionUID = 20151117L;
 
   /**
    * Constructs a new exception for not found getter with <code>null</code> as
@@ -31,7 +31,7 @@ public class GetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public GetterNotFoundException(Class<?> objectClass, String propertyName) {
-    this(null, null, objectClass, propertyName);
+    super(null, null, objectClass, propertyName);
   }
 
   /**
@@ -45,7 +45,7 @@ public class GetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public GetterNotFoundException(String message, Class<?> objectClass, String propertyName) {
-    this(message, null, objectClass, propertyName);
+    super(message, null, objectClass, propertyName);
   }
 
   /**
@@ -62,7 +62,7 @@ public class GetterNotFoundException extends PropertyException {
    * @param propertyName the name of property.
    */
   public GetterNotFoundException(Throwable cause, Class<?> objectClass, String propertyName) {
-    this(null, cause, objectClass, propertyName);
+    super(null, cause, objectClass, propertyName);
   }
 
   /**

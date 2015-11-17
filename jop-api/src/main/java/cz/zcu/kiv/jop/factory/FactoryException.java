@@ -23,7 +23,7 @@ public class FactoryException extends JopException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151112L;
+  private static final long serialVersionUID = 20151117L;
 
   /**
    * Constructs a new factory exception with <code>null</code> as its detail
@@ -58,7 +58,7 @@ public class FactoryException extends JopException {
    *          and indicates that the cause is nonexistent or unknown.)
    */
   public FactoryException(Throwable cause) {
-    super(null, cause);
+    super(cause);
   }
 
   /**

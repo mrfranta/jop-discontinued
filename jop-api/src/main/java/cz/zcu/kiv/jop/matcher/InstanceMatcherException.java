@@ -24,7 +24,7 @@ public class InstanceMatcherException extends JopRuntimeException {
    * Not necessary to include in first version of the class, but included here
    * as a reminder of its importance.
    */
-  private static final long serialVersionUID = 20151112L;
+  private static final long serialVersionUID = 20151117L;
 
   /**
    * Constructs a new instance matcher exception with <code>null</code> as its
@@ -59,7 +59,7 @@ public class InstanceMatcherException extends JopRuntimeException {
    *          and indicates that the cause is nonexistent or unknown.)
    */
   public InstanceMatcherException(Throwable cause) {
-    super(null, cause);
+    super(cause);
   }
 
   /**
