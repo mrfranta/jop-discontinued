@@ -135,7 +135,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Returns field for property which is lazy loaded. Because of that is
    * strongly suggested to use this getter instead of direct access.
    *
-   * @return
+   * @return Declared field for property.
    * @throws PropertyNotFoundException If the field with given name was not
    *           found in <code>objectClass</code>.
    */
