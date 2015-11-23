@@ -13,8 +13,9 @@ import cz.zcu.kiv.jop.property.Property;
  * have visibility modifier different to public.
  * <p>
  * Bean should be created for classes which may be abstract. The bean shouldn't
- * be created for interfaces because it contains no properties.
- * 
+ * be created for interfaces, enumerations, annotations, arrays, etc. because
+ * they are not beans and usually contains no properties.
+ *
  * @see <a href="https://en.wikipedia.org/wiki/Plain_Old_Java_Object">POJO</a>
  *
  * @author Mr.FrAnTA
