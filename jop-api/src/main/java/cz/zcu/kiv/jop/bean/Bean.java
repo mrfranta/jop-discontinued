@@ -38,9 +38,11 @@ public interface Bean extends AnnotatedElement {
   public Class<?> getType();
 
   /**
-   * Returns bean for parent class of class type of this bean.
+   * Returns bean for parent class of class type of this bean. It may return
+   * <code>null</code> value if class type of this bean has no parent or if
+   * parent is {@link Object}.
    *
-   * @return The bean for parent.
+   * @return The bean for parent or <code>null</code>.
    */
   public Bean getParent();
 
