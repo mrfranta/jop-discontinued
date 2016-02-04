@@ -9,14 +9,14 @@ import java.lang.annotation.Target;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
- * Class provider annotation which determines the specific (target) class which
- * may be used for new instance creation.
+ * Class provider annotation which determines the specific (target) class which may be used for new
+ * instance creation.
  * <p>
- * This annotation can be also used as generator annotation which marks property
- * for which will be generated of class (<code>Class&lt;?&gt;</code>) value.
+ * This annotation can be also used as generator annotation which marks property for which will be
+ * generated of class (<code>Class&lt;?&gt;</code>) value.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @ClassProviderAnnotation
 @GeneratorAnnotation
@@ -26,8 +26,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface TargetClass {
 
   /**
-   * Required parameter for class type which will be returned by class provider
-   * or value generator.
+   * Required parameter for class type which will be returned by class provider or value generator.
    */
   public Class<?> value();
 
