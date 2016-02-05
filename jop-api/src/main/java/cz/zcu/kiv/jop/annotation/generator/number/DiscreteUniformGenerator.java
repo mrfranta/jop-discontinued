@@ -9,16 +9,14 @@ import java.lang.annotation.Target;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
- * This annotation marks property for which will be generated random integer
- * value with <em>Discrete uniform distribution</em> (symmetric probability
- * distribution).
+ * This annotation marks property for which will be generated random integer value with
+ * <em>Discrete uniform distribution</em> (symmetric probability distribution).
  *
- * @see <a
- *      href="https://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29">
- *      Discrete uniform distribution</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29"> Discrete
+ *      uniform distribution</a>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @GeneratorAnnotation
 @Documented
@@ -27,14 +25,14 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface DiscreteUniformGenerator {
 
   /**
-   * Required parameter for minimum of generated value. Value of minimum has to
-   * be lesser than {@link #max() maximum}.
+   * Required parameter for minimum of generated value. Value of minimum has to be lesser than or
+   * equals to {@link #max() maximum}.
    */
   public int min();
 
   /**
-   * Required parameter for maximum of generated value. Value of maximum has to
-   * be greater than or equals {@link #min() minimum}.
+   * Required parameter for maximum of generated value. Value of maximum has to be greater than or
+   * equals to {@link #min() minimum}.
    */
   public int max();
 

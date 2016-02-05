@@ -9,15 +9,14 @@ import java.lang.annotation.Target;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
- * This annotation marks property for which will be generated random numeric
- * value with <em>Continuous uniform distribution</em> (symmetric probability
- * distribution).
+ * This annotation marks property for which will be generated random numeric value with
+ * <em>Continuous uniform distribution</em> (symmetric probability distribution).
  *
- * @see <a href="https://en.wikipedia.org/wiki/Uniform_distribution_%28continuous%29">
- *      Continuous uniform distribution</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Uniform_distribution_%28continuous%29"> Continuous
+ *      uniform distribution</a>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @GeneratorAnnotation
 @Documented
@@ -26,14 +25,14 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface UniformGenerator {
 
   /**
-   * Required parameter for minimum of generated value. Value of minimum has to
-   * be lesser than {@link #max() maximum}.
+   * Required parameter for minimum of generated value. Value of minimum has to be lesser than
+   * {@link #max() maximum}.
    */
   public double min();
 
   /**
-   * Required parameter for maximum of generated value. Value of maximum has to
-   * be greater than {@link #min() minimum}.
+   * Required parameter for maximum of generated value. Value of maximum has to be greater than
+   * {@link #min() minimum}.
    */
   public double max();
 

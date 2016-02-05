@@ -9,17 +9,15 @@ import java.lang.annotation.Target;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 
 /**
- * This annotation marks property for which will be generated random boolean
- * value with <em>Bernoulli distribution</em>. The result can be the value
- * <code>true</code> with success probability of {@link #probability() p} and
- * the value <code>false</code> with failure probability of
- * <code>q = 1 - p</code>.
+ * This annotation marks property for which will be generated random boolean value with
+ * <em>Bernoulli distribution</em>. The result can be the value <code>true</code> with success
+ * probability of {@link #probability() p} and the value <code>false</code> with failure probability
+ * of <code>q = 1 - p</code>.
  *
- * @see <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli
- *      distribution</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @GeneratorAnnotation
 @Documented
@@ -28,8 +26,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface RandomBoolean {
 
   /**
-   * Required parameter for probability of success (generator provides the
-   * <code>true</code> value).
+   * Required parameter for probability of success (generator provides the <code>true</code> value).
    */
   public double probability();
 
