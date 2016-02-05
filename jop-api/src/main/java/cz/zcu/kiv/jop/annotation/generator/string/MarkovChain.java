@@ -12,7 +12,6 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
  * This annotation marks property for which will be generated random string value based on
  * <em>Markov chain</em> with given corpus. The corpus serves to determine probability of one letter
  * following another letter or sequence of letters.
- *
  * <p>
  * The Markov chain creates words from corpus according to the probability of one letter following
  * another letter or sequence of letters that precedes. The simplest example can be given for the

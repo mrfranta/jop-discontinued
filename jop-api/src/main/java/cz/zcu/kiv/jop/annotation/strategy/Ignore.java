@@ -7,12 +7,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation presents a generating strategy which allows to forbid the
- * generating of referred object (field). In such case will be the annotated
- * field skipped and no value will be generated for that field. Also the value
- * of the field won't be changed. This is default strategy - if the field has no
- * another generating strategy annotation, this strategy will be used.
- *
+ * This annotation presents a generating strategy which allows to forbid the generating of referred
+ * object (field). In such case will be the annotated field skipped and no value will be generated
+ * for that field. Also the value of the field won't be changed. This is default strategy - if the
+ * field has no another generating strategy annotation, this strategy will be used.
  * <p>
  * An example of an annotation usage:
  *
@@ -25,7 +23,7 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @StrategyAnnotation
 @Documented

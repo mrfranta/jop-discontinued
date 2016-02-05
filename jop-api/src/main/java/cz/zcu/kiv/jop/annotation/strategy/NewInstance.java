@@ -7,15 +7,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation presents a generating strategy which allows to assign new
- * instance into field. In such case, the class that will be used to create new
- * instances have to be supplied (as the reference is usually typed only to the
- * interface), and the reference will be assigned to a new instance of provided
- * class. This annotation may be used in combination with annotation for class
+ * This annotation presents a generating strategy which allows to assign new instance into field. In
+ * such case, the class that will be used to create new instances have to be supplied (as the
+ * reference is usually typed only to the interface), and the reference will be assigned to a new
+ * instance of provided class. This annotation may be used in combination with annotation for class
  * provider.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @StrategyAnnotation
 @Documented

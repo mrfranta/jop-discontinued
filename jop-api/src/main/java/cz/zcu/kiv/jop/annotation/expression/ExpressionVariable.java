@@ -7,12 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation "remaps" variable (field) name for evaluation of
- * {@link Expression Expressions}. If this annotation is not used, the name of
- * field is used as variable name.
+ * This annotation "remaps" variable (field) name for evaluation of {@link Expression Expressions}.
+ * If this annotation is not used, the name of field is used as variable name.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @Documented
 @Target(ElementType.FIELD)
@@ -20,7 +19,9 @@ import java.lang.annotation.Target;
 public @interface ExpressionVariable {
 
   /**
-   * Required parameter which specifies name of variable for expressions.
+   * Required parameter which specifies name of variable for expressions. The name shouldn't
+   * contains the spaces or another special characters which are not allowed for for variables in
+   * Java.
    */
   public String value();
 

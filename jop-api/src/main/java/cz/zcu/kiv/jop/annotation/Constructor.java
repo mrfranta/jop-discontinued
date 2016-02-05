@@ -7,12 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation may be used case that a generated <em>Object</em> has
- * multiple constructors to prevent ambiguity which constructor will be used for
- * <em>Object</em> construction.
+ * This annotation may be used case that a generated <em>Object</em> has multiple constructors to
+ * prevent ambiguity which constructor will be used for <em>Object</em> construction.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @Documented
 @Target(ElementType.CONSTRUCTOR)

@@ -7,13 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation presents a generating strategy which allows to forbid
- * generating of referred object (field). In such case the reference will be set
- * on <code>null</code> and the dependency will not be created. Also the value
- * of the field will be &quot;replaced&quot;. This annotation can be also used
- * for primitive types for which will be used default value (for example 0 for
+ * This annotation presents a generating strategy which allows to forbid generating of referred
+ * object (field). In such case the reference will be set on <code>null</code> and the dependency
+ * will not be created. Also the value of the field will be &quot;replaced&quot;. This annotation
+ * can be also used for primitive types for which will be used default value (for example 0 for
  * numeric types).
- *
  * <p>
  * An example of an annotation usage:
  *
@@ -27,7 +25,7 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 @StrategyAnnotation
 @Documented
