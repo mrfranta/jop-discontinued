@@ -6,24 +6,24 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import cz.zcu.kiv.jop.annotation.Empty;
+import cz.zcu.kiv.jop.annotation.CustomAnnotation;
 import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 import cz.zcu.kiv.jop.class_provider.ClassProvider;
 
 /**
- * Class provider annotation which determines the specific {@link ClassProvider
- * class provider} which provides class type that may be used for new instance
- * creation. Class provider cannot support parameters (only supported is
- * {@link Empty} annotation for empty parameters).
+ * Custom class provider annotation which determines the specific {@link ClassProvider class
+ * provider} which provides class type that may be used for new instance creation. The parameters
+ * for given class provider may be set in separated annotation for property.
  * <p>
- * This annotation can be also used as generator annotation which marks property
- * for which will be generated of class (<code>Class&lt;?&gt;</code>) value.
+ * This annotation can be also used as generator annotation which marks property for which will be
+ * generated of class (<code>Class&lt;?&gt;</code>) value.
  *
  * @see ClassProvider
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
+@CustomAnnotation
 @ClassProviderAnnotation
 @GeneratorAnnotation
 @Documented
@@ -32,9 +32,9 @@ import cz.zcu.kiv.jop.class_provider.ClassProvider;
 public @interface CustomClassProvider {
 
   /**
-   * Required parameter for class provider which provides class type that will
-   * be returned by class provider or value generator.
+   * Required parameter for class provider which provides class type that will be returned by class
+   * provider or value generator.
    */
-  public Class<? extends ClassProvider<Empty>> value();
+  public Class<? extends ClassProvider<?>> value();
 
 }
