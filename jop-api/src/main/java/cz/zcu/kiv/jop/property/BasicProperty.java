@@ -10,11 +10,11 @@ import org.apache.commons.logging.LogFactory;
 import cz.zcu.kiv.jop.util.ReflectionUtils;
 
 /**
- * The basic implementation of <em>Object</em>'s property. It provides the
- * getter and setter, which use the methods for manipulation with property.
+ * The basic implementation of <em>Object</em>'s property. It provides the getter and setter, which
+ * use the methods for manipulation with property.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  *
  * @param <T> Declared class type of property.
  */
@@ -23,24 +23,23 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   /**
    * Determines if a de-serialized file is compatible with this class.
    * <p>
-   * Maintainers must change this value if and only if the new version of this
-   * class is not compatible with old versions. See Oracle docs for <a
-   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-   * serialization/">details</a>.
+   * Maintainers must change this value if and only if the new version of this class is not
+   * compatible with old versions. See Oracle docs for <a
+   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
    * <p>
-   * Not necessary to include in first version of the class, but included here
-   * as a reminder of its importance.
+   * Not necessary to include in first version of the class, but included here as a reminder of its
+   * importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20160206L;
 
   /**
    * Constructs a basic property.
    *
-   * @param objectClass the class type of a property owner.
+   * @param declaringClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public BasicProperty(Class<?> objectClass, String propertyName) {
-    super(objectClass, propertyName);
+  public BasicProperty(Class<?> declaringClass, String propertyName) {
+    super(declaringClass, propertyName);
   }
 
   /**
@@ -49,9 +48,9 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   @Override
   @SuppressWarnings("unchecked")
   protected Getter<T> createGetter() throws GetterNotFoundException {
-    Getter<T> result = (Getter<T>)getGetterOrNull(objectClass, propertyName);
+    Getter<T> result = (Getter<T>)getGetterOrNull(declaringClass, propertyName);
     if (result == null) {
-      throw new GetterNotFoundException(objectClass, propertyName);
+      throw new GetterNotFoundException(declaringClass, propertyName);
     }
 
     return result;
@@ -63,18 +62,18 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   @Override
   @SuppressWarnings("unchecked")
   protected Setter<T> createSetter() throws SetterNotFoundException {
-    Setter<T> result = (Setter<T>)getSetterOrNull(objectClass, propertyName);
+    Setter<T> result = (Setter<T>)getSetterOrNull(declaringClass, propertyName);
     if (result == null) {
-      throw new SetterNotFoundException(objectClass, propertyName);
+      throw new SetterNotFoundException(declaringClass, propertyName);
     }
 
     return result;
   }
 
   /**
-   * Recursively searches for declared getter method for property in owner class
-   * and in all parent classes or implemented interfaces. If the getter method
-   * was found, it returns the getter using found method.
+   * Recursively searches for declared getter method for property in owner class and in all parent
+   * classes or implemented interfaces. If the getter method was found, it returns the getter using
+   * found method.
    *
    * @param clazz the class type of a property owner.
    * @param propertyName the name of property.
@@ -150,9 +149,9 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   }
 
   /**
-   * Recursively searches for declared setter method for property in owner class
-   * and in all parent classes or implemented interfaces. If the setter method
-   * was found, it returns the setter using found method.
+   * Recursively searches for declared setter method for property in owner class and in all parent
+   * classes or implemented interfaces. If the setter method was found, it returns the setter using
+   * found method.
    *
    * @param clazz the class type of a property owner.
    * @param propertyName the name of property.
@@ -216,8 +215,8 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   }
 
   /**
-   * Basic implementation of {@code Getter} interface which uses getter
-   * {@link Method} for access to property value.
+   * Basic implementation of {@code Getter} interface which uses getter {@link Method} for access to
+   * property value.
    *
    * @author Mr.FrAnTA
    * @since 1.0
@@ -230,13 +229,12 @@ public class BasicProperty<T> extends AbstractProperty<T> {
      * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
-     * Maintainers must change this value if and only if the new version of this
-     * class is not compatible with old versions. See Oracle docs for <a
-     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-     * serialization/">details</a>.
+     * Maintainers must change this value if and only if the new version of this class is not
+     * compatible with old versions. See Oracle docs for <a
+     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
      * <p>
-     * Not necessary to include in first version of the class, but included here
-     * as a reminder of its importance.
+     * Not necessary to include in first version of the class, but included here as a reminder of
+     * its importance.
      */
     private static final long serialVersionUID = 1898063802358450466L;
 
@@ -293,7 +291,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
         throw createGetterAccessException("IllegalAccessException occurred while calling", exc);
       }
       catch (IllegalArgumentException exc) {
-        logger.error("IllegalArgumentException in class: " + getObjectClass().getName() + ", getter method of property: " + getPropertyName());
+        logger.error("IllegalArgumentException in class: " + getDeclaringClass().getName() + ", getter method of property: " + getPropertyName());
         throw createGetterAccessException("IllegalArgumentException occurred calling", exc);
       }
     }
@@ -301,8 +299,8 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   }
 
   /**
-   * Basic implementation of {@code Setter} interface which uses setter
-   * {@link Method} for access to property value.
+   * Basic implementation of {@code Setter} interface which uses setter {@link Method} for access to
+   * property value.
    *
    * @author Mr.FrAnTA
    * @since 1.0
@@ -315,13 +313,12 @@ public class BasicProperty<T> extends AbstractProperty<T> {
      * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
-     * Maintainers must change this value if and only if the new version of this
-     * class is not compatible with old versions. See Oracle docs for <a
-     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-     * serialization/">details</a>.
+     * Maintainers must change this value if and only if the new version of this class is not
+     * compatible with old versions. See Oracle docs for <a
+     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
      * <p>
-     * Not necessary to include in first version of the class, but included here
-     * as a reminder of its importance.
+     * Not necessary to include in first version of the class, but included here as a reminder of
+     * its importance.
      */
     private static final long serialVersionUID = -4350628252367230916L;
 
@@ -389,7 +386,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
           throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
         }
         else {
-          logger.error("IllegalArgumentException in class: " + getObjectClass() + ", setter method of property: " + getPropertyName());
+          logger.error("IllegalArgumentException in class: " + getDeclaringClass() + ", setter method of property: " + getPropertyName());
           logger.error("expected type: " + getPropertyType().getName() + ", actual value: " + (value == null ? null : value.getClass().getName()));
           throw createSetterAccessException("IllegalArgumentException occurred while calling", exc);
         }

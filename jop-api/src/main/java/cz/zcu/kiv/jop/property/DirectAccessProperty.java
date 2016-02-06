@@ -3,11 +3,11 @@ package cz.zcu.kiv.jop.property;
 import java.lang.reflect.Field;
 
 /**
- * The implementation of <em>Object</em>'s property. It provides the getter and
- * setter, which use the {@link Field} for manipulation with property.
+ * The implementation of <em>Object</em>'s property. It provides the getter and setter, which use
+ * the {@link Field} for manipulation with property.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  *
  * @param <T> Declared class type of property.
  */
@@ -16,24 +16,23 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   /**
    * Determines if a de-serialized file is compatible with this class.
    * <p>
-   * Maintainers must change this value if and only if the new version of this
-   * class is not compatible with old versions. See Oracle docs for <a
-   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-   * serialization/">details</a>.
+   * Maintainers must change this value if and only if the new version of this class is not
+   * compatible with old versions. See Oracle docs for <a
+   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
    * <p>
-   * Not necessary to include in first version of the class, but included here
-   * as a reminder of its importance.
+   * Not necessary to include in first version of the class, but included here as a reminder of its
+   * importance.
    */
-  private static final long serialVersionUID = 20151114L;
+  private static final long serialVersionUID = 20160206L;
 
   /**
    * Constructs a direct access property.
    *
-   * @param objectClass the class type of a property owner.
+   * @param declaringClass the class type of a property owner.
    * @param propertyName the name of property.
    */
-  public DirectAccessProperty(Class<?> objectClass, String propertyName) {
-    super(objectClass, propertyName);
+  public DirectAccessProperty(Class<?> declaringClass, String propertyName) {
+    super(declaringClass, propertyName);
   }
 
   /**
@@ -45,7 +44,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
       return new DirectGetter<T>(propertyName, getField());
     }
     catch (PropertyNotFoundException exc) {
-      throw new GetterNotFoundException(exc, objectClass, propertyName);
+      throw new GetterNotFoundException(exc, declaringClass, propertyName);
     }
   }
 
@@ -58,13 +57,13 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
       return new DirectSetter<T>(propertyName, getField());
     }
     catch (PropertyNotFoundException exc) {
-      throw new SetterNotFoundException(exc, objectClass, propertyName);
+      throw new SetterNotFoundException(exc, declaringClass, propertyName);
     }
   }
 
   /**
-   * Implementation of {@code Getter} interface which uses {@link Field} for
-   * direct access to property value.
+   * Implementation of {@code Getter} interface which uses {@link Field} for direct access to
+   * property value.
    *
    * @author Mr.FrAnTA
    * @since 1.0
@@ -77,13 +76,12 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
-     * Maintainers must change this value if and only if the new version of this
-     * class is not compatible with old versions. See Oracle docs for <a
-     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-     * serialization/">details</a>.
+     * Maintainers must change this value if and only if the new version of this class is not
+     * compatible with old versions. See Oracle docs for <a
+     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
      * <p>
-     * Not necessary to include in first version of the class, but included here
-     * as a reminder of its importance.
+     * Not necessary to include in first version of the class, but included here as a reminder of
+     * its importance.
      */
     private static final long serialVersionUID = 5222843204772142534L;
 
@@ -121,8 +119,8 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   }
 
   /**
-   * Implementation of {@code Setter} interface which uses {@link Field} for
-   * direct access to property value.
+   * Implementation of {@code Setter} interface which uses {@link Field} for direct access to
+   * property value.
    *
    * @author Mr.FrAnTA
    * @since 1.0
@@ -135,13 +133,12 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
-     * Maintainers must change this value if and only if the new version of this
-     * class is not compatible with old versions. See Oracle docs for <a
-     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-     * serialization/">details</a>.
+     * Maintainers must change this value if and only if the new version of this class is not
+     * compatible with old versions. See Oracle docs for <a
+     * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
      * <p>
-     * Not necessary to include in first version of the class, but included here
-     * as a reminder of its importance.
+     * Not necessary to include in first version of the class, but included here as a reminder of
+     * its importance.
      */
     private static final long serialVersionUID = 4294761455944801476L;
 

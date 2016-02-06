@@ -6,12 +6,11 @@ import java.lang.reflect.Method;
 import cz.zcu.kiv.jop.util.Preconditions;
 
 /**
- * Abstract implementation of {@link PropertyAccess} interface which provides an
- * implementation of the common methods for handling of / accessing to the
- * property.
+ * Abstract implementation of {@link PropertyAccess} interface which provides an implementation of
+ * the common methods for handling of / accessing to the property.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  *
  * @param <T> Declared class type of property.
  * @param <M> Member type which will be used for access to property.
@@ -21,15 +20,14 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
   /**
    * Determines if a de-serialized file is compatible with this class.
    * <p>
-   * Maintainers must change this value if and only if the new version of this
-   * class is not compatible with old versions. See Oracle docs for <a
-   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-   * serialization/">details</a>.
+   * Maintainers must change this value if and only if the new version of this class is not
+   * compatible with old versions. See Oracle docs for <a
+   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
    * <p>
-   * Not necessary to include in first version of the class, but included here
-   * as a reminder of its importance.
+   * Not necessary to include in first version of the class, but included here as a reminder of its
+   * importance.
    */
-  private static final long serialVersionUID = 20151026L;
+  private static final long serialVersionUID = 20160206L;
 
   /** Name of property. */
   protected final String propertyName;
@@ -52,7 +50,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    *
    * @return Class type of property owner.
    */
-  public Class<?> getObjectClass() {
+  public Class<?> getDeclaringClass() {
     return member.getDeclaringClass();
   }
 
@@ -85,27 +83,27 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
   }
 
   /**
-   * Creates exception which can be thrown by getter in case of some problem
-   * during getting of the property value.
+   * Creates exception which can be thrown by getter in case of some problem during getting of the
+   * property value.
    *
    * @param message the detail message of exception.
    * @param cause the cause of exception.
    * @return Created {@link PropertyAccessException} for getter method.
    */
   protected PropertyAccessException createGetterAccessException(String message, Throwable cause) {
-    return new PropertyAccessException(message, cause, getObjectClass(), getPropertyName());
+    return new PropertyAccessException(message, cause, getDeclaringClass(), getPropertyName());
   }
 
   /**
-   * Creates exception which can be thrown by setter in case of some problem
-   * during setting of the value to property.
+   * Creates exception which can be thrown by setter in case of some problem during setting of the
+   * value to property.
    *
    * @param message the detail message of exception.
    * @param cause the cause of exception.
    * @return Created {@link PropertyAccessException} for setter method.
    */
   protected PropertyAccessException createSetterAccessException(String message, Throwable cause) {
-    return new PropertyAccessException(message, cause, getObjectClass(), getPropertyName(), true);
+    return new PropertyAccessException(message, cause, getDeclaringClass(), getPropertyName(), true);
   }
 
   /**
@@ -115,7 +113,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    */
   @Override
   public String toString() {
-    return getClass().getName() + " [" + getObjectClass() + '.' + getPropertyName() + ']';
+    return getClass().getName() + " [" + getDeclaringClass() + '.' + getPropertyName() + ']';
   }
 
 }

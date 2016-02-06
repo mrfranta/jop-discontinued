@@ -1,31 +1,29 @@
 package cz.zcu.kiv.jop.property;
 
 /**
- * This exception may occur in case that no <em>setter</em> for the property was
- * not found.
+ * This exception may occur in case that no <em>setter</em> for the property was not found.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 public class SetterNotFoundException extends PropertyException {
 
   /**
    * Determines if a de-serialized file is compatible with this class.
    * <p>
-   * Maintainers must change this value if and only if the new version of this
-   * class is not compatible with old versions. See Oracle docs for <a
-   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/
-   * serialization/">details</a>.
+   * Maintainers must change this value if and only if the new version of this class is not
+   * compatible with old versions. See Oracle docs for <a
+   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
    * <p>
-   * Not necessary to include in first version of the class, but included here
-   * as a reminder of its importance.
+   * Not necessary to include in first version of the class, but included here as a reminder of its
+   * importance.
    */
-  private static final long serialVersionUID = 20151114L;
+  private static final long serialVersionUID = 20160206L;
 
   /**
-   * Constructs a new exception for not found setter with <code>null</code> as
-   * its detail message. The cause is not initialized, and may subsequently be
-   * initialized by a call to {@link #initCause}.
+   * Constructs a new exception for not found setter with <code>null</code> as its detail message.
+   * The cause is not initialized, and may subsequently be initialized by a call to
+   * {@link #initCause}.
    *
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
@@ -35,12 +33,11 @@ public class SetterNotFoundException extends PropertyException {
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified detail
-   * message. The cause is not initialized, and may subsequently be initialized
-   * by a call to {@link #initCause}.
+   * Constructs a new exception for not found setter with the specified detail message. The cause is
+   * not initialized, and may subsequently be initialized by a call to {@link #initCause}.
    *
-   * @param message the detail message (which is saved for later retrieval by
-   *          the {@link #getMessage()} method).
+   * @param message the detail message (which is saved for later retrieval by the
+   *          {@link #getMessage()} method).
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
@@ -49,15 +46,14 @@ public class SetterNotFoundException extends PropertyException {
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified cause
-   * and <code>null</code> as its detail message. This constructor is different
-   * to parent {@link Exception#Exception(Throwable) constructor} which sets
-   * detail message as message from cause. This constructor brings possibility
-   * to use {@link #getDefaultMessage} instead.
+   * Constructs a new exception for not found setter with the specified cause and <code>null</code>
+   * as its detail message. This constructor is different to parent
+   * {@link Exception#Exception(Throwable) constructor} which sets detail message as message from
+   * cause. This constructor brings possibility to use {@link #getDefaultMessage} instead.
    *
-   * @param cause the cause (which is saved for later retrieval by the
-   *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
-   *          and indicates that the cause is nonexistent or unknown.)
+   * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method).
+   *          (A <tt>null</tt> value is permitted, and indicates that the cause is nonexistent or
+   *          unknown.)
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
@@ -66,17 +62,16 @@ public class SetterNotFoundException extends PropertyException {
   }
 
   /**
-   * Constructs a new exception for not found setter with the specified detail
-   * message and cause.
+   * Constructs a new exception for not found setter with the specified detail message and cause.
    * <p>
-   * Note that the detail message associated with <code>cause</code> is
-   * <i>not</i> automatically incorporated in this exception's detail message.
+   * Note that the detail message associated with <code>cause</code> is <i>not</i> automatically
+   * incorporated in this exception's detail message.
    *
-   * @param message the detail message (which is saved for later retrieval by
-   *          the {@link #getMessage()} method).
-   * @param cause the cause (which is saved for later retrieval by the
-   *          {@link #getCause()} method). (A <tt>null</tt> value is permitted,
-   *          and indicates that the cause is nonexistent or unknown.)
+   * @param message the detail message (which is saved for later retrieval by the
+   *          {@link #getMessage()} method).
+   * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method).
+   *          (A <tt>null</tt> value is permitted, and indicates that the cause is nonexistent or
+   *          unknown.)
    * @param objectClass the class type of a property owner.
    * @param propertyName the name of property.
    */
@@ -85,14 +80,14 @@ public class SetterNotFoundException extends PropertyException {
   }
 
   /**
-   * Returns default message in case that the detail message given in exception
-   * constructor is <code>null</code>.
+   * Returns default message in case that the detail message given in exception constructor is
+   * <code>null</code>.
    *
    * @return Default message of exception.
    */
   @Override
   protected String getDefaultMessage() {
-    return "Could not find a setter for " + getPropertyName() + " in class " + getObjectClassName();
+    return "Could not find a setter for " + getPropertyName() + " in class " + getDeclaringClassName();
   }
 
 }
