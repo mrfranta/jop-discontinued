@@ -1,14 +1,13 @@
 package cz.zcu.kiv.jop.util;
 
 /**
- * Helper static class which provides default values for primitive or object
- * types.
+ * Helper static class which provides default values for primitive or object types.
  *
  * @see <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">
  *      Primitive Data Types</a>
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 public abstract class Defaults {
 
@@ -33,15 +32,14 @@ public abstract class Defaults {
   private static Object DEFAULT_OBJECT;
 
   /**
-   * Private constructor in combination with abstract modifier of this class
-   * makes it static.
+   * Private constructor in combination with abstract modifier of this class makes it static.
    */
   private Defaults() {}
 
   /**
-   * Returns default value for given class type (<code>clazz</code>). If the
-   * given class type is primitive, the default value of that type is returned.
-   * For object types is returned <code>null</code>.
+   * Returns default value for given class type (<code>clazz</code>). If the given class type is
+   * primitive, the default value of that type is returned. For object types is returned
+   * <code>null</code>.
    *
    * @param clazz class type for which will be returned its default value.
    * @return Default value for given class type.

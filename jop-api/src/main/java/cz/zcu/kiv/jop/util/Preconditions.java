@@ -1,25 +1,23 @@
 package cz.zcu.kiv.jop.util;
 
 /**
- * Helper static class which provides static methods for unified single-line
- * checking of some preconditions of method arguments, state of object, etc.
+ * Helper static class which provides static methods for unified single-line checking of some
+ * preconditions of method arguments, state of object, etc.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 public abstract class Preconditions {
 
   /**
-   * Private constructor in combination with abstract modifier of this class
-   * makes it static.
+   * Private constructor in combination with abstract modifier of this class makes it static.
    */
   private Preconditions() {}
 
   /**
-   * Checks whatever given object (<code>reference</code>) is not
-   * <code>null</code>. In case that given object is <code>null</code> the
-   * {@link NullPointerException} is thrown. This method also returns given
-   * reference so checking of <code>null</code> value can be used in this way:
+   * Checks whatever given object (<code>reference</code>) is not <code>null</code>. In case that
+   * given object is <code>null</code> the {@link NullPointerException} is thrown. This method also
+   * returns given reference so checking of <code>null</code> value can be used in this way:
    *
    * <pre>
    * public static String getFullName(Person person) {
@@ -43,11 +41,10 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever given object (<code>reference</code>) is not
-   * <code>null</code>. In case that given object is <code>null</code> the
-   * {@link NullPointerException} with given error message is thrown. This
-   * method also returns given reference so checking of <code>null</code> value
-   * can be used in this way:
+   * Checks whatever given object (<code>reference</code>) is not <code>null</code>. In case that
+   * given object is <code>null</code> the {@link NullPointerException} with given error message is
+   * thrown. This method also returns given reference so checking of <code>null</code> value can be
+   * used in this way:
    *
    * <pre>
    * public static String getFullName(Person person) {
@@ -59,8 +56,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param reference the object (reference) which will be checked.
-   * @param errorMessage the error message for thrown exception in case that
-   *          given object is <code>null</code>.
+   * @param errorMessage the error message for thrown exception in case that given object is
+   *          <code>null</code>.
    * @return Given object (<code>reference</code>).
    * @throws NullPointerException if given object is <code>null</code>.
    */
@@ -73,10 +70,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever given object (<code>reference</code>) is not
-   * <code>null</code>. In case that given object is <code>null</code> the
-   * {@link NullPointerException} with given formatted error message is thrown.
-   * This method also returns given reference so checking of <code>null</code>
+   * Checks whatever given object (<code>reference</code>) is not <code>null</code>. In case that
+   * given object is <code>null</code> the {@link NullPointerException} with given formatted error
+   * message is thrown. This method also returns given reference so checking of <code>null</code>
    * value can be used in this way:
    *
    * <pre>
@@ -91,8 +87,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param reference the object (reference) which will be checked.
-   * @param errorMessageFormat the formatted error message for thrown exception
-   *          in case that given object is <code>null</code>.
+   * @param errorMessageFormat the formatted error message for thrown exception in case that given
+   *          object is <code>null</code>.
    * @param errorMessageArgs the arguments for given formatted error message.
    * @return Given object (<code>reference</code>).
    */
@@ -105,14 +101,13 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever given object (<code>reference</code>), given as argument of
-   * some method, is not <code>null</code>. In case that given object is
-   * <code>null</code> the {@link IllegalArgumentException} is thrown. The main
-   * difference between this method and method {@link #checkNotNull(Object)} is
-   * that the given argument with invalid value (in this case with
+   * Checks whatever given object (<code>reference</code>), given as argument of some method, is not
+   * <code>null</code>. In case that given object is <code>null</code> the
+   * {@link IllegalArgumentException} is thrown. The main difference between this method and method
+   * {@link #checkNotNull(Object)} is that the given argument with invalid value (in this case with
    * <code>null</code>) should cause {@link IllegalArgumentException} not the
-   * {@link NullPointerException}. This method also returns given reference so
-   * checking of <code>null</code> value can be used in this way:
+   * {@link NullPointerException}. This method also returns given reference so checking of
+   * <code>null</code> value can be used in this way:
    *
    * <pre>
    * public static &lt;T&gt; Collection merge(Collection&lt;? extends T&gt; col1, Collection&lt;? extends T&gt; col2) {
@@ -136,15 +131,13 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever given object (<code>reference</code>), given as argument of
-   * some method, is not <code>null</code>. In case that given object is
-   * <code>null</code> the {@link IllegalArgumentException} with given error
-   * message is thrown. The main difference between this method and method
-   * {@link #checkNotNull(Object, String)} is that the given argument with
-   * invalid value (in this case with <code>null</code>) should cause
-   * {@link IllegalArgumentException} not the {@link NullPointerException}. This
-   * method also returns given reference so checking of <code>null</code> value
-   * can be used in this way:
+   * Checks whatever given object (<code>reference</code>), given as argument of some method, is not
+   * <code>null</code>. In case that given object is <code>null</code> the
+   * {@link IllegalArgumentException} with given error message is thrown. The main difference
+   * between this method and method {@link #checkNotNull(Object, String)} is that the given argument
+   * with invalid value (in this case with <code>null</code>) should cause
+   * {@link IllegalArgumentException} not the {@link NullPointerException}. This method also returns
+   * given reference so checking of <code>null</code> value can be used in this way:
    *
    * <pre>
    * public static &lt;T&gt; Collection merge(Collection&lt;? extends T&gt; col1, Collection&lt;? extends T&gt; col2) {
@@ -168,15 +161,13 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever given object (<code>reference</code>), given as argument of
-   * some method, is not <code>null</code>. In case that given object is
-   * <code>null</code> the {@link IllegalArgumentException} with given formatted
-   * error message is thrown. The main difference between this method and method
-   * {@link #checkNotNull(Object, String, Object...)} is that the given argument
-   * with invalid value (in this case with <code>null</code>) should cause
-   * {@link IllegalArgumentException} not the {@link NullPointerException}. This
-   * method also returns given reference so checking of <code>null</code> value
-   * can be used in this way:
+   * Checks whatever given object (<code>reference</code>), given as argument of some method, is not
+   * <code>null</code>. In case that given object is <code>null</code> the
+   * {@link IllegalArgumentException} with given formatted error message is thrown. The main
+   * difference between this method and method {@link #checkNotNull(Object, String, Object...)} is
+   * that the given argument with invalid value (in this case with <code>null</code>) should cause
+   * {@link IllegalArgumentException} not the {@link NullPointerException}. This method also returns
+   * given reference so checking of <code>null</code> value can be used in this way:
    *
    * <pre>
    * private static final String MERGE_ERR_MSG = &quot;%s is null&quot;;
@@ -190,8 +181,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param reference the object (reference) which will be checked.
-   * @param errorMessageFormat the formatted error message for thrown exception
-   *          in case that given object is <code>null</code>.
+   * @param errorMessageFormat the formatted error message for thrown exception in case that given
+   *          object is <code>null</code>.
    * @param errorMessageArgs the arguments for given formatted error message.
    * @return Given object (<code>reference</code>).
    * @throws IllegalArgumentException if given object is <code>null</code>.
@@ -205,9 +196,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever the given state <code>condition</code> is met and if not,
-   * the {@link IllegalStateException} is thrown. This method is useful for
-   * single-line checking of some state. This method can be used in this way:
+   * Checks whatever the given state <code>condition</code> is met and if not, the
+   * {@link IllegalStateException} is thrown. This method is useful for single-line checking of some
+   * state. This method can be used in this way:
    *
    * <pre>
    * public void start() {
@@ -227,10 +218,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever the given state <code>condition</code> is met and if not,
-   * the {@link IllegalStateException} with given error message is thrown. This
-   * method is useful for single-line checking of some state. This method can be
-   * used in this way:
+   * Checks whatever the given state <code>condition</code> is met and if not, the
+   * {@link IllegalStateException} with given error message is thrown. This method is useful for
+   * single-line checking of some state. This method can be used in this way:
    *
    * <pre>
    * public void start() {
@@ -242,8 +232,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
-   * @param errorMessage the error message for thrown exception in case that
-   *          given <code>condition</code> is not met.
+   * @param errorMessage the error message for thrown exception in case that given
+   *          <code>condition</code> is not met.
    */
   public static void checkState(boolean condition, String errorMessage) {
     if (!condition) {
@@ -252,10 +242,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Checks whatever the given state <code>condition</code> is met and if not,
-   * the {@link IllegalStateException} with given formatted error message is
-   * thrown. This method is useful for single-line checking of some state. This
-   * method can be used in this way:
+   * Checks whatever the given state <code>condition</code> is met and if not, the
+   * {@link IllegalStateException} with given formatted error message is thrown. This method is
+   * useful for single-line checking of some state. This method can be used in this way:
    *
    * <pre>
    * public void start() {
@@ -267,8 +256,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
-   * @param errorMessageFormat the formatted error message for thrown exception
-   *          in case that given <code>condition</code> is not met.
+   * @param errorMessageFormat the formatted error message for thrown exception in case that given
+   *          <code>condition</code> is not met.
    * @param errorMessageArgs the arguments for given formatted error message.
    */
   public static void checkState(boolean condition, String errorMessageFormat, Object... errorMessageArgs) {
@@ -278,10 +267,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Check whatever the some method argument meets given <code>condition</code>
-   * and if not, the {@link IllegalArgumentException} is thrown. This method is
-   * useful for single-line checking of method arguments. This method can be
-   * used in this way:
+   * Check whatever the some method argument meets given <code>condition</code> and if not, the
+   * {@link IllegalArgumentException} is thrown. This method is useful for single-line checking of
+   * method arguments. This method can be used in this way:
    *
    * <pre>
    * public void setAge(int age) {
@@ -301,10 +289,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Check whatever the some method argument meets given <code>condition</code>
-   * and if not, the {@link IllegalArgumentException} with given error message
-   * is thrown. This method is useful for single-line checking of method
-   * arguments. This method can be used in this way:
+   * Check whatever the some method argument meets given <code>condition</code> and if not, the
+   * {@link IllegalArgumentException} with given error message is thrown. This method is useful for
+   * single-line checking of method arguments. This method can be used in this way:
    *
    * <pre>
    * public void setAge(int age) {
@@ -316,8 +303,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
-   * @param errorMessage the error message for thrown exception in case that
-   *          given <code>condition</code> is not met.
+   * @param errorMessage the error message for thrown exception in case that given
+   *          <code>condition</code> is not met.
    */
   public static void checkArgument(boolean condition, String errorMessage) {
     if (!condition) {
@@ -326,10 +313,9 @@ public abstract class Preconditions {
   }
 
   /**
-   * Check whatever the some method argument meets given <code>condition</code>
-   * and if not, the {@link IllegalArgumentException} with given formatted error
-   * message is thrown. This method is useful for single-line checking of method
-   * arguments. This method can be used in this way:
+   * Check whatever the some method argument meets given <code>condition</code> and if not, the
+   * {@link IllegalArgumentException} with given formatted error message is thrown. This method is
+   * useful for single-line checking of method arguments. This method can be used in this way:
    *
    * <pre>
    * public void setAge(int age) {
@@ -341,8 +327,8 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
-   * @param errorMessageFormat the formatted error message for thrown exception
-   *          in case that given <code>condition</code> is not met.
+   * @param errorMessageFormat the formatted error message for thrown exception in case that given
+   *          <code>condition</code> is not met.
    * @param errorMessageArgs the arguments for given formatted error message.
    */
   public static void checkArgument(boolean condition, String errorMessageFormat, Object... errorMessageArgs) {
