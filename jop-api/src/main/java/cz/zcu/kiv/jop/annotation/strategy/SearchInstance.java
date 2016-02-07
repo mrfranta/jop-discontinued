@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation presents a generating strategy which allows to use already existing instance
+ * This annotation presents a populating strategy which allows to use already existing instance
  * which will be searched in list of already generated objects. This annotation may be used in
  * combination with annotation for instance matcher.
  *

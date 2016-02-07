@@ -7,8 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation serves as marker for generating strategy annotations. Generating strategy
- * annotations control generating of dependent objects and object fields.
+ * This annotation serves as marker for populating strategy annotations. populating strategy
+ * annotations control populating of dependent objects and object fields.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
