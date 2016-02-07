@@ -32,7 +32,6 @@ public class RandomGeneratorSessionImpl implements RandomGeneratorSession {
   /**
    * {@inheritDoc}
    */
-  @Override
   public Random setRandomGenerator(Annotation annotation, Random random) {
     Preconditions.checkArgumentNotNull(annotation, "Annotation cannot be null");
     return storeRandomGenerator(annotation.annotationType(), random);
@@ -41,7 +40,6 @@ public class RandomGeneratorSessionImpl implements RandomGeneratorSession {
   /**
    * {@inheritDoc}
    */
-  @Override
   public Random getRandomGenerator(Annotation annotation) {
     Preconditions.checkArgumentNotNull(annotation, "Annotation cannot be null");
     Class<? extends Annotation> annotationType = annotation.annotationType();
@@ -68,7 +66,6 @@ public class RandomGeneratorSessionImpl implements RandomGeneratorSession {
   /**
    * {@inheritDoc}
    */
-  @Override
   public void clear() {
     session.clear();
   }
