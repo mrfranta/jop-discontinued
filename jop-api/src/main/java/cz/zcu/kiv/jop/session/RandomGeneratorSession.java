@@ -25,14 +25,16 @@ public interface RandomGeneratorSession {
 
   /**
    * Sets (stores) given random generator to given annotation. If the annotation already had set
-   * (stored) random generator, it will be replaced. This method can be used for setting of custom
-   * random generators to specific annotations. Also can be used for removal of random generator for
-   * annotation when the given random generator is <code>null</code>.
+   * (stored) random generator, it will be replaced and old random generator will be returned. This
+   * method can be used for setting of custom random generators to specific annotations. Also can be
+   * used for removal of random generator for annotation when the given random generator is
+   * <code>null</code>.
    *
    * @param annotation the annotation for which will be set the given random generator.
    * @param random the random generator to set (may be <code>null</code>).
+   * @return Previous stored random generator.
    */
-  public void setRandomGenerator(Annotation annotation, Random random);
+  public Random setRandomGenerator(Annotation annotation, Random random);
 
   /**
    * Returns (stored) random generator for given annotation. If the generator wasn't set (stored) or
