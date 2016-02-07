@@ -1,14 +1,12 @@
 package cz.zcu.kiv.jop.dependency;
 
 /**
- * This interface serves as abstraction of graph of dependencies between
- * populated objects (between each other). Each object can be related
- * (dependent) on any number of dependencies but it cannot create cycle
- * (example: A -&gt; B -&gt; A). Because of that this graph can be also called
- * as tree.
+ * This interface serves as abstraction of graph of dependencies between populated objects (between
+ * each other). Each object can be related (dependent) on any number of dependencies but it cannot
+ * create cycle (example: A -&gt; B -&gt; A). Because of that this graph can be also called as tree.
  *
  * @author Mr.FrAnTA
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DependencyGraph {
 
