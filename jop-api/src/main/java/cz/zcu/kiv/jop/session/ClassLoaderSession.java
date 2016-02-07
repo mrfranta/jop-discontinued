@@ -20,12 +20,13 @@ public interface ClassLoaderSession {
 
   /**
    * Stores given class loader under given name. If some class loader already exist for given name,
-   * it will be replaced.
+   * it will be replaced and old (previous) class loader will be returned.
    *
    * @param name the symbolic name of class loader.
    * @param classLoader the class loader which will be stored (may be <code>null</code>).
+   * @return Previous stored class loader.
    */
-  public void setClassLoader(String name, ClassLoader classLoader);
+  public ClassLoader setClassLoader(String name, ClassLoader classLoader);
 
   /**
    * Returns stored class loader under given symbolic name. If no class loader was stored, it may
