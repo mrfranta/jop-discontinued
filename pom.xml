@@ -16,8 +16,7 @@
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
+      <url>LICENSE.txt</url>
     </license>
   </licenses>
 
@@ -57,7 +56,7 @@
       <organization>Department of Computer Science and Engineering, University of West Bohemia</organization>
       <organizationUrl>http://www.kiv.zcu.cz/</organizationUrl>
       <roles>
-        <role>leader</role>
+        <role>Project Lead</role>
       </roles>
       <timezone>GTM+1</timezone>
     </contributor>
@@ -75,8 +74,8 @@
     <project.build.target>1.5</project.build.target>
 
     <!-- dependencies versions -->
-    <jop-api.version>1.0.0-SNAPSHOT</jop-api.version>
     <javax.inject.version>1</javax.inject.version>
+    <uncommons-maths.version>1.2.2</uncommons-maths.version>
     <commons-logging.version>1.1.1</commons-logging.version>
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.12</junit.version>
@@ -86,15 +85,40 @@
     <resources.plugin.version>2.7</resources.plugin.version>
     <javadoc.plugin.version>2.10.3</javadoc.plugin.version>
     <source.plugin.version>2.4</source.plugin.version>
+    <surefire.plugin.version>2.19.1</surefire.plugin.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
-      <!-- utilities -->
+      <!-- API dependency -->
+      <dependency>
+        <groupId>cz.zcu.kiv.jop</groupId>
+        <artifactId>jop-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- dependency injection -->
       <dependency>
         <groupId>javax.inject</groupId>
         <artifactId>javax.inject</artifactId>
         <version>${javax.inject.version}</version>
+      </dependency>
+
+      <!-- random generators -->
+      <dependency>
+        <groupId>org.uncommons.maths</groupId>
+        <artifactId>uncommons-maths</artifactId>
+        <version>${uncommons-maths.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>jfree</groupId>
+            <artifactId>jcommon</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
 
       <!-- logging -->
@@ -171,6 +195,10 @@
             <charset>${project.build.sourceEncoding}</charset>
             <splitindex>true</splitindex>
             <additionalparam>${javadoc.opts}</additionalparam>
+
+            <doctitle>Java objects populator - Version: ${project.version}</doctitle>
+            <footer>Department of Computer Science and Engineering,
+                University of West Bohemia 2015-2016: All Rights Reserved.</footer>
           </configuration>
           <executions>
             <execution>
@@ -195,16 +223,18 @@
             </execution>
           </executions>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
     <resources>
       <resource>
         <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>**/log4j.xml</exclude>
-          <exclude>**/log4j.dtd</exclude>
-        </excludes>
       </resource>
       <resource>
         <directory>../</directory>

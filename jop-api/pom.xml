@@ -14,7 +14,7 @@
   <name>API for Java Objects Populator</name>
 
   <dependencies>
-    <!-- utilities -->
+    <!-- dependency injection -->
     <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>

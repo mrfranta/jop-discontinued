@@ -14,27 +14,40 @@
   <name>Implementation of Java Objects Populator</name>
 
   <dependencies>
+    <!-- API -->
     <dependency>
       <groupId>cz.zcu.kiv.jop</groupId>
       <artifactId>jop-api</artifactId>
-      <version>${jop-api.version}</version>
     </dependency>
 
+    <!-- dependency injection -->
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+
+    <!-- random generators -->
+    <dependency>
+      <groupId>org.uncommons.maths</groupId>
+      <artifactId>uncommons-maths</artifactId>
+    </dependency>
+
+    <!-- logging -->
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
-    </dependency>
-
+    <!-- testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
