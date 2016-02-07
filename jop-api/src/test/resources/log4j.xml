@@ -23,10 +23,6 @@
     </filter>
   </appender>
 
-  <category name="org.reflection">
-    <priority value="info" />
-  </category>
-
   <root>
     <priority value="all" />
     <appender-ref ref="STDOUT" />
