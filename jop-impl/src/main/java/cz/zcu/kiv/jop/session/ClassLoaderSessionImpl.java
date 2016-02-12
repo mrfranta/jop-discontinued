@@ -45,6 +45,12 @@ public class ClassLoaderSessionImpl implements ClassLoaderSession {
     return session.get(name);
   }
 
+  /**
+   * Checks given name whatever is one of reserved symbolic name for class loaders.
+   *
+   * @param name the symbolic name of class loader.
+   * @return <code>true</code> if given name is reserved; <code>false</code> otherwise.
+   */
   protected boolean checkReservedNames(String name) {
     // @formatter:off
     return !(ClassLoaderConst.CALLER.equalsIgnoreCase(name)
