@@ -21,9 +21,8 @@ public class PreconditionsTest {
   protected static final boolean illegalArgument = false;
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object)} method which should
-   * return given reference and in case of <code>null</code> throws the
-   * {@link NullPointerException}.
+   * Test of {@link Preconditions#checkNotNull(Object)} method which should return given reference
+   * and in case of <code>null</code> throws the {@link NullPointerException}.
    */
   @Test
   public void testCheckNotNull() {
@@ -32,9 +31,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object)} method which should
-   * return given reference and in case of <code>null</code> throws the
-   * {@link NullPointerException}.
+   * Test of {@link Preconditions#checkNotNull(Object)} method which should return given reference
+   * and in case of <code>null</code> throws the {@link NullPointerException}.
    */
   @Test(expected = NullPointerException.class)
   public void testCheckNotNullForNull() {
@@ -42,9 +40,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object, String)} method which
-   * should return given reference and in case of <code>null</code> throws the
-   * {@link NullPointerException} with given message.
+   * Test of {@link Preconditions#checkNotNull(Object, String)} method which should return given
+   * reference and in case of <code>null</code> throws the {@link NullPointerException} with given
+   * message.
    */
   @Test
   public void testCheckNotNullWithMessage() {
@@ -53,9 +51,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object, String)} method which
-   * should return given reference and in case of <code>null</code> throws the
-   * {@link NullPointerException} with given message.
+   * Test of {@link Preconditions#checkNotNull(Object, String)} method which should return given
+   * reference and in case of <code>null</code> throws the {@link NullPointerException} with given
+   * message.
    */
   @Test(expected = NullPointerException.class)
   public void testCheckNotNullWithMessageForNull() {
@@ -71,9 +69,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object, String, Object...)}
-   * method which should return given reference and in case of <code>null</code>
-   * throws the {@link NullPointerException} with given formatted message.
+   * Test of {@link Preconditions#checkNotNull(Object, String, Object...)} method which should
+   * return given reference and in case of <code>null</code> throws the {@link NullPointerException}
+   * with given formatted message.
    */
   @Test
   public void testCheckNotNullWithFormattedMessage() {
@@ -82,9 +80,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkNotNull(Object, String, Object...)}
-   * method which should return given reference and in case of <code>null</code>
-   * throws the {@link NullPointerException} with given formatted message.
+   * Test of {@link Preconditions#checkNotNull(Object, String, Object...)} method which should
+   * return given reference and in case of <code>null</code> throws the {@link NullPointerException}
+   * with given formatted message.
    */
   @Test(expected = NullPointerException.class)
   public void testCheckNotNullWithFormattedMessageForNull() {
@@ -100,9 +98,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgumentNotNull(Object)} method which
-   * should return given reference and in case of <code>null</code> throws the
-   * {@link IllegalArgumentException}.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object)} method which should return given
+   * reference and in case of <code>null</code> throws the {@link IllegalArgumentException}.
    */
   @Test
   public void testCheckArgumentNotNull() {
@@ -111,9 +108,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgumentNotNull(Object)} method which
-   * should return given reference and in case of <code>null</code> throws the
-   * {@link IllegalArgumentException}.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object)} method which should return given
+   * reference and in case of <code>null</code> throws the {@link IllegalArgumentException}.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentNotNullForNull() {
@@ -121,9 +117,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgumentNotNull(Object, String)} method
-   * which should return given reference and in case of <code>null</code> throws
-   * the {@link IllegalArgumentException} with given message.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object, String)} method which should return
+   * given reference and in case of <code>null</code> throws the {@link IllegalArgumentException}
+   * with given message.
    */
   @Test
   public void testCheckArgumentNotNullWithMessage() {
@@ -132,9 +128,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgumentNotNull(Object, String)} method
-   * which should return given reference and in case of <code>null</code> throws
-   * the {@link IllegalArgumentException} with given message.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object, String)} method which should return
+   * given reference and in case of <code>null</code> throws the {@link IllegalArgumentException}
+   * with given message.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentNotNullWithMessageForNull() {
@@ -150,10 +146,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of
-   * {@link Preconditions#checkArgumentNotNull(Object, String, Object...)}
-   * method which should return given reference and in case of <code>null</code>
-   * throws the {@link IllegalArgumentException} with given formatted message.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object, String, Object...)} method which
+   * should return given reference and in case of <code>null</code> throws the
+   * {@link IllegalArgumentException} with given formatted message.
    */
   @Test
   public void testCheckArgumentNotNullWithFormattedMessage() {
@@ -162,10 +157,9 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of
-   * {@link Preconditions#checkArgumentNotNull(Object, String, Object...)}
-   * method which should return given reference and in case of <code>null</code>
-   * throws the {@link IllegalArgumentException} with given formatted message.
+   * Test of {@link Preconditions#checkArgumentNotNull(Object, String, Object...)} method which
+   * should return given reference and in case of <code>null</code> throws the
+   * {@link IllegalArgumentException} with given formatted message.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentNotNullWithFormattedMessageForNull() {
@@ -199,9 +193,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkState(boolean, String)} method which
-   * throws the {@link IllegalStateException} with given message in case that
-   * given condition is not met.
+   * Test of {@link Preconditions#checkState(boolean, String)} method which throws the
+   * {@link IllegalStateException} with given message in case that given condition is not met.
    */
   @Test
   public void testCheckStateWithMessageForInvalidState() {
@@ -209,9 +202,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkState(boolean, String)} method which
-   * throws the {@link IllegalStateException} with given message in case that
-   * given condition is not met.
+   * Test of {@link Preconditions#checkState(boolean, String)} method which throws the
+   * {@link IllegalStateException} with given message in case that given condition is not met.
    */
   @Test(expected = IllegalStateException.class)
   public void testCheckStateWithMessageForValidState() {
@@ -227,9 +219,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkState(boolean, String, Object...)} method
-   * which throws the {@link IllegalStateException} in case that given condition
-   * is not met.
+   * Test of {@link Preconditions#checkState(boolean, String, Object...)} method which throws the
+   * {@link IllegalStateException} in case that given condition is not met.
    */
   @Test
   public void testCheckStateWithFormattedMessageForValidState() {
@@ -237,9 +228,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkState(boolean, String, Object...)} method
-   * which throws the {@link IllegalStateException} in case that given condition
-   * is not met.
+   * Test of {@link Preconditions#checkState(boolean, String, Object...)} method which throws the
+   * {@link IllegalStateException} in case that given condition is not met.
    */
   @Test(expected = IllegalStateException.class)
   public void testCheckStateWithFormattedMessageForInvalidState() {
@@ -255,9 +245,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean)} method which throws
-   * the {@link IllegalArgumentException} in case that given condition is not
-   * met.
+   * Test of {@link Preconditions#checkArgument(boolean)} method which throws the
+   * {@link IllegalArgumentException} in case that given condition is not met.
    */
   @Test
   public void testCheckArgumentForValidArgument() {
@@ -265,9 +254,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean)} method which throws
-   * the {@link IllegalArgumentException} in case that given condition is not
-   * met.
+   * Test of {@link Preconditions#checkArgument(boolean)} method which throws the
+   * {@link IllegalArgumentException} in case that given condition is not met.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentForInlegalArgument() {
@@ -275,9 +263,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean, String)} method which
-   * throws the {@link IllegalArgumentException} with given message in case that
-   * given condition is not met.
+   * Test of {@link Preconditions#checkArgument(boolean, String)} method which throws the
+   * {@link IllegalArgumentException} with given message in case that given condition is not met.
    */
   @Test
   public void testCheckArgumentWithMessageForInlegalArgument() {
@@ -285,9 +272,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean, String)} method which
-   * throws the {@link IllegalArgumentException} with given message in case that
-   * given condition is not met.
+   * Test of {@link Preconditions#checkArgument(boolean, String)} method which throws the
+   * {@link IllegalArgumentException} with given message in case that given condition is not met.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentWithMessageForValidArgument() {
@@ -303,9 +289,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean, String, Object...)}
-   * method which throws the {@link IllegalArgumentException} in case that given
-   * condition is not met.
+   * Test of {@link Preconditions#checkArgument(boolean, String, Object...)} method which throws the
+   * {@link IllegalArgumentException} in case that given condition is not met.
    */
   @Test
   public void testCheckArgumentWithFormattedMessageForValidArgument() {
@@ -313,9 +298,8 @@ public class PreconditionsTest {
   }
 
   /**
-   * Test of {@link Preconditions#checkArgument(boolean, String, Object...)}
-   * method which throws the {@link IllegalArgumentException} in case that given
-   * condition is not met.
+   * Test of {@link Preconditions#checkArgument(boolean, String, Object...)} method which throws the
+   * {@link IllegalArgumentException} in case that given condition is not met.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testCheckArgumentWithFormattedMessageForInlegalArgument() {

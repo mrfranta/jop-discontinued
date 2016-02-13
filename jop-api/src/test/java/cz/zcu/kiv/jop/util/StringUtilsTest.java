@@ -11,9 +11,9 @@ import org.junit.Test;
 public class StringUtilsTest {
 
   /**
-   * Tests of method {@link StringUtils#isEmpty(String)}. This method should
-   * return <code>true</code> in case of empty (<code>null</code> or without
-   * length) string; <code>false</code> otherwise.
+   * Tests of method {@link StringUtils#isEmpty(String)}. This method should return
+   * <code>true</code> in case of empty (<code>null</code> or without length) string;
+   * <code>false</code> otherwise.
    */
   @Test
   public void testIsEmpty() {
@@ -24,9 +24,9 @@ public class StringUtilsTest {
   }
 
   /**
-   * Tests of method {@link StringUtils#hasLength(String)}. This method should
-   * return <code>true</code> in case of non-empty (not <code>null</code> and
-   * with some length) string; <code>false</code> otherwise.
+   * Tests of method {@link StringUtils#hasLength(String)}. This method should return
+   * <code>true</code> in case of non-empty (not <code>null</code> and with some length) string;
+   * <code>false</code> otherwise.
    */
   @Test
   public void testHasLength() {
@@ -37,9 +37,9 @@ public class StringUtilsTest {
   }
 
   /**
-   * Tests of method {@link StringUtils#hasText(String)}. This method should
-   * return <code>true</code> in case that given string contains at least one
-   * non-whitespace character. It should returns <code>false</code> otherwise.
+   * Tests of method {@link StringUtils#hasText(String)}. This method should return
+   * <code>true</code> in case that given string contains at least one non-whitespace character. It
+   * should returns <code>false</code> otherwise.
    */
   @Test
   public void testHasText() {

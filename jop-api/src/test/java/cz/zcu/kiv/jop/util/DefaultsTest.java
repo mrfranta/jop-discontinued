@@ -11,9 +11,8 @@ import org.junit.Test;
 public class DefaultsTest {
 
   /**
-   * Test of {@link Defaults#getDefaultValue} method which should return default
-   * values for primitive types and for object types returns <code>null</code>
-   * value (also default value).
+   * Test of {@link Defaults#getDefaultValue} method which should return default values for
+   * primitive types and for object types returns <code>null</code> value (also default value).
    */
   @Test
   public void testGetDefaultValue() {
