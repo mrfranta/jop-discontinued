@@ -32,7 +32,7 @@ public abstract class Preconditions {
    * @return Given object (<code>reference</code>).
    * @throws NullPointerException if given object is <code>null</code>.
    */
-  public static <T> T checkNotNull(T reference) {
+  public static <T> T checkNotNull(T reference) throws NullPointerException {
     if (reference == null) {
       throw new NullPointerException();
     }
@@ -61,7 +61,7 @@ public abstract class Preconditions {
    * @return Given object (<code>reference</code>).
    * @throws NullPointerException if given object is <code>null</code>.
    */
-  public static <T> T checkNotNull(T reference, String errorMessage) {
+  public static <T> T checkNotNull(T reference, String errorMessage) throws NullPointerException {
     if (reference == null) {
       throw new NullPointerException(errorMessage);
     }
@@ -91,8 +91,9 @@ public abstract class Preconditions {
    *          object is <code>null</code>.
    * @param errorMessageArgs the arguments for given formatted error message.
    * @return Given object (<code>reference</code>).
+   * @throws NullPointerException if given object is <code>null</code>.
    */
-  public static <T> T checkNotNull(T reference, String errorMessageFormat, Object... errorMessageArgs) {
+  public static <T> T checkNotNull(T reference, String errorMessageFormat, Object... errorMessageArgs) throws NullPointerException {
     if (reference == null) {
       throw new NullPointerException(String.format(errorMessageFormat, errorMessageArgs));
     }
@@ -122,7 +123,7 @@ public abstract class Preconditions {
    * @return Given object (<code>reference</code>).
    * @throws IllegalArgumentException if given object is <code>null</code>.
    */
-  public static <T> T checkArgumentNotNull(T reference) {
+  public static <T> T checkArgumentNotNull(T reference) throws IllegalArgumentException {
     if (reference == null) {
       throw new IllegalArgumentException();
     }
@@ -152,7 +153,7 @@ public abstract class Preconditions {
    * @return Given object (<code>reference</code>).
    * @throws IllegalArgumentException if given object is <code>null</code>.
    */
-  public static <T> T checkArgumentNotNull(T reference, String errorMessage) {
+  public static <T> T checkArgumentNotNull(T reference, String errorMessage) throws IllegalArgumentException {
     if (reference == null) {
       throw new IllegalArgumentException(errorMessage);
     }
@@ -187,7 +188,7 @@ public abstract class Preconditions {
    * @return Given object (<code>reference</code>).
    * @throws IllegalArgumentException if given object is <code>null</code>.
    */
-  public static <T> T checkArgumentNotNull(T reference, String errorMessageFormat, Object... errorMessageArgs) {
+  public static <T> T checkArgumentNotNull(T reference, String errorMessageFormat, Object... errorMessageArgs) throws IllegalArgumentException {
     if (reference == null) {
       throw new IllegalArgumentException(String.format(errorMessageFormat, errorMessageArgs));
     }
@@ -210,8 +211,9 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
+   * @throws IllegalStateException If given condition is not met.
    */
-  public static void checkState(boolean condition) {
+  public static void checkState(boolean condition) throws IllegalStateException {
     if (!condition) {
       throw new IllegalStateException();
     }
@@ -234,8 +236,9 @@ public abstract class Preconditions {
    * @param condition the condition which will be checked whatever is met.
    * @param errorMessage the error message for thrown exception in case that given
    *          <code>condition</code> is not met.
+   * @throws IllegalStateException If given condition is not met.
    */
-  public static void checkState(boolean condition, String errorMessage) {
+  public static void checkState(boolean condition, String errorMessage) throws IllegalStateException {
     if (!condition) {
       throw new IllegalStateException(errorMessage);
     }
@@ -259,8 +262,9 @@ public abstract class Preconditions {
    * @param errorMessageFormat the formatted error message for thrown exception in case that given
    *          <code>condition</code> is not met.
    * @param errorMessageArgs the arguments for given formatted error message.
+   * @throws IllegalStateException If given condition is not met.
    */
-  public static void checkState(boolean condition, String errorMessageFormat, Object... errorMessageArgs) {
+  public static void checkState(boolean condition, String errorMessageFormat, Object... errorMessageArgs) throws IllegalStateException {
     if (!condition) {
       throw new IllegalStateException(String.format(errorMessageFormat, errorMessageArgs));
     }
@@ -281,8 +285,9 @@ public abstract class Preconditions {
    * </pre>
    *
    * @param condition the condition which will be checked whatever is met.
+   * @throws IllegalArgumentException If given condition is not met.
    */
-  public static void checkArgument(boolean condition) {
+  public static void checkArgument(boolean condition) throws IllegalArgumentException {
     if (!condition) {
       throw new IllegalArgumentException();
     }
@@ -305,8 +310,9 @@ public abstract class Preconditions {
    * @param condition the condition which will be checked whatever is met.
    * @param errorMessage the error message for thrown exception in case that given
    *          <code>condition</code> is not met.
+   * @throws IllegalArgumentException If given condition is not met.
    */
-  public static void checkArgument(boolean condition, String errorMessage) {
+  public static void checkArgument(boolean condition, String errorMessage) throws IllegalArgumentException {
     if (!condition) {
       throw new IllegalArgumentException(errorMessage);
     }
@@ -330,8 +336,9 @@ public abstract class Preconditions {
    * @param errorMessageFormat the formatted error message for thrown exception in case that given
    *          <code>condition</code> is not met.
    * @param errorMessageArgs the arguments for given formatted error message.
+   * @throws IllegalArgumentException If given condition is not met.
    */
-  public static void checkArgument(boolean condition, String errorMessageFormat, Object... errorMessageArgs) {
+  public static void checkArgument(boolean condition, String errorMessageFormat, Object... errorMessageArgs) throws IllegalArgumentException {
     if (!condition) {
       throw new IllegalArgumentException(String.format(errorMessageFormat, errorMessageArgs));
     }
