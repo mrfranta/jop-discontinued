@@ -75,6 +75,7 @@
 
     <!-- dependencies versions -->
     <javax.inject.version>1</javax.inject.version>
+    <guice.version>3.0</guice.version>
     <uncommons-maths.version>1.2.2</uncommons-maths.version>
     <commons-logging.version>1.1.1</commons-logging.version>
     <log4j.version>1.2.17</log4j.version>
@@ -102,6 +103,12 @@
         <groupId>javax.inject</groupId>
         <artifactId>javax.inject</artifactId>
         <version>${javax.inject.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>${guice.version}</version>
       </dependency>
 
       <!-- random generators -->
@@ -167,7 +174,7 @@
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
             <encoding>${project.build.sourceEncoding}</encoding>
-            <compilerVersion>${project.build.target}</compilerVersion>
+            <!-- <compilerVersion>${project.build.target}</compilerVersion> -->
             <source>${project.build.source}</source>
             <target>${project.build.target}</target>
             <compilerArguments>
@@ -184,6 +191,29 @@
           <configuration>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
+          <executions>
+            <execution>
+              <id>package-resources</id>
+              <phase>prepare-package</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <inherited>true</inherited>
+              <configuration>
+                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>../</directory>
+                    <targetPath>META-INF</targetPath>
+                    <includes>
+                      <include>LICENSE.txt</include>
+                      <include>NOTICE.txt</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>
@@ -203,6 +233,7 @@
           <executions>
             <execution>
               <id>attach-javadocs</id>
+              <inherited>true</inherited>
               <goals>
                 <goal>jar</goal>
               </goals>
@@ -217,6 +248,7 @@
           <executions>
             <execution>
               <id>attach-sources</id>
+              <inherited>true</inherited>
               <goals>
                 <goal>jar</goal>
               </goals>
@@ -231,19 +263,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE.txt</include>
-          <include>NOTICE.txt</include>
-        </includes>
-      </resource>
-    </resources>
   </build>
 </project>

@@ -26,6 +26,13 @@
       <artifactId>javax.inject</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
     <!-- random generators -->
     <dependency>
       <groupId>org.uncommons.maths</groupId>
