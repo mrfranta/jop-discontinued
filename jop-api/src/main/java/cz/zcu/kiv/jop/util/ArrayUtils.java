@@ -563,7 +563,7 @@ public abstract class ArrayUtils {
    * returns <code>null</code> for given <code>null</code> value and original array for given array
    * of object values.
    *
-   * @param object the array of values.
+   * @param obj the array of values.
    * @return The array of object values or <code>null</code>.
    * @throws IllegalArgumentException If given object is not array.
    */
