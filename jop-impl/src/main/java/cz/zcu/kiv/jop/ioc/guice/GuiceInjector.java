@@ -1,6 +1,12 @@
 package cz.zcu.kiv.jop.ioc.guice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Singleton;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Binder;
 import com.google.inject.ConfigurationException;
@@ -11,6 +17,7 @@ import com.google.inject.util.Modules;
 
 import cz.zcu.kiv.jop.ioc.Injector;
 import cz.zcu.kiv.jop.ioc.InjectorException;
+import cz.zcu.kiv.jop.util.ReflectionUtils;
 
 /**
  * The implementation of injector using implementation of IoC from Google Guice library. This class
@@ -23,6 +30,9 @@ import cz.zcu.kiv.jop.ioc.InjectorException;
 @Singleton
 public class GuiceInjector implements Injector {
 
+  /** Logger used for logging. */
+  private static final Log logger = LogFactory.getLog(GuiceInjector.class);
+
   /** Google Guice injector. */
   protected final com.google.inject.Injector injector;
 
@@ -30,17 +40,35 @@ public class GuiceInjector implements Injector {
    * Constructs injector with default modules (bindings).
    */
   public GuiceInjector() {
+    List<Module> modules = new ArrayList<Module>();
+
     // bind injector to this instance
-    Module iocModule = new Module() {
+    modules.add(new Module() {
       public void configure(Binder binder) {
         binder.bind(Injector.class).toInstance(GuiceInjector.this);
       }
-    };
+    });
 
     // core bindings overriden by explicit bindings
-    Module jopModule = Modules.override(new CoreModule()).with(new ExplicitBindingsModule());
+    modules.add(Modules.override(new CoreModule()).with(new ExplicitBindingsModule()));
 
-    injector = Guice.createInjector(iocModule, jopModule);
+    // custom modules
+    try {
+      Class<?> customModulesProviderImpl = Class.forName(CustomModulesProvider.class.getName() + "Impl");
+      Object instance = ReflectionUtils.createInstance(customModulesProviderImpl);
+      List<Module> customModules = ((CustomModulesProvider)instance).getCustomModules();
+      if (customModules != null && !customModules.isEmpty()) {
+        modules.addAll(customModules);
+      }
+    }
+    catch (ClassNotFoundException exc) {
+      logger.debug("Cannot get custom modules: Class not found: " + exc.getMessage());
+    }
+    catch (Exception exc) {
+      logger.debug("Cannot get custom modules: " + exc.getMessage());
+    }
+
+    injector = Guice.createInjector(modules);
   }
 
   /**
