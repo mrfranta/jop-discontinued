@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Binder;
 import com.google.inject.ConfigurationException;
+import com.google.inject.CreationException;
 import com.google.inject.Guice;
 import com.google.inject.Module;
 import com.google.inject.ProvisionException;
@@ -43,11 +44,7 @@ public class GuiceInjector implements Injector {
     List<Module> modules = new ArrayList<Module>();
 
     // bind injector to this instance
-    modules.add(new Module() {
-      public void configure(Binder binder) {
-        binder.bind(Injector.class).toInstance(GuiceInjector.this);
-      }
-    });
+    modules.add(createInjectorModule());
 
     // core bindings overriden by explicit bindings
     modules.add(Modules.override(new CoreModule()).with(new ExplicitBindingsModule()));
@@ -68,19 +65,70 @@ public class GuiceInjector implements Injector {
       logger.debug("Cannot get custom modules: " + exc.getMessage());
     }
 
-    injector = Guice.createInjector(modules);
+    try {
+      injector = Guice.createInjector(modules);
+    }
+    catch (CreationException exc) {
+      throw new InjectorException(exc);
+    }
   }
 
   /**
    * Constructs injector with given modules (bindings).
    * <p>
    * <strong>Notice:</strong> This constructor should be used only for tests because the library
-   * should use standard construction of injector from public constructor.
+   * should use standard construction of injector from public constructor. Also this constructor
+   * adds one additional module for binding of injector interface to this instance.
    *
    * @param modules the modules (bindings) for injector.
    */
   GuiceInjector(Module... modules) {
-    injector = Guice.createInjector(modules);
+    // add binding of injector to this instance
+    Module[] injectorModules = new Module[modules.length + 1];
+    injectorModules[0] = createInjectorModule();
+    System.arraycopy(modules, 0, injectorModules, 1, modules.length);
+
+    try {
+      injector = Guice.createInjector(injectorModules);
+    }
+    catch (CreationException exc) {
+      throw new InjectorException(exc);
+    }
+  }
+
+  /**
+   * Constructs injector with given list of modules (bindings).
+   * <p>
+   * <strong>Notice:</strong> This constructor should be used only for tests because the library
+   * should use standard construction of injector from public constructor. Also this constructor
+   * adds one additional module for binding of injector interface to this instance.
+   *
+   * @param modules the list of modules (bindings) for injector.
+   */
+  GuiceInjector(List<Module> modules) {
+    // add binding of injector to this instance
+    List<Module> injectorModules = new ArrayList<Module>(modules);
+    injectorModules.add(0, createInjectorModule());
+
+    try {
+      injector = Guice.createInjector(injectorModules);
+    }
+    catch (CreationException exc) {
+      throw new InjectorException(exc);
+    }
+  }
+
+  /**
+   * Creates module which contains binding of injector to this instance.
+   *
+   * @return Module for binding of injector.
+   */
+  protected final Module createInjectorModule() {
+    return (new Module() {
+      public void configure(Binder binder) {
+        binder.bind(Injector.class).toInstance(GuiceInjector.this);
+      }
+    });
   }
 
   /**
