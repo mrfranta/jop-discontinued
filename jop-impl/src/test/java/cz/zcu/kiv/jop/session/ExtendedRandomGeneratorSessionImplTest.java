@@ -174,7 +174,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
    * Helper "implementation" of annotation {@link Foo} which may be used for manual creation of
    * annotation instance.
    */
-  private class FooAnnotation implements Foo {
+  private static class FooAnnotation implements Foo {
     /** Annotation value. */
     private final int value;
 
