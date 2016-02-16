@@ -22,9 +22,13 @@
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.12</junit.version>
     <jmock-junit4.version>2.8.2</jmock-junit4.version>
+
+    <!-- plugins versions -->
+    <surefire.plugin.version>2.19.1</surefire.plugin.version>
   </properties>
 
   <dependencies>
+    <!-- jop modules -->
     <dependency>
       <groupId>cz.zcu.kiv.jop</groupId>
       <artifactId>jop-api</artifactId>
@@ -38,6 +42,7 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -58,5 +63,37 @@
       </exclusions>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase/>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-install</id>
+            <phase/>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

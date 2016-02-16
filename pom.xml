@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cz.zcu.kiv.jop</groupId>
@@ -64,8 +65,7 @@
   <modules>
     <module>jop-api</module>
     <module>jop-impl</module>
-
-  <module></module><module>jop-test</module>
+    <module>jop-test</module>
   </modules>
 
   <properties>
@@ -85,7 +85,6 @@
     <resources.plugin.version>2.7</resources.plugin.version>
     <javadoc.plugin.version>2.10.3</javadoc.plugin.version>
     <source.plugin.version>2.4</source.plugin.version>
-    <surefire.plugin.version>2.19.1</surefire.plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -139,9 +138,6 @@
         <artifactId>log4j</artifactId>
         <version>${log4j.version}</version>
       </dependency>
-
-      <!-- testing -->
-
     </dependencies>
   </dependencyManagement>
 
@@ -173,8 +169,8 @@
             <source>${project.build.source}</source>
             <target>${project.build.target}</target>
             <compilerArguments>
-              <verbose/>
-              <Xlint/>
+              <verbose />
+              <Xlint />
             </compilerArguments>
           </configuration>
         </plugin>
@@ -189,11 +185,9 @@
           <executions>
             <execution>
               <id>package-resources</id>
-              <phase>prepare-package</phase>
               <goals>
                 <goal>copy-resources</goal>
               </goals>
-              <inherited>true</inherited>
               <configuration>
                 <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                 <resources>
@@ -223,7 +217,7 @@
 
             <doctitle>Java objects populator - Version: ${project.version}</doctitle>
             <footer>Department of Computer Science and Engineering,
-                University of West Bohemia 2015-2016: All Rights Reserved.</footer>
+              University of West Bohemia 2015-2016: All Rights Reserved.</footer>
           </configuration>
           <executions>
             <execution>
@@ -249,12 +243,6 @@
               </goals>
             </execution>
           </executions>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${surefire.plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
