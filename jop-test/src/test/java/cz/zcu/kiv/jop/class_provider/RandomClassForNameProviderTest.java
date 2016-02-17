@@ -1,4 +1,4 @@
-package cz.zcu.kiv.jop.generator.clazz;
+package cz.zcu.kiv.jop.class_provider;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -9,7 +9,6 @@ import cz.zcu.kiv.jop.AbstractContextTest;
 import cz.zcu.kiv.jop.annotation.class_provider.ClassLoaderConst;
 import cz.zcu.kiv.jop.annotation.class_provider.RandomClassForName;
 import cz.zcu.kiv.jop.annotation.class_provider.RandomClassForNameImpl;
-import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.ioc.ContextUnitSupport;
 import cz.zcu.kiv.jop.ioc.guice.MockModule;
 import cz.zcu.kiv.jop.mock.RandomMock;
@@ -17,81 +16,72 @@ import cz.zcu.kiv.jop.session.ClassLoaderSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 
 /**
- * Test of class {@link RandomClassForNameGenerator}.
+ * Test of class {@link RandomClassForNameProvider}.
  *
  * @author Mr.FrAnTA
  */
-public class RandomClassForNameGeneratorTest extends AbstractContextTest {
+public class RandomClassForNameProviderTest extends AbstractContextTest {
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValueType()} which has to return class of
-   * class type.
+   * Test of method {@link RandomClassForNameProvider#get} for given null value. Expected
+   * {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForNull() throws ClassProviderException {
+    randomClassForNameProvider.get(null);
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with null value.
+   * Expected {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForNullValue() throws ClassProviderException {
+    randomClassForNameProvider.get(new RandomClassForNameImpl());
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with empty value
+   * (array). Expected {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForEmptyValue() throws ClassProviderException {
+    randomClassForNameProvider.get(new RandomClassForNameImpl(new String[0]));
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with null symbolic
+   * name of class loader. Expected {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForNullClassLoader() throws ClassProviderException {
+    randomClassForNameProvider.get(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, null));
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with empty symbolic
+   * name of class loader. Expected {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForEmptyClassLoader() throws ClassProviderException {
+    randomClassForNameProvider.get(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, ""));
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with blank symbolic
+   * name of class loader. Expected {@link ClassProviderException}.
+   */
+  @Test(expected = ClassProviderException.class)
+  public void testGetForBlankClassLoader() throws ClassProviderException {
+    randomClassForNameProvider.get(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, " "));
+  }
+
+  /**
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#CALLER} of class loader.
    */
   @Test
-  public void testGetValueType() {
-    Assert.assertEquals(Class.class, randomClassForNameGenerator.getValueType());
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given null value. Expected
-   * {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNull() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(null);
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with null
-   * value. Expected {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNullValue() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl());
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with empty
-   * value (array). Expected {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForEmptyValue() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl(new String[0]));
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with null
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNullClassLoader() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, null));
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with empty
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForEmptyClassLoader() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, ""));
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with blank
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
-   */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForBlankClassLoader() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl(new String[] {Integer.class.getName()}, true, " "));
-  }
-
-  /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#CALLER} of class loader.
-   */
-  @Test
-  public void testGetValueForCallerClassLoader() throws ValueGeneratorException {
+  public void testGetForCallerClassLoader() throws ClassProviderException {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
@@ -106,18 +96,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameProvider.get(targetClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
   }
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#CONTEXT} of class loader.
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#CONTEXT} of class loader.
    */
   @Test
-  public void testGetValueForContextClassLoader() throws ValueGeneratorException {
+  public void testGetForContextClassLoader() throws ClassProviderException {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
@@ -132,18 +122,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameProvider.get(targetClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Long.class, clazz);
   }
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#SYSTEM} of class loader.
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#SYSTEM} of class loader.
    */
   @Test
-  public void testGetValueForSystemClassLoader() throws ValueGeneratorException {
+  public void testGetForSystemClassLoader() throws ClassProviderException {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
@@ -158,18 +148,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameProvider.get(targetClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
   }
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with symbolic
-   * name of class loader which is stored in session.
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with symbolic name
+   * of class loader which is stored in session.
    */
   @Test
-  public void testGetValueForStoredClassLoader() throws ValueGeneratorException {
+  public void testGetForStoredClassLoader() throws ClassProviderException {
     /*----- Preparation -----*/
     final String name = "NAME";
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
@@ -188,18 +178,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameProvider.get(targetClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
   }
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for given annotation with symbolic
-   * name of class loader which is not stored in session.
+   * Test of method {@link RandomClassForNameProvider#get} for given annotation with symbolic name
+   * of class loader which is not stored in session.
    */
   @Test
-  public void testGetValueForNotStoredClassLoader() throws ValueGeneratorException {
+  public void testGetForNotStoredClassLoader() throws ClassProviderException {
     /*----- Preparation -----*/
     final String name = "NAME";
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
@@ -218,18 +208,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameProvider.get(targetClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Long.class, clazz);
   }
 
   /**
-   * Test of method {@link RandomClassForNameGenerator#getValue} for non-existing class in given
+   * Test of method {@link RandomClassForNameProvider#get} for non-existing class in given
    * annotation with symbolic name {@link ClassLoaderConst#CALLER} of class loader.
    */
-  @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNonExistingClass() throws ValueGeneratorException {
+  @Test(expected = ClassProviderException.class)
+  public void testGetForNonExistingClass() throws ClassProviderException {
     /*----- Preparation -----*/
     String[] values = new String[] {"java.lang.Foo", "java.lang.Bar"};
     final RandomClassForName targetClassForName = new RandomClassForNameImpl(values);
@@ -243,13 +233,13 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution & Verify -----*/
-    randomClassForNameGenerator.getValue(targetClassForName);
+    randomClassForNameProvider.get(targetClassForName);
   }
 
   // ------------------------------ context ------------------------------------
 
   /** Tested class generator. */
-  private RandomClassForNameGenerator randomClassForNameGenerator;
+  private RandomClassForNameProvider randomClassForNameProvider;
 
   /**
    * {@inheritDoc}
@@ -257,7 +247,7 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
   @Override
   protected void prepareInstances() {
     // prepare testing instance
-    randomClassForNameGenerator = injector.getInstance(RandomClassForNameGenerator.class);
+    randomClassForNameProvider = injector.getInstance(RandomClassForNameProvider.class);
   }
 
   /**
@@ -267,7 +257,7 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
   protected ContextUnitSupport createUnitTestContext() {
     // @formatter:off
     return new ContextUnitSupport(
-        new RandomClassForNameModule(mockery)
+        new RandomClassForNameProviderModule(mockery)
     );
     // @formatter:on
   }
@@ -277,13 +267,13 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
    *
    * @author Mr.FrAnTA
    */
-  private class RandomClassForNameModule extends MockModule {
+  private class RandomClassForNameProviderModule extends MockModule {
     /**
      * Constructs module with given mockery.
      *
      * @param mockery the mockery which will be used for mocking.
      */
-    public RandomClassForNameModule(Mockery mockery) {
+    public RandomClassForNameProviderModule(Mockery mockery) {
       super(mockery);
     }
 

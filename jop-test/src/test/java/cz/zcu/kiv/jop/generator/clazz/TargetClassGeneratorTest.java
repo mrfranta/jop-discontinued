@@ -1,13 +1,11 @@
 package cz.zcu.kiv.jop.generator.clazz;
 
-import java.lang.annotation.Annotation;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cz.zcu.kiv.jop.annotation.class_provider.TargetClass;
+import cz.zcu.kiv.jop.annotation.class_provider.TargetClassImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 
 /**
@@ -70,44 +68,6 @@ public class TargetClassGeneratorTest {
   @Test
   public void testGetValue() throws ValueGeneratorException {
     Assert.assertEquals(Integer.class, targetClassGenerator.getValue(new TargetClassImpl(Integer.class)));
-  }
-
-  /**
-   * Implementation of annotation {@link TargetClass}.
-   *
-   * @author Mr.FrAnTA
-   */
-  private static class TargetClassImpl implements TargetClass {
-
-    /** Value of annotation. */
-    private final Class<?> value;
-
-    /**
-     * Constructs the annotation.
-     *
-     * @param value the value of annotation.
-     */
-    public TargetClassImpl(Class<?> value) {
-      this.value = value;
-    }
-
-    /**
-     * Returns type of annotation (this class).
-     *
-     * @return type of annotation.
-     */
-    @Override
-    public Class<? extends Annotation> annotationType() {
-      return TargetClass.class;
-    }
-
-    /**
-     * @return Value of annotation.
-     */
-    @Override
-    public Class<?> value() {
-      return value;
-    }
   }
 
 }

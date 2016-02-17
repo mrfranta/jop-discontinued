@@ -6,6 +6,8 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
+import cz.zcu.kiv.jop.annotation.FooImpl;
+
 /**
  * Test of session class {@link ExtendedRandomGeneratorSessionImpl}.
  *
@@ -35,7 +37,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo = new FooAnnotation(0);
+    Annotation foo = new FooImpl(0);
     Random fooRand = new Random();
 
     /*----- Execution -----*/
@@ -56,7 +58,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo = new FooAnnotation(0);
+    Annotation foo = new FooImpl(0);
     Random fooRand = new Random();
 
     /*----- Execution -----*/
@@ -76,7 +78,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo = new FooAnnotation(0);
+    Annotation foo = new FooImpl(0);
     Random newRand = new Random();
 
     /*----- Execution -----*/
@@ -97,10 +99,10 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo0 = new FooAnnotation(0);
+    Annotation foo0 = new FooImpl(0);
     Random fooRand0 = new Random();
 
-    Annotation foo1 = new FooAnnotation(1);
+    Annotation foo1 = new FooImpl(1);
     Random fooRand1 = new Random();
 
     /*----- Execution -----*/
@@ -120,7 +122,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo = new FooAnnotation(0);
+    Annotation foo = new FooImpl(0);
 
     /*----- Execution -----*/
     Assert.assertNotNull(session.getRandomGenerator(foo));
@@ -135,8 +137,8 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo0 = new FooAnnotation(0);
-    Annotation foo1 = new FooAnnotation(1);
+    Annotation foo0 = new FooImpl(0);
+    Annotation foo1 = new FooImpl(1);
 
     /*----- Execution -----*/
     Assert.assertNotEquals(session.getRandomGenerator(foo0), session.getRandomGenerator(foo1));
@@ -151,7 +153,7 @@ public class ExtendedRandomGeneratorSessionImplTest {
     /*----- Preparation -----*/
     ExtendedRandomGeneratorSessionImpl session = new ExtendedRandomGeneratorSessionImpl();
 
-    Annotation foo = new FooAnnotation(0);
+    Annotation foo = new FooImpl(0);
     Random fooRand = new Random();
     session.setRandomGenerator(foo, fooRand);
 
@@ -162,45 +164,4 @@ public class ExtendedRandomGeneratorSessionImplTest {
     Assert.assertNotEquals(fooRand, session.getRandomGenerator(foo));
   }
 
-  /**
-   * Helper annotation which may be used in tests.
-   */
-  private static @interface Foo {
-    /** Attribute for value. */
-    public int value();
-  }
-
-  /**
-   * Helper "implementation" of annotation {@link Foo} which may be used for manual creation of
-   * annotation instance.
-   */
-  private static class FooAnnotation implements Foo {
-    /** Annotation value. */
-    private final int value;
-
-    /**
-     * Constructs annotation.
-     *
-     * @param value value of annotation.
-     */
-    public FooAnnotation(int value) {
-      this.value = value;
-    }
-
-    /**
-     * Returns type of annotation (this class).
-     *
-     * @return type of annotation.
-     */
-    public Class<? extends Annotation> annotationType() {
-      return Foo.class;
-    }
-
-    /**
-     * @return Value of annotation.
-     */
-    public int value() {
-      return value;
-    }
-  }
 }

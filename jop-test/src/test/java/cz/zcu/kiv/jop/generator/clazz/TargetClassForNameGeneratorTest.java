@@ -1,7 +1,5 @@
 package cz.zcu.kiv.jop.generator.clazz;
 
-import java.lang.annotation.Annotation;
-
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.After;
@@ -11,6 +9,7 @@ import org.junit.Test;
 
 import cz.zcu.kiv.jop.annotation.class_provider.ClassLoaderConst;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
+import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForNameImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.ioc.ContextUnitSupport;
 import cz.zcu.kiv.jop.ioc.Injector;
@@ -220,77 +219,6 @@ public class TargetClassForNameGeneratorTest {
   @Test(expected = ValueGeneratorException.class)
   public void testGetValueForNonExistingClass() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl("java.lang.Foo"));
-  }
-
-  /**
-   * Implementation of annotation {@link TargetClassForName}.
-   *
-   * @author Mr.FrAnTA
-   */
-  private static class TargetClassForNameImpl implements TargetClassForName {
-
-    /** Value of annotation. */
-    private final String value;
-    /** Information whether the class will be initialized. */
-    private final boolean initialize;
-    /** Symbolic name of class loader. */
-    private final String classLoader;
-
-    /**
-     * Constructs the annotation.
-     *
-     * @param value the value of annotation.
-     */
-    public TargetClassForNameImpl(String value) {
-      this(value, true, ClassLoaderConst.CALLER);
-    }
-
-    /**
-     * Constructs the annotation.
-     *
-     * @param value the value of annotation.
-     * @param initialize information whether the class will be initialized.
-     * @param classLoader symbolic name of class loader.
-     */
-    public TargetClassForNameImpl(String value, boolean initialize, String classLoader) {
-      this.value = value;
-      this.initialize = initialize;
-      this.classLoader = classLoader;
-    }
-
-    /**
-     * Returns type of annotation (this class).
-     *
-     * @return type of annotation.
-     */
-    @Override
-    public Class<? extends Annotation> annotationType() {
-      return TargetClassForName.class;
-    }
-
-    /**
-     * @return Value of annotation.
-     */
-    @Override
-    public String value() {
-      return value;
-    }
-
-    /**
-     * @return Information whether the class will be initialized.
-     */
-    @Override
-    public boolean initialize() {
-      return initialize;
-    }
-
-    /**
-     * @return Symbolic name of class loader.
-     */
-    @Override
-    public String classLoader() {
-      return classLoader;
-    }
   }
 
   // ------------------------------ context ------------------------------------

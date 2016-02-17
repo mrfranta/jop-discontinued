@@ -24,7 +24,10 @@
     <jmock-junit4.version>2.8.2</jmock-junit4.version>
 
     <!-- plugins versions -->
-    <surefire.plugin.version>2.19.1</surefire.plugin.version>
+    <jar.plugin.version>2.4</jar.plugin.version>
+    <install.plugin.version>2.5.1</install.plugin.version>
+    <surefire.plugin.version>2.17</surefire.plugin.version>
+    <build-helper.plugin.version>1.8</build-helper.plugin.version>
   </properties>
 
   <dependencies>
@@ -39,6 +42,14 @@
       <groupId>cz.zcu.kiv.jop</groupId>
       <artifactId>jop-impl</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- logging -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -68,7 +79,13 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>${jar.plugin.version}</version>
         <executions>
           <execution>
             <id>default-jar</id>
@@ -80,10 +97,31 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
+        <version>${install.plugin.version}</version>
         <executions>
           <execution>
             <id>default-install</id>
             <phase/>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${build-helper.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>add-test-source</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/test-helpers/java</source>
+              </sources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
