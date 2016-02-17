@@ -3,6 +3,9 @@ package cz.zcu.kiv.jop.generator.clazz;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cz.zcu.kiv.jop.annotation.class_provider.ClassLoaderConst;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
 import cz.zcu.kiv.jop.generator.ValueGenerator;
@@ -18,6 +21,9 @@ import cz.zcu.kiv.jop.util.StringUtils;
  */
 @Singleton
 public class TargetClassForNameGenerator implements ValueGenerator<Class<?>, TargetClassForName> {
+
+  /** Logger used for logging. */
+  private static final Log logger = LogFactory.getLog(TargetClassForNameGenerator.class);
 
   /**
    * {@inheritDoc}
@@ -68,6 +74,9 @@ public class TargetClassForNameGenerator implements ValueGenerator<Class<?>, Tar
     }
     else {
       classLoader = classLoaderSession.getClassLoader(classLoaderName);
+      if (classLoader == null) {
+        logger.warn("No class loader found for name '" + classLoaderName + "', it will be used called class loader.");
+      }
     }
 
     try {
