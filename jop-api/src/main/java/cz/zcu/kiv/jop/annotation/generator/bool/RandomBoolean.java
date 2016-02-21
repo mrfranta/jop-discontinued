@@ -27,6 +27,7 @@ public @interface RandomBoolean {
 
   /**
    * Required parameter for probability of success (generator provides the <code>true</code> value).
+   * The value of probability has to be between 0.0 (inclusive) and 1.0 (inclusive).
    */
   public double probability();
 

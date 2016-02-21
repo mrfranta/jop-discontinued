@@ -34,8 +34,8 @@ public @interface BinomialGenerator {
   public int trials();
 
   /**
-   * Required parameter for probability of individual experiment (trial) success. Probability value
-   * has to be greater or equal to 0 and lesser or equal to 1.
+   * Required parameter for probability of individual experiment (trial) success. Value of
+   * probability has to be between 0.0 (exclusive) and 1.0 (exclusive).
    */
   public double probability();
 

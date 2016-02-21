@@ -26,7 +26,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface PoissonGenerator {
 
   /**
-   * Required parameter for mean of generated values.
+   * Required parameter for mean of generated values. Mean has to be positive integer number.
    */
   public double mean();
 

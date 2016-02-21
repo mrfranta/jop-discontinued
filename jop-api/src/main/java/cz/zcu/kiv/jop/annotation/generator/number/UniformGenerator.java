@@ -25,14 +25,14 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
 public @interface UniformGenerator {
 
   /**
-   * Required parameter for minimum of generated value. Value of minimum has to be lesser than
-   * {@link #max() maximum}.
+   * Required parameter for minimum of generated value. Value of minimum has to be lesser than or
+   * equals to {@link #max() maximum}.
    */
   public double min();
 
   /**
-   * Required parameter for maximum of generated value. Value of maximum has to be greater than
-   * {@link #min() minimum}.
+   * Required parameter for maximum of generated value. Value of maximum has to be greater than or
+   * equals to {@link #min() minimum}.
    */
   public double max();
 
