@@ -3,6 +3,7 @@ package cz.zcu.kiv.jop.generator.clazz;
 import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClass;
+import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 
@@ -26,20 +27,17 @@ public class TargetClassGenerator implements ValueGenerator<Class<?>, TargetClas
   /**
    * Returns class type from parameter {@link TargetClass#value() value()} of given annotation.
    *
-   * @param params the parameters of random generator.
+   * @param params the parameters of class type generator.
    * @return Class given in parameter {@link TargetClass#value() value()}.
    * @throws ValueGeneratorException If given parameters are not valid.
    */
   public Class<?> getValue(TargetClass params) throws ValueGeneratorException {
-    if (params == null) {
-      throw new ValueGeneratorException("Annotation cannot be null");
-    }
+    Class<?> value = AbstractValueGenerator.checkParamsNotNull(params).value(); // check not null
 
-    if (params.value() == null) {
+    if (value == null) {
       throw new ValueGeneratorException("Class type cannot be null");
     }
 
-    return params.value();
+    return value;
   }
-
 }

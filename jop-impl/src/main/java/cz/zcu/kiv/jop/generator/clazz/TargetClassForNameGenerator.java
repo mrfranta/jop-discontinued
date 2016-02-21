@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cz.zcu.kiv.jop.annotation.class_provider.ClassLoaderConst;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
+import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
@@ -38,16 +39,14 @@ public class TargetClassForNameGenerator implements ValueGenerator<Class<?>, Tar
    * {@link TargetClassForName#value() value()} of given annotation. For loading of class is used
    * class loaded specified in parameter {@link TargetClassForName#classLoader() classLoader()}.
    *
-   * @param params the parameters of random generator.
+   * @param params the parameters of class type generator.
    * @return Loaded class type with fully qualified name given in parameter
    *         {@link TargetClassForName#value() value()}.
    * @throws ValueGeneratorException If given parameters are not valid or if class with given name
    *           was not found.
    */
   public Class<?> getValue(TargetClassForName params) throws ValueGeneratorException {
-    if (params == null) {
-      throw new ValueGeneratorException("Annotation cannot be null");
-    }
+    AbstractValueGenerator.checkParamsNotNull(params); // check not null
 
     // class name
     String className = params.value();
@@ -57,7 +56,7 @@ public class TargetClassForNameGenerator implements ValueGenerator<Class<?>, Tar
 
     // class loader symbolic name
     String classLoaderName = params.classLoader();
-    if (!StringUtils.hasText(params.classLoader())) {
+    if (!StringUtils.hasText(classLoaderName)) {
       throw new ValueGeneratorException("Symbolic name of class loader cannot be null, empty or blank");
     }
 

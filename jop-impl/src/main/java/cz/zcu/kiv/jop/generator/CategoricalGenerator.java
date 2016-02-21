@@ -9,9 +9,6 @@ import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
 import java.util.Random;
 
-import javax.inject.Inject;
-
-import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 import cz.zcu.kiv.jop.util.ArrayUtils;
 import cz.zcu.kiv.jop.util.PrimitiveUtils;
 
@@ -36,7 +33,7 @@ import cz.zcu.kiv.jop.util.PrimitiveUtils;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-public abstract class CategoricalGenerator<T, P extends Annotation> implements ValueGenerator<T, P> {
+public abstract class CategoricalGenerator<T, P extends Annotation> extends AbstractValueGenerator<T, P> {
 
   /**
    * {@inheritDoc}
@@ -135,13 +132,11 @@ public abstract class CategoricalGenerator<T, P extends Annotation> implements V
    *           array of floats or doubles).
    */
   public T getValue(P params) throws ValueGeneratorException {
-    if (params == null) {
-      throw new ValueGeneratorException("Parameters of generator cannot be null");
-    }
+    checkParamsNotNull(params); // check not null
 
     T[] values = getValues(params);
     double[] probabilities = getProbabilities(params);
-    Random rand = randomGeneratorSession.getRandomGenerator(params);
+    Random rand = getRandomGenerator(params);
 
     return getValue(rand, values, probabilities);
   }
@@ -304,8 +299,9 @@ public abstract class CategoricalGenerator<T, P extends Annotation> implements V
    * @param probabilities the array of probabilities.
    * @param valuesCount the number of values.
    * @return The normalized array of probabilities.
+   * @throws ValueGeneratorException If the array of probabilities contains negative value(s).
    */
-  public static double[] normalizeProbabilities(double[] probabilities, int valuesCount) {
+  public static double[] normalizeProbabilities(double[] probabilities, int valuesCount) throws ValueGeneratorException {
     double[] normalized = new double[valuesCount];
 
     // no values, no probabilities.
@@ -327,16 +323,18 @@ public abstract class CategoricalGenerator<T, P extends Annotation> implements V
       // normalize probabilities
       double summary = 0.0;
       for (int i = 0; i < normalized.length; i++) {
+        if (normalized[i] < 0.0) {
+          throw new ValueGeneratorException("Negative probability at: " + i);
+        }
+
         summary += normalized[i];
       }
 
       // all values has probabilities 0.0 -> each will have equal probability
       if (summary == 0.0) {
-        Arrays.fill(normalized, 1.0);
-        summary = normalized.length;
+        Arrays.fill(normalized, 1.0 / valuesCount);
       }
-
-      if (summary != 1.0) {
+      else if (summary != 1.0) {
         for (int i = 0; i < normalized.length; i++) {
           normalized[i] = normalized[i] / summary;
         }
@@ -345,20 +343,4 @@ public abstract class CategoricalGenerator<T, P extends Annotation> implements V
 
     return normalized;
   }
-
-  // ----- Injection part ------------------------------------------------------
-
-  /** Session which stores random generators. */
-  protected RandomGeneratorSession randomGeneratorSession;
-
-  /**
-   * Sets (injects) session which stores random generators.
-   *
-   * @param randomGeneratorSession the session to set (inject).
-   */
-  @Inject
-  public final void setRandomGeneratorSession(RandomGeneratorSession randomGeneratorSession) {
-    this.randomGeneratorSession = randomGeneratorSession;
-  }
-
 }

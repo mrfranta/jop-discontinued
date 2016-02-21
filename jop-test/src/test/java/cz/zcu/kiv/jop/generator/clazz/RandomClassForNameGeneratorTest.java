@@ -47,7 +47,19 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
    */
   @Test(expected = ValueGeneratorException.class)
   public void testGetValueForNullValue() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl());
+    /*----- Preparation -----*/
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl();
+
+    /*----- Expectations -----*/
+    mockery.checking(new Expectations() {
+      {
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
+        will(returnValue(new RandomMock(0.3))); // it will return first value
+      }
+    });
+
+    /*----- Execution & Verify -----*/
+    randomClassForNameGenerator.getValue(randomClassForName);
   }
 
   /**
@@ -56,7 +68,19 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
    */
   @Test(expected = ValueGeneratorException.class)
   public void testGetValueForEmptyValue() throws ValueGeneratorException {
-    randomClassForNameGenerator.getValue(new RandomClassForNameImpl(new String[0]));
+    /*----- Preparation -----*/
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(new String[0]);
+
+    /*----- Expectations -----*/
+    mockery.checking(new Expectations() {
+      {
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
+        will(returnValue(new RandomMock(0.3))); // it will return first value
+      }
+    });
+
+    /*----- Execution & Verify -----*/
+    randomClassForNameGenerator.getValue(randomClassForName);
   }
 
   /**
@@ -95,18 +119,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.CALLER);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.CALLER);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.3))); // it will return first value
       }
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameGenerator.getValue(randomClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
@@ -121,18 +145,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.CONTEXT);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.CONTEXT);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.7))); // it will return second value
       }
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameGenerator.getValue(randomClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Long.class, clazz);
@@ -147,18 +171,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     /*----- Preparation -----*/
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.SYSTEM);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values, probabilities, true, ClassLoaderConst.SYSTEM);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.5))); // it will return first value
       }
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameGenerator.getValue(randomClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
@@ -174,12 +198,12 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     final String name = "NAME";
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values, probabilities, true, name);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values, probabilities, true, name);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.45))); // it will return first value
 
         oneOf(getInstance(ClassLoaderSession.class)).getClassLoader(with(equal(name)));
@@ -188,7 +212,7 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameGenerator.getValue(randomClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Integer.class, clazz);
@@ -204,12 +228,12 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     final String name = "NAME";
     String[] values = new String[] {Integer.class.getName(), Long.class.getName()};
     double[] probabilities = new double[] {0.5, 0.5};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values, probabilities, true, name);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values, probabilities, true, name);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.51))); // it will return second value
 
         oneOf(getInstance(ClassLoaderSession.class)).getClassLoader(with(equal(name)));
@@ -218,7 +242,7 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
     });
 
     /*----- Execution -----*/
-    Class<?> clazz = randomClassForNameGenerator.getValue(targetClassForName);
+    Class<?> clazz = randomClassForNameGenerator.getValue(randomClassForName);
 
     /*----- Verify -----*/
     Assert.assertEquals(Long.class, clazz);
@@ -232,18 +256,18 @@ public class RandomClassForNameGeneratorTest extends AbstractContextTest {
   public void testGetValueForNonExistingClass() throws ValueGeneratorException {
     /*----- Preparation -----*/
     String[] values = new String[] {"java.lang.Foo", "java.lang.Bar"};
-    final RandomClassForName targetClassForName = new RandomClassForNameImpl(values);
+    final RandomClassForName randomClassForName = new RandomClassForNameImpl(values);
 
     /*----- Expectations -----*/
     mockery.checking(new Expectations() {
       {
-        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(targetClassForName)));
+        oneOf(getInstance(RandomGeneratorSession.class)).getRandomGenerator(with(equal(randomClassForName)));
         will(returnValue(new RandomMock(0.51))); // it will return second value
       }
     });
 
     /*----- Execution & Verify -----*/
-    randomClassForNameGenerator.getValue(targetClassForName);
+    randomClassForNameGenerator.getValue(randomClassForName);
   }
 
   // ------------------------------ context ------------------------------------
