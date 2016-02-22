@@ -27,6 +27,8 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
+ *
+ * @see <a href="https://github.com/google/guice">Google Guice</a>
  */
 @Singleton
 public class GuiceInjector implements Injector {

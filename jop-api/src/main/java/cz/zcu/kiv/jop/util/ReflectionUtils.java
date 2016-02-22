@@ -183,4 +183,23 @@ public abstract class ReflectionUtils {
     return null;
   }
 
+  /**
+   * Returns information whether the class with given fully qualified name exists on classpath.
+   *
+   * @param className the fully qualified name of class.
+   * @return <code>true</code> if class exists on classpath; <code>false</code> otherwise.
+   */
+  public static boolean isClassExist(String className) {
+    try {
+      // FIXME: There should be used some workaround for Reflection.getCallerClass()
+      // Class.forName(className, false, ClassLoaderResolver.getCallerClassLoader());
+      Class.forName(className);
+      return true;
+    }
+    catch (ClassNotFoundException exc) {
+      // class doesn't exist on classpath
+      return false;
+    }
+  }
+
 }
