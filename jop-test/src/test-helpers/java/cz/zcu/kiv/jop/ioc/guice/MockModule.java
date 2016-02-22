@@ -3,6 +3,7 @@ package cz.zcu.kiv.jop.ioc.guice;
 import org.jmock.Mockery;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.name.Names;
 
 /**
  * Google Guice module which supports binding of classes to their mocks created by {@link Mockery}.
@@ -39,6 +40,17 @@ public abstract class MockModule extends AbstractModule {
   @SuppressWarnings("unchecked")
   protected final void bindMock(Class<?> clazz) {
     bind((Class<Object>)clazz).toInstance(mockery.mock(clazz));
+  }
+
+  /**
+   * Creates mock of given class type and creates the named binding.
+   *
+   * @param clazz the class type which will be mocked and bound.
+   * @param name the name for named binding.
+   */
+  @SuppressWarnings("unchecked")
+  protected final void bindNamedMock(Class<?> clazz, String name) {
+    bind((Class<Object>)clazz).annotatedWith(Names.named(name)).toInstance(mockery.mock(clazz));
   }
 
   /**
