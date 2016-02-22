@@ -56,6 +56,8 @@ public class InjectorManager implements InjectorProvider {
   /**
    * Returns instance of provided injector. Each call of this method should returns the same
    * injector.
+   *
+   * @return Provided injector.
    */
   public Injector get() {
     return injector;

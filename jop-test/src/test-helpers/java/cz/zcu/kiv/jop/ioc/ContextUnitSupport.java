@@ -52,7 +52,13 @@ public class ContextUnitSupport {
    * @return Created injector.
    */
   public Injector createInjector() {
-    return new TestInjector(modules);
+    Injector injector = new TestInjector(modules);
+
+    // stores injector for actual thread
+    InjectorManager manager = (InjectorManager)InjectorManager.getInstance();
+    manager.set(injector);
+
+    return injector;
   }
 
 }
