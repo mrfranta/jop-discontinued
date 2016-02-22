@@ -31,6 +31,17 @@ public interface Injector {
   public <T> T getInstance(Class<T> clazz);
 
   /**
+   * Returns assembled named instance of given class with injected dependencies.
+   *
+   * @param clazz the class which instance will be provided.
+   * @param name the name of named instance.
+   * @return Assembled named instance of given class.
+   * @throws InjectorException if some error occurs while Injector providing a named instance or
+   *           during injection of dependencies into some instance.
+   */
+  public <T> T getInstance(Class<T> clazz, String name);
+
+  /**
    * Injects dependencies into the fields and methods of given instance. Ignores the presence or
    * absence of an injectable constructor.
    * <p>

@@ -1,9 +1,12 @@
 package cz.zcu.kiv.jop.ioc.guice;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.name.Names;
 
+import cz.zcu.kiv.jop.ioc.NamedScopes;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
 import cz.zcu.kiv.jop.session.ClassLoaderSessionImpl;
+import cz.zcu.kiv.jop.session.ExtendedRandomGeneratorSessionImpl;
 import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSessionImpl;
 
@@ -26,6 +29,7 @@ public final class CoreModule extends AbstractModule {
     // binding of sessions
     bind(ClassLoaderSession.class).to(ClassLoaderSessionImpl.class);
     bind(RandomGeneratorSession.class).to(RandomGeneratorSessionImpl.class);
+    bind(RandomGeneratorSession.class).annotatedWith(Names.named(NamedScopes.EXTENDED_IMPL)).to(ExtendedRandomGeneratorSessionImpl.class);
   }
 
 }

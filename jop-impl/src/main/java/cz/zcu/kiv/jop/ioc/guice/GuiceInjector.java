@@ -12,8 +12,10 @@ import com.google.inject.Binder;
 import com.google.inject.ConfigurationException;
 import com.google.inject.CreationException;
 import com.google.inject.Guice;
+import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.ProvisionException;
+import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
 
 import cz.zcu.kiv.jop.ioc.Injector;
@@ -142,6 +144,25 @@ public class GuiceInjector implements Injector {
   public <T> T getInstance(Class<T> clazz) {
     try {
       return injector.getInstance(clazz);
+    }
+    catch (ConfigurationException exc) {
+      throw new InjectorException(exc);
+    }
+    catch (ProvisionException exc) {
+      throw new InjectorException(exc);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>
+   * This method serves only as wrapper of Guice injector's method
+   * {@link com.google.inject.Injector#getInstance(Key) getInstance(Key.get(Class,
+   * Names.named(String)))}.
+   */
+  public <T> T getInstance(Class<T> clazz, String name) {
+    try {
+      return injector.getInstance(Key.get(clazz, Names.named(name)));
     }
     catch (ConfigurationException exc) {
       throw new InjectorException(exc);
