@@ -22,9 +22,10 @@ public interface Binder<T> {
    *
    * @param annotation the class type of annotation of which will be created binding (builder).
    * @return Binding builder for binding creation.
-   * @throws BindingException If some binding for given annotation already exists.
+   * @throws BindingException If given annotation is not valid or if some binding for given
+   *           annotation already exists.
    */
-  public BindingBuilder<T> bind(Class<? extends Annotation> annotation);
+  public BindingBuilder<T> bind(Class<? extends Annotation> annotation) throws BindingException;
 
   /**
    * Creates builder for binding of given annotation type. In case that given annotation type was
@@ -32,8 +33,9 @@ public interface Binder<T> {
    *
    * @param annotation the class type of annotation of which will be created binding (builder).
    * @return Binding builder for binding creation.
+   * @throws BindingException If given annotation is not valid.
    */
-  public BindingBuilder<T> rebind(Class<? extends Annotation> annotation);
+  public BindingBuilder<T> rebind(Class<? extends Annotation> annotation) throws BindingException;
 
   /**
    * Returns created binding (even if it wasn't finished by their builder) for given
@@ -42,10 +44,10 @@ public interface Binder<T> {
    * @param annotation the class type of annotation for which will be returned binding.
    * @return Found binding for given annotation type;<code>null</code> in case that exception won't
    *         be thrown (not recommended).
-   * @throws BindingException It may throws binding exception in case that binding for given
-   *           annotation type was not found.
+   * @throws BindingException If given annotation is not valid. It also may throws binding exception
+   *           in case that binding for given annotation type was not found.
    */
-  public Binding<T> getBinding(Class<? extends Annotation> annotation);
+  public Binding<T> getBinding(Class<? extends Annotation> annotation) throws BindingException;
 
   /**
    * Returns all created bindings (even if they wasn't finished by their builder) by this binder.

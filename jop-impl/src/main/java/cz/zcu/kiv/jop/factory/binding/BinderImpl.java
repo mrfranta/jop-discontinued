@@ -50,7 +50,7 @@ public class BinderImpl<T> implements Binder<T> {
   /**
    * {@inheritDoc}
    */
-  public BindingBuilder<T> bind(Class<? extends Annotation> annotation) {
+  public BindingBuilder<T> bind(Class<? extends Annotation> annotation) throws BindingException {
     checkAnnotation(annotation);
 
     if (bindings.containsKey(annotation)) {
@@ -63,7 +63,7 @@ public class BinderImpl<T> implements Binder<T> {
   /**
    * {@inheritDoc}
    */
-  public BindingBuilder<T> rebind(Class<? extends Annotation> annotation) {
+  public BindingBuilder<T> rebind(Class<? extends Annotation> annotation) throws BindingException {
     checkAnnotation(annotation);
 
     // no presence checking here...
@@ -88,7 +88,9 @@ public class BinderImpl<T> implements Binder<T> {
   /**
    * {@inheritDoc}
    */
-  public Binding<T> getBinding(Class<? extends Annotation> annotation) {
+  public Binding<T> getBinding(Class<? extends Annotation> annotation) throws BindingException {
+    checkAnnotation(annotation);
+
     Binding<T> binding = bindings.get(annotation);
     if (binding == null) {
       throw new BindingException("No binding found for annotation '" + annotation.getName() + "'");
@@ -103,4 +105,5 @@ public class BinderImpl<T> implements Binder<T> {
   public List<Binding<T>> getBindings() {
     return new ArrayList<Binding<T>>(bindings.values());
   }
+
 }

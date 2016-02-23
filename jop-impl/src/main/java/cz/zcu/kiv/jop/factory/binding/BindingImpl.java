@@ -52,6 +52,7 @@ public class BindingImpl<T> implements Binding<T> {
     if (annotation == null) {
       throw new BindingException("Annotation type cannot be null");
     }
+
     this.annotation = annotation;
   }
 
