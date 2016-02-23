@@ -28,7 +28,7 @@ public interface Injector {
    * @throws InjectorException if some error occurs while Injector providing an instance or during
    *           injection of dependencies into some instance.
    */
-  public <T> T getInstance(Class<T> clazz);
+  public <T> T getInstance(Class<T> clazz) throws InjectorException;
 
   /**
    * Returns assembled named instance of given class with injected dependencies.
@@ -39,7 +39,7 @@ public interface Injector {
    * @throws InjectorException if some error occurs while Injector providing a named instance or
    *           during injection of dependencies into some instance.
    */
-  public <T> T getInstance(Class<T> clazz, String name);
+  public <T> T getInstance(Class<T> clazz, String name) throws InjectorException;
 
   /**
    * Injects dependencies into the fields and methods of given instance. Ignores the presence or
@@ -52,6 +52,6 @@ public interface Injector {
    * @throws InjectorException if some error occurs during injection of dependencies into some
    *           instance.
    */
-  public void injectMembers(Object instance);
+  public void injectMembers(Object instance) throws InjectorException;
 
 }

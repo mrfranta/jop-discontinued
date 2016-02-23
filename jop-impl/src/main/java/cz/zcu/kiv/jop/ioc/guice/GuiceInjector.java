@@ -43,8 +43,10 @@ public class GuiceInjector implements Injector {
 
   /**
    * Constructs injector with default modules (bindings).
+   *
+   * @throws InjectorException If some error occurs during injector creation.
    */
-  public GuiceInjector() {
+  public GuiceInjector() throws InjectorException {
     List<Module> modules = new ArrayList<Module>();
 
     // bind injector to this instance
@@ -85,8 +87,10 @@ public class GuiceInjector implements Injector {
    * adds one additional module for binding of injector interface to this instance.
    *
    * @param modules the modules (bindings) for injector.
+   *
+   * @throws InjectorException If some error occurs during injector creation.
    */
-  GuiceInjector(Module... modules) {
+  GuiceInjector(Module... modules) throws InjectorException {
     // add binding of injector to this instance
     Module[] injectorModules = new Module[modules.length + 1];
     injectorModules[0] = createInjectorModule();
@@ -108,8 +112,10 @@ public class GuiceInjector implements Injector {
    * adds one additional module for binding of injector interface to this instance.
    *
    * @param modules the list of modules (bindings) for injector.
+   *
+   * @throws InjectorException If some error occurs during injector creation.
    */
-  GuiceInjector(List<Module> modules) {
+  GuiceInjector(List<Module> modules) throws InjectorException {
     // add binding of injector to this instance
     List<Module> injectorModules = new ArrayList<Module>(modules);
     injectorModules.add(0, createInjectorModule());
@@ -141,7 +147,7 @@ public class GuiceInjector implements Injector {
    * This method serves only as wrapper of Guice injector's method
    * {@link com.google.inject.Injector#getInstance(Class) getInstance(Class)}.
    */
-  public <T> T getInstance(Class<T> clazz) {
+  public <T> T getInstance(Class<T> clazz) throws InjectorException {
     try {
       return injector.getInstance(clazz);
     }
@@ -160,7 +166,7 @@ public class GuiceInjector implements Injector {
    * {@link com.google.inject.Injector#getInstance(Key) getInstance(Key.get(Class,
    * Names.named(String)))}.
    */
-  public <T> T getInstance(Class<T> clazz, String name) {
+  public <T> T getInstance(Class<T> clazz, String name) throws InjectorException {
     try {
       return injector.getInstance(Key.get(clazz, Names.named(name)));
     }
@@ -178,7 +184,7 @@ public class GuiceInjector implements Injector {
    * This method serves only as wrapper of Guice injector's method
    * {@link com.google.inject.Injector#injectMembers(Object) injectMembers(Object)}.
    */
-  public void injectMembers(Object instance) {
+  public void injectMembers(Object instance) throws InjectorException {
     try {
       injector.injectMembers(instance);
     }

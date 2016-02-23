@@ -50,8 +50,10 @@ public class ContextUnitSupport {
    * Creates injector which may be used in jUnit tests for injecting of mocked dependencies.
    *
    * @return Created injector.
+   *
+   * @throws InjectorException If some error occurs during injector creation.
    */
-  public Injector createInjector() {
+  public Injector createInjector() throws InjectorException {
     Injector injector = new TestInjector(modules);
 
     // stores injector for actual thread

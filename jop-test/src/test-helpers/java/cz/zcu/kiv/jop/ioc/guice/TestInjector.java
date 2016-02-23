@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.inject.Module;
 
+import cz.zcu.kiv.jop.ioc.InjectorException;
+
 /**
  * Extension of Google Guice injector which contains public constructor which allows construct it
  * for given list of modules.
@@ -17,8 +19,10 @@ public class TestInjector extends GuiceInjector {
    * additional module for binding of injector interface to this instance.
    *
    * @param modules list of modules (bindings) for injector.
+   *
+   * @throws InjectorException If some error occurs during injector creation.
    */
-  public TestInjector(List<Module> modules) {
+  public TestInjector(List<Module> modules) throws InjectorException {
     super(modules);
   }
 
