@@ -231,15 +231,22 @@ public class BindingImpl<T> implements Binding<T> {
       throw new BindingException(error);
     }
 
-    if (instance == null) {
+    T ret = instance;
+    if (ret == null) {
       try {
         Injector injector = InjectorManager.getInstance().get();
         if (constructor == null) {
-          instance = injector.getInstance(type);
+          ret = injector.getInstance(type);
+          if (isSingleton()) {
+            instance = ret;
+          }
         }
         else {
-          instance = ReflectionUtils.createInstance(constructor);
-          injector.injectMembers(instance); // lazy injection
+          ret = ReflectionUtils.createInstance(constructor);
+          injector.injectMembers(ret); // lazy injection
+          if (isSingleton()) {
+            instance = ret;
+          }
         }
       }
       catch (Exception exc) {
@@ -247,7 +254,7 @@ public class BindingImpl<T> implements Binding<T> {
       }
     }
 
-    return instance;
+    return ret;
   }
 
   /**
