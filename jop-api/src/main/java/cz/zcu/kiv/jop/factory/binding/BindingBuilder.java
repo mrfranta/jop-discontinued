@@ -36,7 +36,7 @@ public interface BindingBuilder<T> extends ScopedBindingBuilder {
 
   /**
    * Binds given constructor to annotation for which was created binding which is builded by this
-   * binder.
+   * binder. Given constructor has to be parameterless.
    *
    * @param constructor the constructor of object which will be bound to annotation.
    * @return Instance of scoped binding builder which may set the scope of binding.

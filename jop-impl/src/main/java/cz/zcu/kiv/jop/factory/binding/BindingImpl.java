@@ -147,8 +147,26 @@ public class BindingImpl<T> implements Binding<T> {
     this.type = type;
   }
 
+  /**
+   * Sets given constructor of object which was bound to annotation for which was created this
+   * binding.
+   *
+   * @param constructor the constructor to set.
+   */
   <S extends T> void setConstructor(Constructor<S> constructor) {
+    clearBinding(); // clears binding
+    if (constructor == null) {
+      this.error = "Constructor cannot be null";
+      return;
+    }
 
+    if (constructor.getParameterTypes().length > 0) {
+      this.error = "Constructor has to be parameterless";
+      return;
+    }
+
+    this.type = constructor.getDeclaringClass();
+    this.constructor = constructor;
   }
 
   /**
