@@ -45,7 +45,7 @@ public class TargetClassForNameImpl implements TargetClassForName {
    */
   @Override
   public Class<? extends Annotation> annotationType() {
-    return TargetClassForName.class;
+    return getClass();
   }
 
   /**

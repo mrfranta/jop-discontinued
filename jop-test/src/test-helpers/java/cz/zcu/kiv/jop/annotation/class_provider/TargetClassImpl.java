@@ -28,7 +28,7 @@ public class TargetClassImpl implements TargetClass {
    */
   @Override
   public Class<? extends Annotation> annotationType() {
-    return TargetClass.class;
+    return getClass();
   }
 
   /**

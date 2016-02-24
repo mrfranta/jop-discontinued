@@ -68,7 +68,7 @@ public class RandomClassForNameImpl implements RandomClassForName {
    */
   @Override
   public Class<? extends Annotation> annotationType() {
-    return RandomClassForName.class;
+    return getClass();
   }
 
   /**
