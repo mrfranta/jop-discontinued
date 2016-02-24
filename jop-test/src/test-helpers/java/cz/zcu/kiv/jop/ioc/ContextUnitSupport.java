@@ -63,4 +63,14 @@ public class ContextUnitSupport {
     return injector;
   }
 
+  /**
+   * Disposes (destroys) prepared prepared context unit support.
+   */
+  public void dispose() {
+    modules.clear(); // clear modules
+
+    // removes stored injector for actual thread
+    InjectorManager manager = (InjectorManager)InjectorManager.getInstance();
+    manager.remove();
+  }
 }

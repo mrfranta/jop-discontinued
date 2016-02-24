@@ -27,11 +27,14 @@ public abstract class AbstractContextTest {
    */
   @After
   public void tearDown() {
+    contextUnitSupport.dispose();
     mockery.assertIsSatisfied();
   }
 
   //------------------------------ context ------------------------------------
 
+  /** Support of jUnit context. */
+  private ContextUnitSupport contextUnitSupport;
   /** Mockery for mocking dependencies. */
   protected final Mockery mockery = new Mockery();
   /** Injector of dependencies. */
@@ -41,7 +44,7 @@ public abstract class AbstractContextTest {
    * Prepare unit test instances
    */
   protected void prepareContext() {
-    ContextUnitSupport contextUnitSupport = createUnitTestContext();
+    contextUnitSupport = createUnitTestContext();
     injector = contextUnitSupport.createInjector();
     prepareInstances(); // prepare instances for tests
   }

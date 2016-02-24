@@ -1,21 +1,16 @@
 package cz.zcu.kiv.jop.ioc;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Singleton implementation of {@link InjectorProvider injector provider} which provides singleton
- * instance of injector which may be used for dependency injection. In this implementation also may
- * prepare the injector according to available implementation of dependency injection. Generally
- * this library may cooperate with several implementations of dependency injection. Currently is
- * implemented only integration of injector using Google Guice.
+ * Singleton implementation of {@link InjectorProvider injector provider} which provides stored
+ * instance of injector for actual thread. The injector manager for jUnit tests provides injectors
+ * which integrates injector of Google Guice.
  *
  * @author Mr.FrAnTA
  */
 public class InjectorManager implements InjectorProvider {
 
   /** Stored instances of provided injectors. */
-  protected final Map<Thread, Injector> injectors = new HashMap<Thread, Injector>();
+  protected final ThreadLocal<Injector> injectors = new ThreadLocal<Injector>();
 
   /** Singleton instance of this this class. */
   private static InjectorManager instance;
@@ -31,7 +26,7 @@ public class InjectorManager implements InjectorProvider {
    * @param injector the injector to set (store).
    */
   protected synchronized void set(Injector injector) {
-    injectors.put(Thread.currentThread(), injector);
+    injectors.set(injector);
   }
 
   /**
@@ -42,12 +37,19 @@ public class InjectorManager implements InjectorProvider {
    */
   @Override
   public synchronized Injector get() throws InjectorException {
-    Injector injector = injectors.get(Thread.currentThread());
+    Injector injector = injectors.get();
     if (injector == null) {
       throw new InjectorException("No injector was found");
     }
 
     return injector;
+  }
+
+  /**
+   * Removes stored injector for actual thread.
+   */
+  protected void remove() {
+    injectors.remove();
   }
 
   /**
