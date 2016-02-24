@@ -112,8 +112,8 @@ public abstract class Preconditions {
    *
    * <pre>
    * public static &lt;T&gt; Collection merge(Collection&lt;? extends T&gt; col1, Collection&lt;? extends T&gt; col2) {
-   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkNotNull(col1));
-   *   collection.addAll(Preconditions.checkNotNull(col2));
+   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkArgumentNotNull(col1));
+   *   collection.addAll(Preconditions.checkArgumentNotNull(col2));
    *
    *   return collection;
    * }
@@ -142,8 +142,8 @@ public abstract class Preconditions {
    *
    * <pre>
    * public static &lt;T&gt; Collection merge(Collection&lt;? extends T&gt; col1, Collection&lt;? extends T&gt; col2) {
-   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkNotNull(col1, &quot;col1 is null&quot;));
-   *   collection.addAll(Preconditions.checkNotNull(col2, &quot;col2 is null&quot;));
+   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkArgumentNotNull(col1, &quot;col1 is null&quot;));
+   *   collection.addAll(Preconditions.checkArgumentNotNull(col2, &quot;col2 is null&quot;));
    *
    *   return collection;
    * }
@@ -174,8 +174,8 @@ public abstract class Preconditions {
    * private static final String MERGE_ERR_MSG = &quot;%s is null&quot;;
    *
    * public static &lt;T&gt; Collection merge(Collection&lt;? extends T&gt; col1, Collection&lt;? extends T&gt; col2) {
-   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkNotNull(col1, MERGE_ERR_MSG, &quot;col1&quot;));
-   *   collection.addAll(Preconditions.checkNotNull(col2, MERGE_ERR_MSG, &quot;col2&quot;));
+   *   Collection&lt;T&gt; collection = new ArrayList&lt;T&gt;(Preconditions.checkArgumentNotNull(col1, MERGE_ERR_MSG, &quot;col1&quot;));
+   *   collection.addAll(Preconditions.checkArgumentNotNull(col2, MERGE_ERR_MSG, &quot;col2&quot;));
    *
    *   return collection;
    * }
