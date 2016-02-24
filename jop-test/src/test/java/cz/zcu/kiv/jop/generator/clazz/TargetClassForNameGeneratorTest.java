@@ -2,17 +2,15 @@ package cz.zcu.kiv.jop.generator.clazz;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
+import cz.zcu.kiv.jop.AbstractContextTest;
 import cz.zcu.kiv.jop.annotation.class_provider.ClassLoaderConst;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForNameImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.ioc.ContextUnitSupport;
-import cz.zcu.kiv.jop.ioc.Injector;
 import cz.zcu.kiv.jop.ioc.guice.MockModule;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
 
@@ -21,26 +19,7 @@ import cz.zcu.kiv.jop.session.ClassLoaderSession;
  *
  * @author Mr.FrAnTA
  */
-public class TargetClassForNameGeneratorTest {
-
-  /** Tested class generator. */
-  private TargetClassForNameGenerator targetClassForNameGenerator;
-
-  /**
-   * Preparations before test.
-   */
-  @Before
-  public void setUp() {
-    prepareContext();
-  }
-
-  /**
-   * Cleanup after test.
-   */
-  @After
-  public void tearDown() {
-    mockery.assertIsSatisfied();
-  }
+public class TargetClassForNameGeneratorTest extends AbstractContextTest {
 
   /**
    * Test of method {@link TargetClassForNameGenerator#getValueType()} which has to return class of
@@ -52,74 +31,74 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given null value. Expected
+   * Test of method {@link TargetClassForNameGenerator#get} for given null value. Expected
    * {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNull() throws ValueGeneratorException {
+  public void testGetForNull() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(null);
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with null
-   * value. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with null value.
+   * Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNullValue() throws ValueGeneratorException {
+  public void testGetForNullValue() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(null));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with empty
-   * value. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with empty value.
+   * Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForEmptyValue() throws ValueGeneratorException {
+  public void testGetForEmptyValue() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(""));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with blank
-   * value. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with blank value.
+   * Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForBlankValue() throws ValueGeneratorException {
+  public void testGetForBlankValue() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(" "));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with null
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with null symbolic
+   * name of class loader. Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNullClassLoader() throws ValueGeneratorException {
+  public void testGetForNullClassLoader() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(Integer.class.getName(), true, null));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with empty
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with empty symbolic
+   * name of class loader. Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForEmptyClassLoader() throws ValueGeneratorException {
+  public void testGetForEmptyClassLoader() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(Integer.class.getName(), true, ""));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with blank
-   * symbolic name of class loader. Expected {@link ValueGeneratorException}.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with blank symbolic
+   * name of class loader. Expected {@link ValueGeneratorException}.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForBlankClassLoader() throws ValueGeneratorException {
+  public void testGetForBlankClassLoader() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl(Integer.class.getName(), true, " "));
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#CALLER} of class loader.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#CALLER} of class loader.
    */
   @Test
-  public void testGetValueForCallerClassLoader() throws ValueGeneratorException {
+  public void testGetForCallerClassLoader() throws ValueGeneratorException {
     /*----- Preparation -----*/
     TargetClassForName targetClassForName = new TargetClassForNameImpl(Integer.class.getName(), true, ClassLoaderConst.CALLER);
 
@@ -131,11 +110,11 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#CONTEXT} of class loader.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#CONTEXT} of class loader.
    */
   @Test
-  public void testGetValueForContextClassLoader() throws ValueGeneratorException {
+  public void testGetForContextClassLoader() throws ValueGeneratorException {
     /*----- Preparation -----*/
     TargetClassForName targetClassForName = new TargetClassForNameImpl(Integer.class.getName(), true, ClassLoaderConst.CONTEXT);
 
@@ -147,11 +126,11 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with symbolic
-   * name {@link ClassLoaderConst#SYSTEM} of class loader.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with symbolic name
+   * {@link ClassLoaderConst#SYSTEM} of class loader.
    */
   @Test
-  public void testGetValueForSystemClassLoader() throws ValueGeneratorException {
+  public void testGetForSystemClassLoader() throws ValueGeneratorException {
     /*----- Preparation -----*/
     TargetClassForName targetClassForName = new TargetClassForNameImpl(Integer.class.getName(), true, ClassLoaderConst.SYSTEM);
 
@@ -163,11 +142,11 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with symbolic
-   * name of class loader which is stored in session.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with symbolic name
+   * of class loader which is stored in session.
    */
   @Test
-  public void testGetValueForStoredClassLoader() throws ValueGeneratorException {
+  public void testGetForStoredClassLoader() throws ValueGeneratorException {
     /*----- Preparation -----*/
     final String name = "NAME";
     TargetClassForName targetClassForName = new TargetClassForNameImpl(Integer.class.getName(), true, name);
@@ -188,11 +167,11 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for given annotation with symbolic
-   * name of class loader which is not stored in session.
+   * Test of method {@link TargetClassForNameGenerator#get} for given annotation with symbolic name
+   * of class loader which is not stored in session.
    */
   @Test
-  public void testGetValueForNotStoredClassLoader() throws ValueGeneratorException {
+  public void testGetForNotStoredClassLoader() throws ValueGeneratorException {
     /*----- Preparation -----*/
     final String name = "NAME";
     TargetClassForName targetClassForName = new TargetClassForNameImpl(Integer.class.getName(), true, name);
@@ -213,62 +192,52 @@ public class TargetClassForNameGeneratorTest {
   }
 
   /**
-   * Test of method {@link TargetClassForNameGenerator#getValue} for non-existing class in given
+   * Test of method {@link TargetClassForNameGenerator#get} for non-existing class in given
    * annotation with symbolic name {@link ClassLoaderConst#CALLER} of class loader.
    */
   @Test(expected = ValueGeneratorException.class)
-  public void testGetValueForNonExistingClass() throws ValueGeneratorException {
+  public void testGetForNonExistingClass() throws ValueGeneratorException {
     targetClassForNameGenerator.getValue(new TargetClassForNameImpl("java.lang.Foo"));
   }
 
   // ------------------------------ context ------------------------------------
 
-  /** Mockery for mocking dependencies. */
-  private final Mockery mockery = new Mockery();
-  /** Injector of dependencies. */
-  private Injector injector;
+  /** Tested class generator. */
+  private TargetClassForNameGenerator targetClassForNameGenerator;
 
   /**
-   * Prepare unit test instances
+   * {@inheritDoc}
    */
-  private void prepareContext() {
-    ContextUnitSupport contextUnitSupport = createUnitTestContext();
-    injector = contextUnitSupport.createInjector();
-
+  @Override
+  protected void prepareInstances() {
     // prepare testing instance
     targetClassForNameGenerator = injector.getInstance(TargetClassForNameGenerator.class);
   }
 
   /**
-   * Returns mocked instance of given class.
-   *
-   * @param mockedClass the mocked class type.
-   * @return Instance of mocked class.
+   * {@inheritDoc}
    */
-  private <T> T getInstance(Class<T> mockedClass) {
-    return injector.getInstance(mockedClass);
-  }
-
-  /**
-   * Create jUnit context.
-   *
-   * @return the provided jUnit context.
-   */
-  private ContextUnitSupport createUnitTestContext() {
+  @Override
+  protected ContextUnitSupport createUnitTestContext() {
     // @formatter:off
     return new ContextUnitSupport(
-        new TargetClassForNameModule(mockery)
+        new TargetClassForNameGeneratorModule(mockery)
     );
     // @formatter:on
   }
 
-  private class TargetClassForNameModule extends MockModule {
+  /**
+   * Google Guice module for context of this test.
+   *
+   * @author Mr.FrAnTA
+   */
+  private class TargetClassForNameGeneratorModule extends MockModule {
     /**
      * Constructs module with given mockery.
      *
      * @param mockery the mockery which will be used for mocking.
      */
-    public TargetClassForNameModule(Mockery mockery) {
+    public TargetClassForNameGeneratorModule(Mockery mockery) {
       super(mockery);
     }
 
