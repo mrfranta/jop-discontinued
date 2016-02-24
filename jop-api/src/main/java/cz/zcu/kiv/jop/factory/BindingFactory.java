@@ -2,6 +2,8 @@ package cz.zcu.kiv.jop.factory;
 
 import java.lang.annotation.Annotation;
 
+import cz.zcu.kiv.jop.factory.binding.Binder;
+
 /**
  * Common interface for binding factory which extends {@link Factory} interface and adds method
  * which returns created instance of implementation of interface <code>T</code> bound to some
@@ -15,6 +17,14 @@ import java.lang.annotation.Annotation;
  * @param <T> Type of interface which instances will be created by this factory.
  */
 public interface BindingFactory<T> extends Factory<T> {
+
+  /**
+   * Configures bindings of this factory for given binder.
+   *
+   * @param binder the binder for configuration.
+   * @throws FactoryException If some error occurs during configuration of binding factory.
+   */
+  public void configure(Binder<T> binder) throws FactoryException;
 
   /**
    * Returns created instance of bound implementation for given annotation. If the given class is
