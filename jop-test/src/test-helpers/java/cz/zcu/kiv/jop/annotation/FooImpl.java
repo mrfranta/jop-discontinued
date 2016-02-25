@@ -5,6 +5,8 @@ import java.lang.annotation.Annotation;
 /**
  * Helper "implementation" of annotation {@link Foo} which may be used for manual creation of
  * annotation instance.
+ *
+ * @author Mr.FrAnTA
  */
 public class FooImpl implements Foo {
 
