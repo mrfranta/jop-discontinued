@@ -43,7 +43,6 @@ public class TargetClassForNameImpl implements TargetClassForName {
    *
    * @return type of annotation.
    */
-  @Override
   public Class<? extends Annotation> annotationType() {
     return getClass();
   }
@@ -51,7 +50,6 @@ public class TargetClassForNameImpl implements TargetClassForName {
   /**
    * @return Value of annotation.
    */
-  @Override
   public String value() {
     return value;
   }
@@ -59,7 +57,6 @@ public class TargetClassForNameImpl implements TargetClassForName {
   /**
    * @return Information whether the class will be initialized.
    */
-  @Override
   public boolean initialize() {
     return initialize;
   }
@@ -67,7 +64,6 @@ public class TargetClassForNameImpl implements TargetClassForName {
   /**
    * @return Symbolic name of class loader.
    */
-  @Override
   public String classLoader() {
     return classLoader;
   }

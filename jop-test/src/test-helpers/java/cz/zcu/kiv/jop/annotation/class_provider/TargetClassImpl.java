@@ -26,7 +26,6 @@ public class TargetClassImpl implements TargetClass {
    *
    * @return type of annotation.
    */
-  @Override
   public Class<? extends Annotation> annotationType() {
     return getClass();
   }
@@ -34,7 +33,6 @@ public class TargetClassImpl implements TargetClass {
   /**
    * @return Value of annotation.
    */
-  @Override
   public Class<?> value() {
     return value;
   }

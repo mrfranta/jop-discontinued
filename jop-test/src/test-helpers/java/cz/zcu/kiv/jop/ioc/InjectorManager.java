@@ -35,7 +35,6 @@ public class InjectorManager implements InjectorProvider {
    * @return Stored injector for actual thread.
    * @throws InjectorException If no injector was stored for actual thread.
    */
-  @Override
   public synchronized Injector get() throws InjectorException {
     Injector injector = injectors.get();
     if (injector == null) {

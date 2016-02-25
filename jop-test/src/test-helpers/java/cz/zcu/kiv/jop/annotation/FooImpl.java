@@ -27,7 +27,6 @@ public class FooImpl implements Foo {
    *
    * @return type of annotation.
    */
-  @Override
   public Class<? extends Annotation> annotationType() {
     return getClass();
   }
@@ -35,7 +34,6 @@ public class FooImpl implements Foo {
   /**
    * @return Value of annotation.
    */
-  @Override
   public int value() {
     return value;
   }

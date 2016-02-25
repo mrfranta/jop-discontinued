@@ -26,7 +26,6 @@ public class RandomBooleanImpl implements RandomBoolean {
    *
    * @return type of annotation.
    */
-  @Override
   public Class<? extends Annotation> annotationType() {
     return getClass();
   }
@@ -34,7 +33,6 @@ public class RandomBooleanImpl implements RandomBoolean {
   /**
    * @return The value of parameter probability.
    */
-  @Override
   public double probability() {
     return probability;
   }

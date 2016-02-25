@@ -66,7 +66,6 @@ public class RandomClassForNameImpl implements RandomClassForName {
    *
    * @return type of annotation.
    */
-  @Override
   public Class<? extends Annotation> annotationType() {
     return getClass();
   }
@@ -74,7 +73,6 @@ public class RandomClassForNameImpl implements RandomClassForName {
   /**
    * @return Value of annotation.
    */
-  @Override
   public String[] value() {
     return value;
   }
@@ -82,7 +80,6 @@ public class RandomClassForNameImpl implements RandomClassForName {
   /**
    * @return Probabilities of annotation.
    */
-  @Override
   public double[] probabilities() {
     return probabilities;
   }
@@ -90,7 +87,6 @@ public class RandomClassForNameImpl implements RandomClassForName {
   /**
    * @return Information whether the class will be initialized.
    */
-  @Override
   public boolean initialize() {
     return initialize;
   }
@@ -98,7 +94,6 @@ public class RandomClassForNameImpl implements RandomClassForName {
   /**
    * @return Symbolic name of class loader.
    */
-  @Override
   public String classLoader() {
     return classLoader;
   }
