@@ -112,6 +112,14 @@ public class PrimitiveUtilsTest {
   }
 
   /**
+   * Test of method {@link PrimitiveUtils#unwrap(Class)} for the Object class type.
+   */
+  @Test
+  public void testUnwrapForObjectType() {
+    Assert.assertEquals(Object.class, PrimitiveUtils.unwrap(Object.class));
+  }
+
+  /**
    * Test of method {@link PrimitiveUtils#abbreviate(Class)} for given null.
    */
   @Test

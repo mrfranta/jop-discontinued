@@ -1,5 +1,8 @@
 package cz.zcu.kiv.jop.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Helper static class for wrapping/unwrapping of primitive class types.
  *
@@ -16,7 +19,7 @@ public abstract class PrimitiveUtils {
   /** Constant for array of wrapper (object) types. */
   @SuppressWarnings("rawtypes")
   //@formatter:off
-  private static final Class[] wrappers = {
+  private static final List<Class> wrappers = Arrays.asList(new Class[] {
       Integer.class,
       Double.class,
       Byte.class,
@@ -26,13 +29,13 @@ public abstract class PrimitiveUtils {
       Short.class,
       Float.class,
       Long.class
-  };
+  });
   // @formatter:on
 
   /** Constant for array of primitive types. */
   @SuppressWarnings("rawtypes")
   //@formatter:off
-  private static final Class[] primitives = {
+  private static final List<Class> primitives = Arrays.asList(new Class[] {
       int.class,
       double.class,
       byte.class,
@@ -42,7 +45,7 @@ public abstract class PrimitiveUtils {
       short.class,
       float.class,
       long.class
-  };
+  });
   // @formatter:on
 
   /** Constant for abbreviations of primitive class types. */
@@ -81,11 +84,12 @@ public abstract class PrimitiveUtils {
     int c2 = name.charAt(2);
     int mapper = (c0 + c0 + c0 + 5) & (118 - c2);
 
-    return wrappers[mapper];
+    return wrappers.get(mapper);
   }
 
   /**
-   * Unwraps class type of object type into class type for primitive type.
+   * Unwraps class type of object type into class type for primitive type. If the class cannot be
+   * unwrapped, it returns the given class type.
    *
    * @param clazz the object type to unwrap.
    * @return Unwrapped primitive type.
@@ -100,12 +104,17 @@ public abstract class PrimitiveUtils {
       return clazz;
     }
 
+    // cannot be unwrapped
+    if (!wrappers.contains(clazz)) {
+      return clazz;
+    }
+
     String name = clazz.getName();
     int c10 = name.charAt(10);
     int c12 = name.charAt(12);
     int mapper = (c10 + c10 + c10 + 5) & (118 - c12);
 
-    return primitives[mapper];
+    return primitives.get(mapper);
   }
 
   /**
