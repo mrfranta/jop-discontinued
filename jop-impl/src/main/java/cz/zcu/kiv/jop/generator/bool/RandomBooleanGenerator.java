@@ -19,7 +19,7 @@ public class RandomBooleanGenerator extends AbstractValueGenerator<Boolean, Rand
    * {@inheritDoc}
    */
   public Class<Boolean> getValueType() {
-    return Boolean.TYPE;
+    return Boolean.class;
   }
 
   /**
