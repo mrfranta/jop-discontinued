@@ -27,7 +27,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160228L;
 
   /** Class type of a property owner. */
   protected final Class<?> declaringClass;
@@ -214,5 +214,4 @@ public abstract class AbstractProperty<T> implements Property<T> {
 
     return field;
   }
-
 }

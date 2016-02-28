@@ -27,7 +27,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160228L;
 
   /** Name of property. */
   protected final String propertyName;
@@ -52,6 +52,17 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    */
   public Class<?> getDeclaringClass() {
     return member.getDeclaringClass();
+  }
+
+  /**
+   * Returns the name of class type for owner of property.
+   *
+   * @return The name of class type for owner of property.
+   */
+  public String getDeclaringClassName() {
+    Class<?> declaringClass = getDeclaringClass();
+
+    return (declaringClass == null) ? null : declaringClass.getName();
   }
 
   /**
@@ -113,7 +124,7 @@ public abstract class AbstractPropertyAccess<T, M extends Member> implements Pro
    */
   @Override
   public String toString() {
-    return getClass().getName() + " [" + getDeclaringClass() + '.' + getPropertyName() + ']';
+    return getClass().getName() + " [" + getDeclaringClassName() + '.' + getPropertyName() + ']';
   }
 
 }

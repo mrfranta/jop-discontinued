@@ -1,6 +1,10 @@
 package cz.zcu.kiv.jop.property;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * The implementation of <em>Object</em>'s property. It provides the getter and setter, which use
@@ -23,7 +27,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160228L;
 
   /**
    * Constructs a direct access property.
@@ -54,6 +58,11 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   @Override
   protected Setter<T> createSetter() throws SetterNotFoundException {
     try {
+      Field field = getField();
+      if (field != null && Modifier.isFinal(field.getModifiers())) {
+        throw new SetterNotFoundException("Cannot create setter for read-only field", declaringClass, propertyName);
+      }
+
       return new DirectSetter<T>(propertyName, getField());
     }
     catch (PropertyNotFoundException exc) {
@@ -73,7 +82,6 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   public static class DirectGetter<T> extends AbstractPropertyAccess<T, Field> implements Getter<T> {
 
     /**
-     * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
      * Maintainers must change this value if and only if the new version of this class is not
@@ -83,7 +91,10 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = 5222843204772142534L;
+    private static final long serialVersionUID = 20160228L;
+
+    /** Logger used for logging. */
+    private static final Log logger = LogFactory.getLog(DirectAccessProperty.DirectGetter.class);
 
     /**
      * Constructs a getter.
@@ -98,9 +109,8 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public Class<T> getPropertyType() {
-      return (Class<T>)member.getType();
+    public Class<?> getPropertyType() {
+      return member.getType();
     }
 
     /**
@@ -111,8 +121,20 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
       try {
         return (T)member.get(owner);
       }
+      catch (NullPointerException exc) {
+        throw createGetterAccessException("Static call of non-static", exc);
+      }
+      catch (IllegalAccessException exc) {
+        // shouldn't occur
+        throw createGetterAccessException("Illegal access occured during call of", exc);
+      }
+      catch (IllegalArgumentException exc) {
+        String ownerName = (owner == null) ? null : owner.getClass().getName();
+        logger.error("Given incorrect owner '" + ownerName + "' for getter of property: " + getDeclaringClassName() + '.' + getPropertyName());
+        throw createGetterAccessException("Given incorrect owner for calling", exc);
+      }
       catch (Exception exc) {
-        throw createGetterAccessException("Could not get a field value by reflection inside", exc);
+        throw createGetterAccessException("An exception occured during call of", exc);
       }
     }
 
@@ -130,7 +152,6 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
   public static class DirectSetter<T> extends AbstractPropertyAccess<T, Field> implements Setter<T> {
 
     /**
-     * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
      * Maintainers must change this value if and only if the new version of this class is not
@@ -140,7 +161,10 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = 4294761455944801476L;
+    private static final long serialVersionUID = 20160228L;
+
+    /** Logger used for logging. */
+    private static final Log logger = LogFactory.getLog(DirectAccessProperty.DirectSetter.class);
 
     /**
      * Constructs a setter.
@@ -155,9 +179,8 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public Class<T> getPropertyType() {
-      return (Class<T>)member.getType();
+    public Class<?> getPropertyType() {
+      return member.getType();
     }
 
     /**
@@ -167,16 +190,36 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
       try {
         member.set(owner, value);
       }
-      catch (Exception exc) {
-        if (value == null && getPropertyType().isPrimitive()) {
-          throw createSetterAccessException("Null value was assigned to a property of primitive type inside", exc);
+      catch (NullPointerException exc) {
+        if (owner == null) {
+          throw createGetterAccessException("Static call of non-static", exc);
         }
         else {
-          throw createSetterAccessException("Could not set a field value by reflection inside", exc);
+          throw createGetterAccessException("Null pointer exception occured inside", exc);
         }
       }
+      catch (IllegalAccessException exc) {
+        // shouldn't occur
+        throw createGetterAccessException("Illegal access occured during call of", exc);
+      }
+      catch (IllegalArgumentException exc) {
+        if (value == null && getPropertyType().isPrimitive()) {
+          throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
+        }
+        else if (owner != null && !getDeclaringClass().isAssignableFrom(owner.getClass())) {
+          String ownerName = owner.getClass().getName();
+          logger.error("Given incorrect owner '" + ownerName + "' for setter of property: " + getDeclaringClassName() + '.' + getPropertyName());
+          throw createGetterAccessException("Given incorrect owner for calling", exc);
+        }
+        else {
+          logger.error("Given incorrect value type for setter of property: " + getDeclaringClassName() + '.' + getPropertyName()
+              + " expected type: " + getPropertyType().getName() + ", given value type: " + (value == null ? null : value.getClass().getName()));
+          throw createSetterAccessException("Given incorrect value type for", exc);
+        }
+      }
+      catch (Exception exc) {
+        throw createGetterAccessException("An exception occured during call of", exc);
+      }
     }
-
   }
-
 }

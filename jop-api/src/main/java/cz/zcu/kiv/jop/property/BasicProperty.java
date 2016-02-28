@@ -30,7 +30,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160228L;
 
   /**
    * Constructs a basic property.
@@ -226,7 +226,6 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   public static class BasicGetter<T> extends AbstractPropertyAccess<T, Method> implements Getter<T> {
 
     /**
-     * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
      * Maintainers must change this value if and only if the new version of this class is not
@@ -236,7 +235,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = 1898063802358450466L;
+    private static final long serialVersionUID = 20160228L;
 
     /** Logger used for logging. */
     private static final Log logger = LogFactory.getLog(BasicGetter.class);
@@ -254,9 +253,8 @@ public class BasicProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public Class<T> getPropertyType() {
-      return (Class<T>)member.getReturnType();
+    public Class<?> getPropertyType() {
+      return member.getReturnType();
     }
 
     /**
@@ -283,16 +281,23 @@ public class BasicProperty<T> extends AbstractProperty<T> {
       try {
         return (T)member.invoke(owner);
       }
+      catch (NullPointerException exc) {
+        throw createGetterAccessException("Static call of non-static", exc);
+      }
       catch (InvocationTargetException exc) {
         throw createGetterAccessException("Exception occurred inside", exc);
       }
       catch (IllegalAccessException exc) {
         // shouldn't occur
-        throw createGetterAccessException("IllegalAccessException occurred while calling", exc);
+        throw createGetterAccessException("Illegal access occured during call of", exc);
       }
       catch (IllegalArgumentException exc) {
-        logger.error("IllegalArgumentException in class: " + getDeclaringClass().getName() + ", getter method of property: " + getPropertyName());
-        throw createGetterAccessException("IllegalArgumentException occurred calling", exc);
+        String ownerName = (owner == null) ? null : owner.getClass().getName();
+        logger.error("Given incorrect owner '" + ownerName + "' for getter of property: " + getDeclaringClassName() + '.' + getPropertyName());
+        throw createGetterAccessException("Given incorrect owner for calling", exc);
+      }
+      catch (Exception exc) {
+        throw createGetterAccessException("An exception occured during call of", exc);
       }
     }
 
@@ -310,7 +315,6 @@ public class BasicProperty<T> extends AbstractProperty<T> {
   public static class BasicSetter<T> extends AbstractPropertyAccess<T, Method> implements Setter<T> {
 
     /**
-     * <p>
      * Determines if a de-serialized file is compatible with this class.
      * <p>
      * Maintainers must change this value if and only if the new version of this class is not
@@ -320,7 +324,7 @@ public class BasicProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = -4350628252367230916L;
+    private static final long serialVersionUID = 20160228L;
 
     /** Logger used for logging. */
     private static final Log logger = LogFactory.getLog(BasicSetter.class);
@@ -338,9 +342,8 @@ public class BasicProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public Class<T> getPropertyType() {
-      return (Class<T>)member.getParameterTypes()[0];
+    public Class<?> getPropertyType() {
+      return member.getParameterTypes()[0];
     }
 
     /**
@@ -367,32 +370,38 @@ public class BasicProperty<T> extends AbstractProperty<T> {
         member.invoke(owner, value);
       }
       catch (NullPointerException exc) {
-        if (value == null && getPropertyType().isPrimitive()) {
-          throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
+        if (owner == null) {
+          throw createGetterAccessException("Static call of non-static", exc);
         }
         else {
-          throw createSetterAccessException("NullPointerException occurred while calling", exc);
+          throw createGetterAccessException("Null pointer exception occured inside", exc);
         }
       }
       catch (InvocationTargetException exc) {
-        throw createSetterAccessException("Exception occurred inside", exc);
+        throw createGetterAccessException("Exception occurred inside", exc);
       }
       catch (IllegalAccessException exc) {
         // shouldn't occur
-        throw createSetterAccessException("IllegalAccessException occurred while calling", exc);
+        throw createGetterAccessException("Illegal access occured during call of", exc);
       }
       catch (IllegalArgumentException exc) {
         if (value == null && getPropertyType().isPrimitive()) {
           throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
         }
+        else if (owner != null && !getDeclaringClass().isAssignableFrom(owner.getClass())) {
+          String ownerName = owner.getClass().getName();
+          logger.error("Given incorrect owner '" + ownerName + "' for setter of property: " + getDeclaringClassName() + '.' + getPropertyName());
+          throw createGetterAccessException("Given incorrect owner for calling", exc);
+        }
         else {
-          logger.error("IllegalArgumentException in class: " + getDeclaringClass() + ", setter method of property: " + getPropertyName());
-          logger.error("expected type: " + getPropertyType().getName() + ", actual value: " + (value == null ? null : value.getClass().getName()));
-          throw createSetterAccessException("IllegalArgumentException occurred while calling", exc);
+          logger.error("Given incorrect value type for setter of property: " + getDeclaringClassName() + '.' + getPropertyName()
+              + " expected type: " + getPropertyType().getName() + ", given value type: " + (value == null ? null : value.getClass().getName()));
+          throw createSetterAccessException("Given incorrect value type for", exc);
         }
       }
+      catch (Exception exc) {
+        throw createGetterAccessException("An exception occured during call of", exc);
+      }
     }
-
   }
-
 }

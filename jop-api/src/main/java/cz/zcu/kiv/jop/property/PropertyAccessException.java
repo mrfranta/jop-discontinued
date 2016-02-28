@@ -20,7 +20,7 @@ public class PropertyAccessException extends PropertyException {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160228L;
 
   /** Information whether the exception raised in setter. */
   protected final boolean fromSetter;
@@ -119,8 +119,8 @@ public class PropertyAccessException extends PropertyException {
     String message = super.getMessage();
 
     // @formatter:off
-    StringBuilder sb = new StringBuilder(StringUtils.hasText(message) ? "" : message)
-        .append(isFromSetter() ? " setter of " : " getter of ")
+    StringBuilder sb = new StringBuilder(StringUtils.hasText(message) ? message : "")
+        .append(isFromSetter() ? " setter for " : " getter for ")
         .append(getDeclaringClassName())
         .append(".")
         .append(getPropertyName());
