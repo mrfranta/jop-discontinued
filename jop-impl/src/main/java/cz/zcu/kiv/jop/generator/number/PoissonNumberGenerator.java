@@ -2,6 +2,8 @@ package cz.zcu.kiv.jop.generator.number;
 
 import java.util.Random;
 
+import javax.inject.Singleton;
+
 import cz.zcu.kiv.jop.annotation.generator.number.PoissonGenerator;
 import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
@@ -12,6 +14,7 @@ import cz.zcu.kiv.jop.generator.ValueGeneratorException;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
+@Singleton
 public class PoissonNumberGenerator extends AbstractValueGenerator<Integer, PoissonGenerator> {
 
   /**

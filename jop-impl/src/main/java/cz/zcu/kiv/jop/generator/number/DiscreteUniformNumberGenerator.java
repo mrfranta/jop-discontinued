@@ -2,6 +2,8 @@ package cz.zcu.kiv.jop.generator.number;
 
 import java.util.Random;
 
+import javax.inject.Singleton;
+
 import cz.zcu.kiv.jop.annotation.generator.number.DiscreteUniformGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.UniformGenerator;
 import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
@@ -13,6 +15,7 @@ import cz.zcu.kiv.jop.generator.ValueGeneratorException;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
+@Singleton
 public class DiscreteUniformNumberGenerator extends AbstractValueGenerator<Integer, DiscreteUniformGenerator> {
 
   /**
