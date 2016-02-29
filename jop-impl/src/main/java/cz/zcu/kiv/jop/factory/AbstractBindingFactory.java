@@ -90,7 +90,7 @@ public abstract class AbstractBindingFactory<T> extends AbstractFactory<T> imple
   /**
    * Configures default bindings between annotations and classes. This method should be marked as
    * final in factory which implements it. For customization of factory is prepared method
-   * {@link #customConfiguration()} in which can be some bindings re-binded.
+   * {@link #customConfigure()} in which can be some bindings re-binded.
    *
    * @throws BindingException If some error occurs during configuration of binding factory.
    */

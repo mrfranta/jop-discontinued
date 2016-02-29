@@ -32,9 +32,9 @@ public class ClassProviderFactoryImpl extends AbstractBindingFactory<ClassProvid
 
   /**
    * Check conditions for given annotation type. The annotation type cannot be <code>null</code> and
-   * has to be marked by annotation {@link ClassProviderAnnotation}. Also checks whatever the given
-   * annotation is not marked by annotation {@link CustomAnnotation} because the binding of
-   * annotation for custom class provider is not allowed.
+   * has to be marked by annotation {@link ClassProviderAnnotation}. This method also checks
+   * whatever the given annotation is not marked by annotation {@link CustomAnnotation} because the
+   * binding of annotation for custom class provider is not allowed.
    *
    * @param annotation the annotation type to check.
    * @throws BindingException if entered annotation isn't valid.
