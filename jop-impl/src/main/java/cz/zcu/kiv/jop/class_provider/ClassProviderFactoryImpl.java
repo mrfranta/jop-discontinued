@@ -71,7 +71,6 @@ public class ClassProviderFactoryImpl extends AbstractBindingFactory<ClassProvid
    * {@inheritDoc}
    */
   @Override
-  // actually checked
   @SuppressWarnings("unchecked")
   public <A extends Annotation> ClassProvider<A> createInstance(A annotation) throws FactoryException {
     ClassProvider<?> classProvider = super.createInstance(annotation);

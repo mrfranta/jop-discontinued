@@ -8,6 +8,10 @@ import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
+import cz.zcu.kiv.jop.class_provider.ClassProviderFactory;
+import cz.zcu.kiv.jop.class_provider.ClassProviderFactoryImpl;
+import cz.zcu.kiv.jop.generator.ValueGeneratorFactory;
+import cz.zcu.kiv.jop.generator.ValueGeneratorFactoryImpl;
 import cz.zcu.kiv.jop.ioc.NamedScopes;
 import cz.zcu.kiv.jop.ioc.callback.Initializable;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
@@ -33,6 +37,10 @@ public final class CoreModule extends AbstractModule {
    */
   @Override
   public void configure() {
+    // binding of factories
+    bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
+    bind(ValueGeneratorFactory.class).to(ValueGeneratorFactoryImpl.class);
+
     // binding of sessions
     bind(ClassLoaderSession.class).to(ClassLoaderSessionImpl.class);
     bind(RandomGeneratorSession.class).to(RandomGeneratorSessionImpl.class);
