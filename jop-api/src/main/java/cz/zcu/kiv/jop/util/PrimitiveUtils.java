@@ -88,6 +88,16 @@ public abstract class PrimitiveUtils {
   }
 
   /**
+   * Returns information whether the given class is the wrapper class.
+   *
+   * @param clazz the class type to check.
+   * @return <code>true</code> if given class type is wrapper class; <code>false</code> otherwise.
+   */
+  public static boolean isWrapper(Class<?> clazz) {
+    return wrappers.contains(clazz);
+  }
+
+  /**
    * Unwraps class type of object type into class type for primitive type. If the class cannot be
    * unwrapped, it returns the given class type.
    *
@@ -105,7 +115,7 @@ public abstract class PrimitiveUtils {
     }
 
     // cannot be unwrapped
-    if (!wrappers.contains(clazz)) {
+    if (!isWrapper(clazz)) {
       return clazz;
     }
 

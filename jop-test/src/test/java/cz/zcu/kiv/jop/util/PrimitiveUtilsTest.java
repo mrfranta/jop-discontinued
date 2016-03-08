@@ -84,6 +84,32 @@ public class PrimitiveUtilsTest {
   }
 
   /**
+   * Test of method {@link PrimitiveUtils#isWrapper(Class)} for null value.
+   */
+  @Test
+  public void testIsWrapperForNull() {
+    Assert.assertFalse(PrimitiveUtils.isWrapper(null));
+  }
+
+  /**
+   * Test of method {@link PrimitiveUtils#isWrapper(Class)} for wrapper classes.
+   */
+  @Test
+  public void testIsWrapperForWrappers() {
+    for (Class<?> objectClass : primitivesMap.values()) {
+      Assert.assertTrue(PrimitiveUtils.isWrapper(objectClass));
+    }
+  }
+
+  /**
+   * Test of method {@link PrimitiveUtils#isWrapper(Class)} for non-wrapper class.
+   */
+  @Test
+  public void testIsWrapperForNonWrapper() {
+    Assert.assertFalse(PrimitiveUtils.isWrapper(Object.class));
+  }
+
+  /**
    * Test of method {@link PrimitiveUtils#unwrap(Class)} for <code>null</code> value.
    */
   @Test

@@ -1,6 +1,7 @@
 package cz.zcu.kiv.jop.util;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -760,6 +761,15 @@ public class ArrayUtilsTest {
   }
 
   /**
+   * Test of method {@link ArrayUtils#toObjectArray(double[])} for multidimensional array value.
+   * Expected exception: {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testToObjectArrayForMultidimensionalArray() {
+    ArrayUtils.toObjectArray(new Double[0][0]);
+  }
+
+  /**
    * Test of method {@link ArrayUtils#toObjectArray(double[])} for object arrays (will return same
    * array).
    */
@@ -788,6 +798,366 @@ public class ArrayUtilsTest {
       }
       Assert.assertArrayEquals(expected, ArrayUtils.toObjectArray(array));
     }
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for <code>null</code> value.
+   */
+  @Test
+  public void testToPrimitiveArrayForNull() {
+    Assert.assertNull(ArrayUtils.toPrimitiveArray((Object)null));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for non-array value. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testToPrimitiveArrayForNotArray() {
+    Assert.assertNull(ArrayUtils.toPrimitiveArray(new Object()));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for primitive array value.
+   */
+  @Test
+  public void testToPrimitiveArrayForPrimitiveArray() {
+    boolean[] expected = new boolean[] {true, false, true};
+
+    Assert.assertArrayEquals(expected, (boolean[])ArrayUtils.toPrimitiveArray(expected));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for multidimensional array value.
+   * Expected {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testToPrimitiveArrayForMultidimensionalArray() {
+    Double[][] array = new Double[0][0];
+
+    ArrayUtils.toPrimitiveArray(array);
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for array of Void values. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testToPrimitiveArrayForVoidArray() {
+    Void[] array = new Void[0];
+
+    ArrayUtils.toPrimitiveArray(array);
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for array of non-wrapper values.
+   * Expected {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testToPrimitiveArrayForNonWrapperArray() {
+    Object[] array = new Object[0];
+    ArrayUtils.toPrimitiveArray(array);
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#toPrimitiveArray(Object)} for arrays of wrapper values.
+   */
+  @Test
+  public void testToPrimitiveArrayForWrapperArray() {
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, (boolean[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_BOOLEAN_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_BYTE_ARRAY, (byte[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_BYTE_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_CHAR_ARRAY, (char[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_CHARACTER_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_SHORT_ARRAY, (short[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_SHORT_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_INT_ARRAY, (int[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_INTEGER_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_LONG_ARRAY, (long[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_LONG_OBJECT_ARRAY));
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_FLOAT_ARRAY, (float[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_FLOAT_OBJECT_ARRAY), 0);
+    Assert.assertArrayEquals(ArrayUtils.EMPTY_DOUBLE_ARRAY, (double[])ArrayUtils.toPrimitiveArray((Object)ArrayUtils.EMPTY_DOUBLE_OBJECT_ARRAY), 0);
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for null.
+   */
+  @Test
+  public void testCloneArrayForNull() {
+    Assert.assertEquals(null, ArrayUtils.cloneArray(null));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for non-array object.Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testCloneArrayForNoArray() {
+    ArrayUtils.cloneArray(new Object());
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for multidimensional array object.
+   */
+  @Test
+  public void testCloneArrayForMultidimensionalArray() {
+    Double[][] expected = new Double[][] { {0d, 1d, 2d}, {3d}, {4d, 5d}};
+
+    Assert.assertArrayEquals(expected, (Double[][])ArrayUtils.cloneArray(expected));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for object arrays.
+   */
+  @Test
+  public void testCloneArrayForObjectArray() {
+    Object[] array = new Object[getArrayLength()];
+    for (int i = 0; i < array.length; i++) {
+      switch (rand.nextInt(5)) {
+        case 0 :
+          array[i] = null;
+          break;
+
+        case 1 :
+          array[i] = new Integer(i);
+          break;
+
+        case 2 :
+          array[i] = new Double(i);
+          break;
+
+        case 3 :
+          array[i] = new Object();
+          break;
+
+        case 4 :
+          array[i] = String.valueOf(i);
+          break;
+      }
+    }
+
+    Assert.assertArrayEquals(array, (Object[])ArrayUtils.cloneArray(array));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for arrays of primitives.
+   */
+  @Test
+  public void testCloneArrayForPrimitiveArray() {
+    for (int i = 0; i < primitives.length; i++) {
+      int size = getArrayLength();
+      Object[] expected = (Object[])Array.newInstance(wrappers[i], size);
+      Object array = Array.newInstance(primitives[i], size);
+      for (int j = 0; j < size; j++) {
+        expected[j] = Defaults.getDefaultValue(primitives[i]);
+        Array.set(array, j, Defaults.getDefaultValue(primitives[i]));
+      }
+
+      Object clone = ArrayUtils.cloneArray(array);
+      Assert.assertEquals(size, Array.getLength(clone));
+      for (int j = 0; j < size; j++) {
+        Assert.assertEquals("Wrong value at: " + j, expected[j], Array.get(clone, j));
+      }
+    }
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#hashCode(Object)} for null.
+   */
+  @Test
+  public void testHashCodeForNull() {
+    Assert.assertEquals(Arrays.hashCode((Object[])null), ArrayUtils.hashCode(null));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#hashCode(Object)} for non-array object. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testHashCodeForNoArray() {
+    ArrayUtils.hashCode(new Object());
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#cloneArray} for multidimensional array object.
+   */
+  @Test
+  public void testHashCodeForMultidimensionalArray() {
+    Double[][] array = new Double[][] { {0d, 1d, 2d}, {3d}, {4d, 5d}};
+
+    Assert.assertEquals(Arrays.deepHashCode(array), ArrayUtils.hashCode(array));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#hashCode(Object)} for object arrays.
+   */
+  @Test
+  public void testHashCodeForObjectArray() {
+    Object[] array = new Object[getArrayLength() * 2];
+    for (int i = 0; i < array.length; i++) {
+      switch (rand.nextInt(5)) {
+        case 0 :
+          array[i] = null;
+          break;
+
+        case 1 :
+          array[i] = new Integer(i);
+          break;
+
+        case 2 :
+          array[i] = new Double(i);
+          break;
+
+        case 3 :
+          array[i] = new Object();
+          break;
+
+        case 4 :
+          array[i] = String.valueOf(i);
+          break;
+      }
+    }
+
+    Assert.assertEquals(Arrays.hashCode(array), ArrayUtils.hashCode(array));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#hashCode(Object)} for array of primitives.
+   */
+  @Test
+  public void testHashCodeForPrimitiveArray() {
+    double[] array = new double[getArrayLength()];
+    for (int i = 0; i < array.length; i++) {
+      array[i] = rand.nextDouble();
+    }
+
+    Assert.assertEquals(Arrays.hashCode(array), ArrayUtils.hashCode(array));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for one or two null values.
+   */
+  @Test
+  public void testEqualsForNullValues() {
+    Assert.assertFalse(ArrayUtils.equals(null, ArrayUtils.EMPTY_BOOLEAN_ARRAY));
+    Assert.assertFalse(ArrayUtils.equals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, null));
+    Assert.assertFalse(ArrayUtils.equals(null, null));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for one or two non-array values.
+   */
+  @Test
+  public void testEqualsForNonArrayValues() {
+    Assert.assertFalse(ArrayUtils.equals(new Object(), ArrayUtils.EMPTY_BOOLEAN_ARRAY));
+    Assert.assertFalse(ArrayUtils.equals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, new Object()));
+    Assert.assertFalse(ArrayUtils.equals(new Object(), new Object()));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for same values (instances).
+   */
+  @Test
+  public void testEqualsForSameArrayValues() {
+    Assert.assertTrue(ArrayUtils.equals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, ArrayUtils.EMPTY_BOOLEAN_ARRAY));
+    Assert.assertTrue(ArrayUtils.equals(ArrayUtils.EMPTY_BOOLEAN_OBJECT_ARRAY, ArrayUtils.EMPTY_BOOLEAN_OBJECT_ARRAY));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for different lengths.
+   */
+  @Test
+  public void testEqualsForDifferentLengths() {
+    double[] a1 = new double[1];
+    Double[] a2 = new Double[2];
+    Assert.assertFalse(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for equals primitive arrays.
+   */
+  @Test
+  public void testEqualsForEqualityOfPrimitiveArrays() {
+    double[] a1 = new double[] {1.0, 2.0, 3.0, 4.0};
+    double[] a2 = new double[] {1.0, 2.0, 3.0, 4.0};
+
+    Assert.assertTrue(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for not equals primitive arrays.
+   */
+  @Test
+  public void testEqualsForNotEqualityOfPrimitiveArrays() {
+    double[] a1 = new double[] {1.0, 2.0, 3.0, 4.0};
+    double[] a2 = new double[] {4.0, 3.0, 2.0, 1.0};
+
+    Assert.assertFalse(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for equals object arrays.
+   */
+  @Test
+  public void testEqualsForEqualityOfObjectArrays() {
+    Double[] a1 = new Double[] {1.0, null, 3.0, 4.0};
+    Double[] a2 = new Double[] {1.0, null, 3.0, 4.0};
+
+    Assert.assertTrue(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for not equals object arrays.
+   */
+  @Test
+  public void testEqualsForNotEqualityOfObjectArrays() {
+    Double[] a1 = new Double[] {1.0, null, 3.0, 4.0};
+    Double[] a2 = new Double[] {4.0, 3.0, null, 1.0};
+
+    Assert.assertFalse(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for equals primitive and object
+   * arrays.
+   */
+  @Test
+  public void testEqualsForEqualityOfPrimitiveAnObjectArrays() {
+    double[] a1 = new double[] {1.0, 2.0, 3.0, 4.0};
+    Double[] a2 = new Double[] {1.0, 2.0, 3.0, 4.0};
+
+    Assert.assertTrue(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for not equals primitive and object
+   * arrays.
+   */
+  @Test
+  public void testEqualsForNotEqualityOfPrimitiveAnObjectArrays() {
+    double[] a1 = new double[] {1.0, 2.0, 3.0, 4.0};
+    Double[] a2 = new Double[] {1.0, null, 3.0, 4.0};
+
+    Assert.assertFalse(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for equals multidimensional primitive
+   * and object arrays.
+   */
+  @Test
+  public void testEqualsForEqualityOfMultidimensionalArrays() {
+    double[][] a1 = new double[][] { {1.0, 2.0}, {3.0, 4.0, 5.0}, {6.0}};
+    Double[][] a2 = new Double[][] { {1.0, 2.0}, {3.0, 4.0, 5.0}, {6.0}};
+
+    Assert.assertTrue(ArrayUtils.equals(a1, a2));
+  }
+
+  /**
+   * Test of method {@link ArrayUtils#equals(Object, Object)} for not equals multidimensional
+   * primitive and object arrays.
+   */
+  @Test
+  public void testEqualsForNotEqualityOfMultidimensionalArrays() {
+    double[][] a1 = new double[][] { {1.0, 2.0}, {3.0, 4.0, 5.0}, {6.0}};
+    Double[][] a2 = new Double[][] { {1.0, 2.0}, {3.0}, {6.0}};
+
+    Assert.assertFalse(ArrayUtils.equals(a1, a2));
   }
 
 }

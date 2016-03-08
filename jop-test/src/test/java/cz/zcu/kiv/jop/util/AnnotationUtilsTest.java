@@ -2,6 +2,8 @@ package cz.zcu.kiv.jop.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -9,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import cz.zcu.kiv.jop.annotation.Bar;
+import cz.zcu.kiv.jop.annotation.Complex;
 import cz.zcu.kiv.jop.annotation.Foo;
 import cz.zcu.kiv.jop.annotation.FooImpl;
 import cz.zcu.kiv.jop.annotation.Marker;
@@ -42,7 +45,7 @@ public class AnnotationUtilsTest {
    * @param annotation the annotation type which instance will be returned.
    * @return The annotation which marks the helper field with given name.
    */
-  protected Annotation getAnnotationInstnace(String fieldName, Class<? extends Annotation> annotation) {
+  protected <T extends Annotation> T getAnnotationInstance(String fieldName, Class<? extends T> annotation) {
     try {
       Field field = getClass().getDeclaredField(fieldName);
       return field.getAnnotation(annotation);
@@ -76,7 +79,7 @@ public class AnnotationUtilsTest {
    */
   @Test
   public void testIsAnnotatedAnnotationForUnmarked() {
-    Annotation annotation = getAnnotationInstnace("fieldWithNotMarked", Foo.class);
+    Annotation annotation = getAnnotationInstance("fieldWithNotMarked", Foo.class);
     Assert.assertFalse(AnnotationUtils.isAnnotatedAnnotation(annotation, Marker.class));
   }
 
@@ -86,7 +89,7 @@ public class AnnotationUtilsTest {
    */
   @Test
   public void testIsAnnotatedAnnotationForMarked() {
-    Annotation annotation = getAnnotationInstnace("fieldWithMarked", Bar.class);
+    Annotation annotation = getAnnotationInstance("fieldWithMarked", Bar.class);
     Assert.assertTrue(AnnotationUtils.isAnnotatedAnnotation(annotation, Marker.class));
   }
 
@@ -162,6 +165,209 @@ public class AnnotationUtilsTest {
     Class<?> clazz = getClass();
     Annotation[] annotations = new Annotation[] {clazz.getAnnotation(Bar.class)};
     Assert.assertArrayEquals(annotations, AnnotationUtils.getAnnotatedAnnotations(getClass(), Marker.class));
+  }
+
+  // ---- Test of method getAnnotationProxy ------------------------------------
+
+  @Complex
+  private int fieldWithDefaults;
+
+  @Complex(value = "null", bool = false, integers = {0, 1, 2}, strings = {})
+  private int fieldWithCustoms;
+
+  /**
+   * Helper method for equality of basic attributes of two annotations.
+   *
+   * @param expected the expected annotation.
+   * @param annotation the tested annotation.
+   */
+  private static void assertEquals(Annotation expected, Annotation annotation) {
+    Assert.assertEquals(expected.annotationType(), annotation.annotationType());
+    Assert.assertEquals(annotation, annotation); // a == a
+    Assert.assertEquals(annotation, expected); // a == e
+    Assert.assertEquals(expected, annotation); // e == a
+    Assert.assertEquals(expected.hashCode(), annotation.hashCode());
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for null values. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForNulls() {
+    AnnotationUtils.getAnnotationProxy(null, null);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for null value as annotation type.
+   * Expected {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForNullAnnotation() {
+    AnnotationUtils.getAnnotationProxy(null, new HashMap<String, Object>());
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for creation of proxy with null
+   * parameters - default values will be used. It will be checked with annotation for
+   * {@link #fieldWithDefaults} which contains the annotation with default values.
+   */
+  @Test
+  public void testGetAnnotationProxyForDefaultValuesWithNullParams() {
+    Complex expected = getAnnotationInstance("fieldWithDefaults", Complex.class);
+    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, null);
+
+    Assert.assertEquals(expected.value(), annotation.value());
+    Assert.assertEquals(expected.bool(), annotation.bool());
+    Assert.assertArrayEquals(expected.integers(), annotation.integers());
+    Assert.assertArrayEquals(expected.strings(), annotation.strings());
+    assertEquals(expected, annotation);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for creation of proxy with empty
+   * parameters - default values will be used. It will be checked with annotation for
+   * {@link #fieldWithDefaults} which contains the annotation with default values.
+   */
+  @Test
+  public void testGetAnnotationProxyForDefaultValuesWithEmptyParams() {
+    Complex expected = getAnnotationInstance("fieldWithDefaults", Complex.class);
+    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, new HashMap<String, Object>());
+
+    Assert.assertEquals(expected.value(), annotation.value());
+    Assert.assertEquals(expected.bool(), annotation.bool());
+    Assert.assertArrayEquals(expected.integers(), annotation.integers());
+    Assert.assertArrayEquals(expected.strings(), annotation.strings());
+    assertEquals(expected, annotation);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for creation of proxy with custom
+   * parameters. It will be checked with annotation for {@link #fieldWithCustoms} which contains the
+   * annotation with custom parameters.
+   */
+  @Test
+  public void testGetAnnotationProxyForCustomValuesWithParams() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("value", "null");
+    params.put("bool", false);
+    params.put("integers", new int[] {0, 1, 2});
+    params.put("strings", new String[0]);
+
+    Complex expected = getAnnotationInstance("fieldWithCustoms", Complex.class);
+    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+
+    Assert.assertEquals(expected.value(), annotation.value());
+    Assert.assertEquals(expected.bool(), annotation.bool());
+    Assert.assertArrayEquals(expected.integers(), annotation.integers());
+    Assert.assertArrayEquals(expected.strings(), annotation.strings());
+    assertEquals(expected, annotation);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for creation of proxy with custom
+   * parameters. It will be checked with annotation for {@link #fieldWithCustoms} which contains the
+   * annotation with custom parameters. Also checks unboxing for primitive types.
+   */
+  @Test
+  public void testGetAnnotationProxyForCustomValuesWithParamsAndBoxing() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("value", "null");
+    params.put("bool", new Boolean(false));
+    params.put("integers", new Integer[] {0, 1, 2});
+    params.put("strings", new String[0]);
+
+    Complex expected = getAnnotationInstance("fieldWithCustoms", Complex.class);
+    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+
+    Assert.assertEquals(expected.value(), annotation.value());
+    Assert.assertEquals(expected.bool(), annotation.bool());
+    Assert.assertArrayEquals(expected.integers(), annotation.integers());
+    Assert.assertArrayEquals(expected.strings(), annotation.strings());
+    assertEquals(expected, annotation);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for creation of proxy for parameters
+   * with missing value (or with the <code>null</code> value). Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForMissingParameter() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("value", null);
+    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for incompatible value type of some
+   * parameter. Expected {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForIncompatibleParameter() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("bool", 1);
+    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for incompatible value type of some
+   * parameter. The parameter is not array but was given array. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForIncompatibleNotArrayParameter() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("bool", new boolean[0]);
+    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for incompatible value type of some
+   * parameter. The parameter is array but was not given array. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForIncompatibleArrayParameter() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("integers", "value");
+    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#getAnnotationProxy} for incompatible value type of some
+   * parameter. The parameter is array but was given array of incorrect type. Expected
+   * {@link IllegalArgumentException}.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAnnotationProxyForIncompatibleArrayParameter2() {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("integers", new String[0]);
+    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+  }
+
+  /**
+   * Test of immutability of created annotation proxy in method
+   * {@link AnnotationUtils#getAnnotationProxy}.
+   */
+  @Test
+  public void testGetAnnotationProxyImmutability() {
+    int[] expected = new int[] {1, 2, 3};
+    int[] integers = expected.clone();
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("integers", integers);
+
+    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+
+    integers[1] = 4; // change one value
+
+    Assert.assertArrayEquals(expected, annotation.integers());
+
+    // returned value - change it
+    integers = annotation.integers();
+    integers[1] = 4; // change one value
+
+    Assert.assertArrayEquals(expected, annotation.integers());
   }
 
 }

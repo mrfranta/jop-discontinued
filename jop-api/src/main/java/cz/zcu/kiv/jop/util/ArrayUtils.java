@@ -2,9 +2,12 @@ package cz.zcu.kiv.jop.util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import cz.zcu.kiv.jop.JopRuntimeException;
 
 /**
  * Helper static class for operations with arrays.
@@ -561,53 +564,241 @@ public abstract class ArrayUtils {
   /**
    * Generic method which copies given array of primitive values into array of objects. This method
    * returns <code>null</code> for given <code>null</code> value and original array for given array
-   * of object values.
+   * of object values. The multidimensional array is not supported.
    *
-   * @param obj the array of values.
+   * @param array the array of values.
    * @return The array of object values or <code>null</code>.
-   * @throws IllegalArgumentException If given object is not array.
+   * @throws IllegalArgumentException If given object is not array or if given object is
+   *           multidimensional array.
    */
-  public static Object[] toObjectArray(Object obj) {
-    if (obj == null) {
+  public static Object[] toObjectArray(Object array) {
+    if (array == null) {
       return null;
     }
 
     // get class type of argument
-    Class<?> clazz = obj.getClass();
-    Preconditions.checkArgument(clazz.isArray(), "Given object is not array!");
+    Class<?> clazz = array.getClass();
+    Preconditions.checkArgument(clazz.isArray(), "Given object is not array");
 
     // get length of array
-    int length = Array.getLength(obj);
+    int length = Array.getLength(array);
 
     // prepare class type of array members
     Class<?> componentType = clazz.getComponentType();
 
+    // check whatever the array is multidimensional
+    if (componentType.isArray()) {
+      throw new IllegalArgumentException("Multidimensional array is not supported");
+    }
+
     // check whatever the array is array of primitives
     if (!componentType.isPrimitive()) {
       // return original argument
-      return (Object[])obj;
+      return (Object[])array;
     }
 
     // prepare Object variant of component type
     Class<?> componentObjectType = PrimitiveUtils.wrap(componentType);
 
     // prepare array
-    Object[] array = (Object[])Array.newInstance(componentObjectType, length);
+    Object[] primitiveArray = (Object[])Array.newInstance(componentObjectType, length);
     for (int i = 0; i < length; i++) {
       // autoboxing using constructors with primitive argument
-      Object value = Array.get(obj, i);
+      Object value = Array.get(array, i);
       try {
         Constructor<?> construct = componentObjectType.getConstructor(componentType);
-        array[i] = construct.newInstance(value);
+        primitiveArray[i] = construct.newInstance(value);
       }
       catch (Exception exc) {
         // this should not happen
         logger.error("Cannot autobox value: " + value + " into " + componentObjectType.getName());
-        array[i] = null;
+        primitiveArray[i] = null;
       }
     }
 
-    return array;
+    return primitiveArray;
   }
 
+  /**
+   * Copies given one dimensional array of wrapper instances into array of primitives. This method
+   * returns <code>null</code> for given <code>null</code> value. If given array object is already
+   * array of primitives, it returns the same array. If some value is <code>null</code>, it will put
+   * default value instead.
+   *
+   * @param array the array object to copy.
+   * @return The array of primitive values.
+   * @throws IllegalArgumentException If given object is not array, is multidimensional, is array of
+   *           Voids or is not array of wrappers.
+   * @throws JopRuntimeException If copying (boxing) of given array object fails.
+   */
+  public static Object toPrimitiveArray(Object array) {
+    if (array == null) {
+      return null;
+    }
+
+    Class<?> objType = array.getClass();
+    if (!objType.isArray()) {
+      throw new IllegalArgumentException("Given object has to be array");
+    }
+
+    if (objType.getComponentType().isPrimitive()) {
+      return array;
+    }
+
+    Class<?> compType = objType.getComponentType();
+    if (compType.isArray()) {
+      throw new IllegalArgumentException("Multidimensional array is not supported");
+    }
+
+    if (Void.class.equals(compType)) {
+      throw new IllegalArgumentException("Array of Voids is not supported");
+    }
+
+    if (!PrimitiveUtils.isWrapper(compType)) {
+      throw new IllegalArgumentException("Given array has to be array of wrapper classes");
+    }
+
+    Method toPrimitiveArray = ReflectionUtils.getDeclaredMethod(ArrayUtils.class, "toPrimitiveArray", objType);
+    if (toPrimitiveArray == null) {
+      throw new IllegalArgumentException("Unsupported array type: " + compType.getName());
+    }
+
+    try {
+      return toPrimitiveArray.invoke(null, array);
+    }
+    catch (Exception exc) {
+      // should not happen
+      throw new JopRuntimeException("Transformation to primitive type failed for array type: " + compType.getName(), exc);
+    }
+  }
+
+  /**
+   * Clones given array object. The array object may be multidimensional.
+   *
+   * @param array the array object to clone.
+   * @return Clone of given array object.
+   */
+  public static Object cloneArray(Object array) {
+    if (array == null) {
+      return null;
+    }
+
+    Class<?> objType = array.getClass();
+    if (!objType.isArray()) {
+      throw new IllegalArgumentException("Given object has to be array");
+    }
+
+    Class<?> compType = objType.getComponentType();
+    int len = Array.getLength(array);
+    Object clone = Array.newInstance(compType, len);
+    if (compType.isArray()) { // multidimensional array support
+      for (int i = 0; i < len; i++) {
+        Array.set(clone, i, cloneArray(Array.get(array, i)));
+      }
+    }
+    else {
+      System.arraycopy(array, 0, clone, 0, len);
+    }
+
+    return clone;
+  }
+
+  /**
+   * The method for generic calculation of hash code for given array object. The array object may be
+   * multidimensional. This method is supported for the benefit of hash tables such as those
+   * provided by {@link java.util.HashMap}.
+   *
+   * @param array the array object for which will be returned hash code.
+   * @return A hash code value for given array object.
+   */
+  public static int hashCode(Object array) {
+    if (array == null) {
+      return 0;
+    }
+
+    Class<?> objType = array.getClass();
+    if (!objType.isArray()) {
+      throw new IllegalArgumentException("Given object has to be array");
+    }
+
+    int result = 1;
+
+    Class<?> compType = objType.getComponentType();
+    int len = Array.getLength(array);
+    for (int i = 0; i < len; i++) {
+      int elementHash = 0;
+      Object value = Array.get(array, i);
+      if (value != null) {
+        if (!compType.isArray()) {
+          elementHash = value.hashCode();
+        }
+        else {// multidimensional array
+          elementHash = hashCode(value);
+        }
+      }
+
+      result = 31 * result + elementHash;
+    }
+
+    return result;
+  }
+
+  /**
+   * The method for generic checking of equality of two arrays given as object parameters. The
+   * arrays may be multidimensional.
+   *
+   * @param array1 the first array to check.
+   * @param array2 the second array to check.
+   * @return <code>true</code> if given array objects are equals; <code>false</code> otherwise.
+   */
+  public static boolean equals(Object array1, Object array2) {
+    if (array1 == null || array2 == null) {
+      return false;
+    }
+
+    // check whatever both arguments are arrays
+    if (!array1.getClass().isArray() || !array2.getClass().isArray()) {
+      return false;
+    }
+
+    // check equality
+    if (array1 == array2) {
+      return true;
+    }
+
+    // check length
+    int len = Array.getLength(array1);
+    if (len != Array.getLength(array2)) {
+      return false;
+    }
+
+    // supports boxing
+    for (int i = 0; i < len; i++) {
+      Object value1 = Array.get(array1, i);
+      Object value2 = Array.get(array2, i);
+      if (value1 == null) {
+        if (value2 != null) {
+          return false;
+        }
+        continue;
+      }
+      else if (value2 == null) {
+        return false;
+      }
+
+      // multidimensional array
+      if (value1.getClass().isArray()) {
+        if (!equals(value1, value2)) {
+          return false;
+        }
+        continue;
+      }
+
+      if (!value1.equals(value2)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
