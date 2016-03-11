@@ -75,7 +75,7 @@ public class ClassProviderFactoryImpl extends AbstractBindingFactory<ClassProvid
   public <A extends Annotation> ClassProvider<A> createInstance(A annotation) throws FactoryException {
     ClassProvider<?> classProvider = super.createInstance(annotation);
     try {
-      classProvider.getClass().getDeclaredMethod("get", annotation.annotationType());
+      classProvider.getClass().getMethod("get", annotation.annotationType());
     }
     catch (Exception exc) {
       throw new FactoryException("Invalid class provider was bound for annotation: " + annotation.annotationType().getName());

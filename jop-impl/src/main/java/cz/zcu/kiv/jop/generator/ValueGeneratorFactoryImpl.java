@@ -108,7 +108,7 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
   public <A extends Annotation> ValueGenerator<?, A> createInstance(A annotation) throws FactoryException {
     ValueGenerator<?, ?> valueGenerator = super.createInstance(annotation);
     try {
-      valueGenerator.getClass().getDeclaredMethod("getValue", annotation.annotationType());
+      valueGenerator.getClass().getMethod("getValue", annotation.annotationType());
     }
     catch (Exception exc) {
       throw new FactoryException("Invalid value generator was bound for annotation: " + annotation.annotationType().getName());
