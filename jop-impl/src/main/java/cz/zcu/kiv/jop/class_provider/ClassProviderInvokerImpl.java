@@ -27,6 +27,9 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
 @Singleton
 public class ClassProviderInvokerImpl implements ClassProviderInvoker {
 
+  /** Constant for name of invocable method by this invoker. */
+  protected static final String INVOCABLE_METHOD_NAME = "get";
+
   /**
    * {@inheritDoc}
    */
@@ -112,7 +115,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
    */
   protected Annotation getCustomClassProviderParams(Property<?> property, Class<?> customClassProvider, Class<?> customAnnotation) throws ClassProviderException {
     // empty parameters
-    if (ReflectionUtils.getMethod(customClassProvider, "get", EmptyParameters.class) != null) {
+    if (ReflectionUtils.getMethod(customClassProvider, INVOCABLE_METHOD_NAME, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);
     }
 
@@ -143,7 +146,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
       // no matching parameters not found
       if (customParams == null) {
         for (int i = 0; i < customParameters.length; i++) {
-          if (ReflectionUtils.getMethod(customClassProvider, "get", customParameters[i].annotationType()) != null) {
+          if (ReflectionUtils.getMethod(customClassProvider, INVOCABLE_METHOD_NAME, customParameters[i].annotationType()) != null) {
             // we can easily break in this point because we cannot have same annotation multiple times
             return customParameters[i];
           }
@@ -156,7 +159,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
 
     // checks compatibility of custom parameters
     Class<?> customParamsType = customParams.annotationType();
-    if (ReflectionUtils.getMethod(customClassProvider, "get", customParamsType) != null) {
+    if (ReflectionUtils.getMethod(customClassProvider, INVOCABLE_METHOD_NAME, customParamsType) != null) {
       return customParams;
     }
     else {

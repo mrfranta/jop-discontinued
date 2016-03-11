@@ -27,6 +27,9 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
 @Singleton
 public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
 
+  /** Constant for name of invocable method by this invoker. */
+  protected static final String INVOCABLE_METHOD_NAME = "getValue";
+
   /**
    * {@inheritDoc}
    */
@@ -112,7 +115,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
    */
   protected Annotation getCustomValueGeneratorParams(Property<?> property, Class<?> customValueGenerator, Class<?> customAnnotation) throws ValueGeneratorException {
     // empty parameters
-    if (ReflectionUtils.getMethod(customValueGenerator, "get", EmptyParameters.class) != null) {
+    if (ReflectionUtils.getMethod(customValueGenerator, INVOCABLE_METHOD_NAME, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);
     }
 
@@ -143,7 +146,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
       // no matching parameters not found
       if (customParams == null) {
         for (int i = 0; i < customParameters.length; i++) {
-          if (ReflectionUtils.getMethod(customValueGenerator, "get", customParameters[i].annotationType()) != null) {
+          if (ReflectionUtils.getMethod(customValueGenerator, INVOCABLE_METHOD_NAME, customParameters[i].annotationType()) != null) {
             // we can easily break in this point because we cannot have same annotation multiple times
             return customParameters[i];
           }
@@ -156,7 +159,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
 
     // checks compatibility of custom parameters
     Class<?> customParamsType = customParams.annotationType();
-    if (ReflectionUtils.getMethod(customValueGenerator, "get", customParamsType) != null) {
+    if (ReflectionUtils.getMethod(customValueGenerator, INVOCABLE_METHOD_NAME, customParamsType) != null) {
       return customParams;
     }
     else {
