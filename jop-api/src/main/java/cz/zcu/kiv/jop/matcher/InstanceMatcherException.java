@@ -4,7 +4,7 @@ import cz.zcu.kiv.jop.JopException;
 
 /**
  * Exception which can be thrown if some error occurs during matching of given object (instance) in
- * {@link TypedInstanceMatcher#matches matches} method. Also can be thrown in case of value of some
+ * {@link InstanceMatcher#matches matches} method. Also can be thrown in case of value of some
  * parameter is not valid. It's recommended to not throw another exception from mentioned method.
  *
  * @author Mr.FrAnTA

@@ -7,15 +7,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
-import cz.zcu.kiv.jop.matcher.TypedInstanceMatcher;
+import cz.zcu.kiv.jop.matcher.InstanceMatcher;
 
 /**
  * Objects (instances) matcher annotation which determines the specific instance of
- * {@link TypedInstanceMatcher matcher} which decides which already generated object (instance) can
- * be set into populated field. The parameters for given instance matcher may be set in separated
+ * {@link InstanceMatcher matcher} which decides which already generated object (instance) can be
+ * set into populated field. The parameters for given instance matcher may be set in separated
  * annotation for property.
  *
- * @see TypedInstanceMatcher
+ * @see InstanceMatcher
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
@@ -31,6 +31,6 @@ public @interface CustomInstanceMatcher {
    * Required parameter for instance matcher which decides which already generated object (instance)
    * can be set into populated field.
    */
-  public Class<? extends TypedInstanceMatcher<?, ?>> value();
+  public Class<? extends InstanceMatcher<?>> value();
 
 }
