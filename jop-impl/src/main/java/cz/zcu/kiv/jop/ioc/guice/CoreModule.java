@@ -10,8 +10,12 @@ import com.google.inject.spi.TypeListener;
 
 import cz.zcu.kiv.jop.class_provider.ClassProviderFactory;
 import cz.zcu.kiv.jop.class_provider.ClassProviderFactoryImpl;
+import cz.zcu.kiv.jop.class_provider.ClassProviderInvoker;
+import cz.zcu.kiv.jop.class_provider.ClassProviderInvokerImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactory;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactoryImpl;
+import cz.zcu.kiv.jop.generator.ValueGeneratorInvoker;
+import cz.zcu.kiv.jop.generator.ValueGeneratorInvokerImpl;
 import cz.zcu.kiv.jop.ioc.NamedScopes;
 import cz.zcu.kiv.jop.ioc.callback.Initializable;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
@@ -40,6 +44,10 @@ public final class CoreModule extends AbstractModule {
     // binding of factories
     bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
     bind(ValueGeneratorFactory.class).to(ValueGeneratorFactoryImpl.class);
+
+    // binding of interlayers
+    bind(ClassProviderInvoker.class).to(ClassProviderInvokerImpl.class);
+    bind(ValueGeneratorInvoker.class).to(ValueGeneratorInvokerImpl.class);
 
     // binding of sessions
     bind(ClassLoaderSession.class).to(ClassLoaderSessionImpl.class);
