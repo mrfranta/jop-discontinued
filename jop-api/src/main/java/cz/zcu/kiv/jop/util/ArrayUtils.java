@@ -658,7 +658,7 @@ public abstract class ArrayUtils {
       throw new IllegalArgumentException("Given array has to be array of wrapper classes");
     }
 
-    Method toPrimitiveArray = ReflectionUtils.getDeclaredMethod(ArrayUtils.class, "toPrimitiveArray", objType);
+    Method toPrimitiveArray = ReflectionUtils.getMethod(ArrayUtils.class, "toPrimitiveArray", objType);
     if (toPrimitiveArray == null) {
       throw new IllegalArgumentException("Unsupported array type: " + compType.getName());
     }

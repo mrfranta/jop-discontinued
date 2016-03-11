@@ -111,7 +111,7 @@ public abstract class ReflectionUtils {
   }
 
   /**
-   * Returns declared field in given <code>clazz</code>. If the field is not found, it returns
+   * Returns declared field in given <code>clazz</code>. If the field was not found, it returns
    * <code>null</code>. Also if the field is not accessible, it marks the field as accessible.
    *
    * @param clazz the owner of searched declared field.
@@ -157,8 +157,28 @@ public abstract class ReflectionUtils {
   }
 
   /**
-   * Returns declared field in given <code>clazz</code>. If the field is not found, it returns
-   * <code>null</code>. Also if the field is not accessible, it marks the field as accessible.
+   * Returns method in given <code>clazz</code>. If the method was not found, it returns
+   * <code>null</code>
+   *
+   * @param clazz the owner of searched method.
+   * @param methodName the name of searched method.
+   * @param parameterTypes array of parameter types of method parameters.
+   * @return Method or <code>null</code>.
+   */
+  public static Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+    try {
+      return clazz.getMethod(methodName, parameterTypes);
+    }
+    catch (Exception exc) {
+      // ignore exception, the null will be returned
+    }
+
+    return null;
+  }
+
+  /**
+   * Returns declared method in given <code>clazz</code>. If the method was not found, it returns
+   * <code>null</code>. Also if the method is not accessible, it marks the method as accessible.
    *
    * @param clazz the owner of searched declared method.
    * @param methodName the name of searched declared method.
