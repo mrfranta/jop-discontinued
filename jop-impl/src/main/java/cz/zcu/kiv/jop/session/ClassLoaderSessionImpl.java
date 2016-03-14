@@ -28,7 +28,7 @@ public class ClassLoaderSessionImpl implements ClassLoaderSession {
   /**
    * {@inheritDoc}
    */
-  public ClassLoader setClassLoader(String name, ClassLoader classLoader) {
+  public synchronized ClassLoader setClassLoader(String name, ClassLoader classLoader) {
     Preconditions.checkArgument(StringUtils.hasText(name), "Symbolic name cannot be null, empty or blank");
     Preconditions.checkArgument(checkReservedNames(name), "Symbolic name cannot be '%s'", name);
 
@@ -38,7 +38,7 @@ public class ClassLoaderSessionImpl implements ClassLoaderSession {
   /**
    * {@inheritDoc}
    */
-  public ClassLoader getClassLoader(String name) {
+  public synchronized ClassLoader getClassLoader(String name) {
     Preconditions.checkArgument(StringUtils.hasText(name), "Symbolic name cannot be null, empty or blank");
     Preconditions.checkArgument(checkReservedNames(name), "Symbolic name cannot be '%s'", name);
 
@@ -62,7 +62,7 @@ public class ClassLoaderSessionImpl implements ClassLoaderSession {
   /**
    * {@inheritDoc}
    */
-  public void clear() {
+  public synchronized void clear() {
     session.clear();
   }
 
