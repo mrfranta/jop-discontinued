@@ -144,18 +144,11 @@ public abstract class AbstractBean implements Bean {
       return false;
     }
 
-    if (!(obj instanceof AbstractBean)) {
+    if (!(obj instanceof Bean)) {
       return false;
     }
 
-    Bean other = (Bean)obj;
-    if (getType() == null) {
-      if (other.getType() != null) {
-        return false;
-      }
-    }
-
-    return getType() == other.getType();
+    return getType() == ((Bean)obj).getType();
   }
 
   /**
