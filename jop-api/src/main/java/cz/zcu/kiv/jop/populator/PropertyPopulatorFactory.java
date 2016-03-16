@@ -6,13 +6,13 @@ import cz.zcu.kiv.jop.factory.BindingFactory;
 import cz.zcu.kiv.jop.factory.FactoryException;
 
 /**
- * The interface for factory which serves for creation of {@link TypedPropertyPopulator
- * TypedPropertyPopulators}. Property populators should be created primary by this factory.
+ * The interface for factory which serves for creation of {@link PropertyPopulator
+ * PropertyPopulators}. Property populators should be created primary by this factory.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-public interface PropertyPopulatorFactory extends BindingFactory<TypedPropertyPopulator<?, ?>> {
+public interface PropertyPopulatorFactory extends BindingFactory<PropertyPopulator<?>> {
 
   /**
    * Returns created instance of bound implementation of property populator for given annotation. If
@@ -30,6 +30,6 @@ public interface PropertyPopulatorFactory extends BindingFactory<TypedPropertyPo
    * @throws FactoryException if some error occurs during creation of (new) instance of given class
    *           or if no implementation was bound to given annotation.
    */
-  public <A extends Annotation> TypedPropertyPopulator<?, A> createInstance(A annotation) throws FactoryException;
+  public <A extends Annotation> PropertyPopulator<A> createInstance(A annotation) throws FactoryException;
 
 }

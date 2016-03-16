@@ -4,9 +4,8 @@ import cz.zcu.kiv.jop.JopException;
 
 /**
  * Exception which can be thrown if some error occurs during populating of property in
- * {@link TypedPropertyPopulator#populate populate} method. Also can be thrown in case of value of
- * some parameter is not valid. It's recommended to not throw another exception from mentioned
- * method.
+ * {@link PropertyPopulator#populate populate} method. Also can be thrown in case of value of some
+ * parameter is not valid. It's recommended to not throw another exception from mentioned method.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0

@@ -7,14 +7,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
-import cz.zcu.kiv.jop.populator.TypedPropertyPopulator;
+import cz.zcu.kiv.jop.populator.PropertyPopulator;
 
 /**
- * Annotation for custom property populator which determines the specific
- * {@link TypedPropertyPopulator property populator} which populates annotated property. The
- * parameters for given property populator may be set in separated annotation for property.
+ * Annotation for custom property populator which determines the specific {@link PropertyPopulator
+ * property populator} which populates annotated property. The parameters for given property
+ * populator may be set in separated annotation for property.
  *
- * @see TypedPropertyPopulator
+ * @see PropertyPopulator
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
@@ -29,6 +29,6 @@ public @interface CustomPopulator {
   /**
    * Required parameter for class type of property populator which populates annotated property.
    */
-  public Class<? extends TypedPropertyPopulator<?, ?>> value();
+  public Class<? extends PropertyPopulator<?>> value();
 
 }
