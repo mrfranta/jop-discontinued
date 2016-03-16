@@ -179,6 +179,17 @@ public abstract class AbstractProperty<T> implements Property<T> {
   protected abstract Setter<T> createSetter() throws SetterNotFoundException;
 
   /**
+   * Returns string value of property.
+   *
+   * @return String value of property.
+   */
+  @Override
+  public String toString() {
+    return getClass().getName() + " [declaringClass=" + (declaringClass == null ? null : declaringClass.getName()) +
+        ", propertyName=" + propertyName + "]";
+  }
+
+  /**
    * Recursively searches for declared field with given name in given class and in all parent
    * classes or implemented interfaces. If the field is not found, the exception is thrown.
    *
