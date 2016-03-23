@@ -35,7 +35,7 @@ public interface InstanceMatcher<P extends Annotation> {
    * @return <code>true</code> if instances matcher can {@link #matches} instances of given class
    *         type; <code>false</code> otherwise.
    */
-  boolean supports(Class<?> clazz);
+  public boolean supports(Class<?> clazz);
 
   /**
    * Checks whatever the given object matches custom conditions.

@@ -34,7 +34,7 @@ public interface PropertyPopulator<P extends Annotation> {
    * @return <code>true</code> if property populator can {@link #populate} property of the given
    *         class type; <code>false</code> otherwise.
    */
-  boolean supports(Class<?> clazz);
+  public boolean supports(Class<?> clazz);
 
   /**
    * Populates given property according to given parameters. Populator can use additional
