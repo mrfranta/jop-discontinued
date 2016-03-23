@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 import cz.zcu.kiv.jop.class_provider.ClassProvider;
 
 /**
@@ -25,7 +25,7 @@ import cz.zcu.kiv.jop.class_provider.ClassProvider;
  */
 @CustomAnnotation
 @ClassProviderAnnotation
-@GeneratorAnnotation
+@ValueGeneratorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

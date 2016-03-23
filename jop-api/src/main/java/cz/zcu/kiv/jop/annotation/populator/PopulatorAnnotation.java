@@ -12,10 +12,11 @@ import java.lang.annotation.Target;
  * {@link cz.zcu.kiv.jop.annotation.strategy.StrategyAnnotation StrategyAnnotation}.
  * <p>
  * They can be combined with annotations marked by
- * {@link cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation GeneratorAnnotation} which
- * provides the generated values which will be populated into annotated field.
+ * {@link cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation ValueGeneratorAnnotation}
+ * which provides the generated values which will be populated into annotated field.
  * <p>
- * Also may be combined with annotations marked as populator. The chaning of populators is specified by order of
+ * Also may be combined with annotations marked as populator. The chaning of populators is specified
+ * by order of
  *
  * @author Mr.FrAnTA
  * @since 1.0.0

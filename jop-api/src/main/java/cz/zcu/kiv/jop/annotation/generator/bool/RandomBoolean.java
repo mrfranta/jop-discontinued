@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 
 /**
  * This annotation marks property for which will be generated random boolean value with
@@ -19,7 +19,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-@GeneratorAnnotation
+@ValueGeneratorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

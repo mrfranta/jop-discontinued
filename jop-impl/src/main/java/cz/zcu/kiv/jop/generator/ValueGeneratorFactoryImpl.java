@@ -9,7 +9,7 @@ import cz.zcu.kiv.jop.annotation.class_provider.RandomClass;
 import cz.zcu.kiv.jop.annotation.class_provider.RandomClassForName;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClass;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 import cz.zcu.kiv.jop.annotation.generator.bool.RandomBoolean;
 import cz.zcu.kiv.jop.annotation.generator.number.BinomialGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.CategoricalGenerator;
@@ -52,7 +52,7 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
 
   /**
    * Check conditions for given annotation type. The annotation type cannot be <code>null</code> and
-   * has to be marked by annotation {@link GeneratorAnnotation}. This method also checks whatever
+   * has to be marked by annotation {@link ValueGeneratorAnnotation}. This method also checks whatever
    * the given annotation is not marked by annotation {@link CustomAnnotation} because the binding
    * of annotation for custom value generator is not allowed.
    *
@@ -63,8 +63,8 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
   protected void checkAnnotation(Class<? extends Annotation> annotation) throws BindingException {
     super.checkAnnotation(annotation);
 
-    if (!AnnotationUtils.isAnnotatedAnnotation(annotation, GeneratorAnnotation.class)) {
-      throw new BindingException("Annotation has to be marked by annotation: " + GeneratorAnnotation.class.getName());
+    if (!AnnotationUtils.isAnnotatedAnnotation(annotation, ValueGeneratorAnnotation.class)) {
+      throw new BindingException("Annotation has to be marked by annotation: " + ValueGeneratorAnnotation.class.getName());
     }
 
     if (AnnotationUtils.isAnnotatedAnnotation(annotation, CustomAnnotation.class)) {

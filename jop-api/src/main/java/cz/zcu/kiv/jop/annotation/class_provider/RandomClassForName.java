@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 
 /**
  * Class provider annotation which will select random class name which will be searched in
@@ -26,7 +26,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
  *      distribution</a>
  */
 @ClassProviderAnnotation
-@GeneratorAnnotation
+@ValueGeneratorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

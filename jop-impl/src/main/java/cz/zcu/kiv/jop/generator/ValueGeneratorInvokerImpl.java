@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
 import cz.zcu.kiv.jop.annotation.generator.CustomValueGenerator;
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 import cz.zcu.kiv.jop.annotation.parameters.CustomParameters;
 import cz.zcu.kiv.jop.annotation.parameters.EmptyParameters;
 import cz.zcu.kiv.jop.factory.FactoryException;
@@ -49,7 +49,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
       throw new ValueGeneratorException("Number of invocations has to be greater than 0");
     }
 
-    Annotation[] annotations = AnnotationUtils.getAnnotatedAnnotations(property, GeneratorAnnotation.class);
+    Annotation[] annotations = AnnotationUtils.getAnnotatedAnnotations(property, ValueGeneratorAnnotation.class);
     if (annotations == null || annotations.length == 0) {
       throw new ValueGeneratorException("No such value generator annotation");
     }

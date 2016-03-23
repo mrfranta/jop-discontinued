@@ -20,7 +20,7 @@ import cz.zcu.kiv.jop.generator.ValueGenerator;
  * @since 1.0.0
  */
 @CustomAnnotation
-@GeneratorAnnotation
+@ValueGeneratorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

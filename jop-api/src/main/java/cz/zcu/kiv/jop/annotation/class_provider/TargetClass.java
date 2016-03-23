@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 
 /**
  * Class provider annotation which determines the specific (target) class which may be used for new
@@ -19,7 +19,7 @@ import cz.zcu.kiv.jop.annotation.generator.GeneratorAnnotation;
  * @since 1.0.0
  */
 @ClassProviderAnnotation
-@GeneratorAnnotation
+@ValueGeneratorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
