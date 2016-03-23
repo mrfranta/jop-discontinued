@@ -22,9 +22,11 @@ public interface PropertyAccess<T> extends Serializable {
   public String getPropertyName();
 
   /**
-   * Returns the declared class type of a property.
+   * Returns the declared class type of a property access. This class type may be different than
+   * class type of property because the access may have changed the class type for handling of /
+   * accessing to the property.
    *
-   * @return Declared class type of property.
+   * @return Declared class type of property access.
    */
   public Class<?> getPropertyType();
 

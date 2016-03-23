@@ -72,6 +72,18 @@ public abstract class AbstractProperty<T> implements Property<T> {
 
   /**
    * {@inheritDoc}
+   */
+  public Class<?> getType() {
+    try {
+      return getField().getType();
+    }
+    catch (PropertyNotFoundException exc) {
+      throw new PropertyRuntimeException(exc, declaringClass, propertyName);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
    *
    * @throws PropertyRuntimeException If some error occurs during getting annotation for property.
    */

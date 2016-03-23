@@ -29,6 +29,14 @@ public interface Property<T> extends AnnotatedElement, Serializable {
   public String getName();
 
   /**
+   * Returns declared class type of property. This type may be different than class types returned
+   * by getters/setters for this property.
+   *
+   * @return Declared class type of property.
+   */
+  public Class<?> getType();
+
+  /**
    * Creates and returns the instance of appropriate <em>getter</em> for the property.
    *
    * @return The <em>getter</em> for the property.
