@@ -15,6 +15,16 @@ import cz.zcu.kiv.jop.property.Property;
 public interface PopulatingStrategy {
 
   /**
+   * Returns information whether populating strategy may be {@link #applyStrategy applied} to given
+   * property.
+   *
+   * @param property the property to check.
+   * @return <code>true</code> if populating strategy may be {@link #applyStrategy applied} to given
+   *         property; <code>false</code> otherwise.
+   */
+  public boolean supports(Property<?> property);
+
+  /**
    * Applies populating strategy to given property. It may populate some value into property or
    * enqueue class into populating context to populate.
    *
