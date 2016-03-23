@@ -46,7 +46,7 @@ public abstract class ClassLoaderUtils {
    * This method selects the "best" class loader instance to be used for class/resource loading by
    * whoever calls this method. The decision typically involves choosing between the caller's
    * current, thread context, system, and other classloaders in the JVM and is made by the
-   * {@link IClassLoadStrategy} instance established by the last call to {@link #setStrategy}.
+   * {@link ClassLoaderProvider} instance established by the last call to {@link #setStrategy}.
    *
    * @return classloader to be used by the caller ['null' indicates the primordial loader]
    */
@@ -182,7 +182,7 @@ public abstract class ClassLoaderUtils {
       if (loader1 == loader2) {
         return true;
       }
-      
+
       if (loader2 == null) {
         return false;
       }
