@@ -211,9 +211,7 @@ public abstract class ReflectionUtils {
    */
   public static boolean isClassExist(String className) {
     try {
-      // FIXME: There should be used some workaround for Reflection.getCallerClass()
-      // Class.forName(className, false, ClassLoaderResolver.getCallerClassLoader());
-      Class.forName(className);
+      Class.forName(className, false, ClassLoaderUtils.getClassLoader());
       return true;
     }
     catch (ClassNotFoundException exc) {

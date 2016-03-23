@@ -14,6 +14,7 @@ import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.CategoricalGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
+import cz.zcu.kiv.jop.util.ClassLoaderUtils;
 import cz.zcu.kiv.jop.util.StringUtils;
 
 /**
@@ -60,10 +61,10 @@ public class RandomClassForNameGenerator extends AbstractValueGenerator<Class<?>
     Random rand = getRandomGenerator(params);
     String className = CategoricalGenerator.getValue(rand, params.value(), params.probabilities());
 
-    // class loader
+    // class loaders
     ClassLoader classLoader = null;
     if (ClassLoaderConst.CALLER.equalsIgnoreCase(classLoaderName)) {
-      classLoader = null; // default for caller
+      classLoader = ClassLoaderUtils.getClassLoader(); // default for caller
     }
     else if (ClassLoaderConst.CONTEXT.equalsIgnoreCase(classLoaderName)) {
       classLoader = Thread.currentThread().getContextClassLoader();
@@ -75,6 +76,7 @@ public class RandomClassForNameGenerator extends AbstractValueGenerator<Class<?>
       classLoader = classLoaderSession.getClassLoader(classLoaderName);
       if (classLoader == null) {
         logger.warn("No class loader found for name '" + classLoaderName + "', it will be used called class loader.");
+        classLoader = ClassLoaderUtils.getClassLoader(); // default for caller
       }
     }
 

@@ -12,6 +12,7 @@ import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
+import cz.zcu.kiv.jop.util.ClassLoaderUtils;
 import cz.zcu.kiv.jop.util.StringUtils;
 
 /**
@@ -75,6 +76,7 @@ public class TargetClassForNameGenerator implements ValueGenerator<Class<?>, Tar
       classLoader = classLoaderSession.getClassLoader(classLoaderName);
       if (classLoader == null) {
         logger.warn("No class loader found for name '" + classLoaderName + "', it will be used called class loader.");
+        classLoader = ClassLoaderUtils.getClassLoader(); // default for caller
       }
     }
 
