@@ -15,6 +15,15 @@ import cz.zcu.kiv.jop.property.Property;
 public interface InstanceMatcherInvoker {
 
   /**
+   * Returns information whether the instance matcher annotation is present on given property.
+   *
+   * @param property the property which annotations will be checked.
+   * @return <code>true</code> if given property is annotated by instance matcher annotation;
+   *         <code>false</code> otherwise.
+   */
+  public boolean isAnnotationPresent(Property<?> property);
+
+  /**
    * Analyzes annotations for given property and then choose the proper instance matcher. Then a
    * chosen instance matcher is used for finding matching object from all already populated
    * (generated) objects stored in given <code>context</code>. If no matching object is found, the

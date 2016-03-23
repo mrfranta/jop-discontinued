@@ -14,6 +14,15 @@ import cz.zcu.kiv.jop.property.Property;
 public interface ValueGeneratorInvoker {
 
   /**
+   * Returns information whether the value generator annotation is present on given property.
+   *
+   * @param property the property which annotations will be checked.
+   * @return <code>true</code> if given property is annotated by value generator annotation;
+   *         <code>false</code> otherwise.
+   */
+  public boolean isAnnotationPresent(Property<?> property);
+
+  /**
    * Analyzes annotations for given property and then choose the proper value generator. The chosen
    * value generator is invoked and then result of invocation is returned.
    *

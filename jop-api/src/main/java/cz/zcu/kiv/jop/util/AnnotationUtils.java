@@ -63,6 +63,33 @@ public abstract class AnnotationUtils {
   }
 
   /**
+   * Returns information whether the given annotated element is annotated by some annotation which
+   * is marked by given (marker) annotation.
+   *
+   * @param element the annotated element.
+   * @param annotatedBy the annotation type which annotates searched annotations.
+   * @return <code>true</code> if given element is annotated by annotation which is marked by given
+   *         (marker) annotation; <code>false</code> otherwise.
+   */
+  public static boolean isAnnotatedAnnotationPresent(AnnotatedElement element, Class<? extends Annotation> annotatedBy) {
+    Preconditions.checkArgumentNotNull(element, "Annotated element cannot be null");
+    Preconditions.checkArgumentNotNull(annotatedBy, "Annotation cannot be null");
+
+    Annotation[] annotations = element.getAnnotations();
+    for (int i = 0; i < annotations.length; i++) {
+      Annotation[] annotationAnnotations = annotations[i].annotationType().getAnnotations();
+      for (int j = 0; j < annotationAnnotations.length; j++) {
+        Class<? extends Annotation> aType = annotationAnnotations[j].annotationType();
+        if (annotatedBy.equals(aType)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Returns array of annotations which annotates the given annotated element and which are
    * annotated by given annotation type.
    *
@@ -265,11 +292,13 @@ public abstract class AnnotationUtils {
     }
 
     /**
-     * Implementation of generic equals method which indicates whether some object is "equal to" this annotation.
+     * Implementation of generic equals method which indicates whether some object is "equal to"
+     * this annotation.
      *
      * @param thisObj the reference to this object.
      * @param obj the reference object with which to compare.
-     * @return <code>true</code> if this annotation is the same as the obj argument; <code>false</code> otherwise.
+     * @return <code>true</code> if this annotation is the same as the obj argument;
+     *         <code>false</code> otherwise.
      */
     private boolean equalsImpl(Object thisObj, Object obj) {
       if (obj == thisObj) {

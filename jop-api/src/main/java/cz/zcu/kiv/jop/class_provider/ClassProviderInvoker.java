@@ -14,6 +14,15 @@ import cz.zcu.kiv.jop.property.Property;
 public interface ClassProviderInvoker {
 
   /**
+   * Returns information whether the class provider annotation is present on given property.
+   *
+   * @param property the property which annotations will be checked.
+   * @return <code>true</code> if given property is annotated by class provider annotation;
+   *         <code>false</code> otherwise.
+   */
+  public boolean isAnnotationPresent(Property<?> property);
+
+  /**
    * Analyzes annotations for given property and then choose the proper class provider. The chosen
    * class provider is invoked and then result of invocation is returned.
    *

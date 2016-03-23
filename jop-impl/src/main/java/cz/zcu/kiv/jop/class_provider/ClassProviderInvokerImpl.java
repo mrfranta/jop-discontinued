@@ -33,6 +33,13 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
   /**
    * {@inheritDoc}
    */
+  public boolean isAnnotationPresent(Property<?> property) {
+    return AnnotationUtils.isAnnotatedAnnotationPresent(property, ClassProviderAnnotation.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Class<?> get(Property<?> property) throws ClassProviderException {
     return get(property, 1)[0]; // returns only one provided class
   }

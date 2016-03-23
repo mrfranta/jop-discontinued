@@ -34,6 +34,13 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
   /**
    * {@inheritDoc}
    */
+  public boolean isAnnotationPresent(Property<?> property) {
+    return AnnotationUtils.isAnnotatedAnnotationPresent(property, InstanceMatcherAnnotation.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Object match(Property<?> property, PopulatingContext context) throws InstanceMatcherException {
     if (property == null) {
       throw new InstanceMatcherException("Property cannot be null");
@@ -108,8 +115,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
    * @throws InstanceMatcherException If custom parameters for custom instance matcher cannot be
    *           obtained.
    */
-  protected Annotation getCustomInstanceMatcherParams(Property<?> property, Class<?> customInstanceMatcher, Class<?> customAnnotation)
-      throws InstanceMatcherException {
+  protected Annotation getCustomInstanceMatcherParams(Property<?> property, Class<?> customInstanceMatcher, Class<?> customAnnotation) throws InstanceMatcherException {
     // empty parameters
     if (ReflectionUtils.getMethod(customInstanceMatcher, INVOCABLE_METHOD_NAME, Object.class, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);

@@ -33,6 +33,13 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
   /**
    * {@inheritDoc}
    */
+  public boolean isAnnotationPresent(Property<?> property) {
+    return AnnotationUtils.isAnnotatedAnnotationPresent(property, ValueGeneratorAnnotation.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Object getValue(Property<?> property) throws ValueGeneratorException {
     return getValue(property, 1)[0]; // returns only one generated value
   }

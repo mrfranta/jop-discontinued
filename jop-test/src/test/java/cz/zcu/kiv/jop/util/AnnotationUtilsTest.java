@@ -130,6 +130,42 @@ public class AnnotationUtilsTest {
   }
 
   /**
+   * Test of method {@link AnnotationUtils#isAnnotatedAnnotationPresent} for null value as element.
+   * Expected illegal argument exception.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testIsAnnotatedAnnotationPresentForNullElement() {
+    AnnotationUtils.isAnnotatedAnnotationPresent(null, Marker.class);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#isAnnotatedAnnotationPresent} for null value as marker
+   * annotation type. Expected illegal argument exception.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testIsAnnotatedAnnotationPresentForNullAnnotation() {
+    AnnotationUtils.isAnnotatedAnnotationPresent(getClass(), null);
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#isAnnotatedAnnotationPresent} for element with not-marked
+   * annotations.
+   */
+  @Test
+  public void testIsAnnotatedAnnotationPresentForElementWithNotMarkedAnnotations() throws Throwable {
+    Assert.assertFalse(AnnotationUtils.isAnnotatedAnnotationPresent(getClass().getDeclaredField("fieldWithNotMarked"), Marker.class));
+  }
+
+  /**
+   * Test of method {@link AnnotationUtils#isAnnotatedAnnotationPresent} for element with marked
+   * annotation.
+   */
+  @Test
+  public void testIsAnnotatedAnnotationPresentForElementWithMarkedAnnotations() {
+    Assert.assertTrue(AnnotationUtils.isAnnotatedAnnotationPresent(getClass(), Marker.class));
+  }
+
+  /**
    * Test of method {@link AnnotationUtils#getAnnotatedAnnotations} for null value as element.
    * Expected illegal argument exception.
    */
@@ -153,7 +189,8 @@ public class AnnotationUtilsTest {
    */
   @Test
   public void testGetAnnotatedAnnotationsForElementWithNotMarkedAnnotations() throws Throwable {
-    AnnotationUtils.getAnnotatedAnnotations(getClass().getDeclaredField("fieldWithNotMarked"), Marker.class);
+    Annotation[] expected = new Annotation[0];
+    Assert.assertArrayEquals(expected, AnnotationUtils.getAnnotatedAnnotations(getClass().getDeclaredField("fieldWithNotMarked"), Marker.class));
   }
 
   /**
@@ -164,7 +201,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotatedAnnotationsForElementWithMarkedAnnotations() {
     Class<?> clazz = getClass();
     Annotation[] annotations = new Annotation[] {clazz.getAnnotation(Bar.class)};
-    Assert.assertArrayEquals(annotations, AnnotationUtils.getAnnotatedAnnotations(getClass(), Marker.class));
+    Assert.assertArrayEquals(annotations, AnnotationUtils.getAnnotatedAnnotations(clazz, Marker.class));
   }
 
   // ---- Test of method getAnnotationProxy ------------------------------------
