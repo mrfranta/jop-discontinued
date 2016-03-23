@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
  * This annotation presents a populating strategy which allows to forbid the populating of referred
  * object (field). In such case will be the annotated field skipped and no value will be generated
  * for that field. Also the value of the field won't be changed. This is default strategy - if the
- * field has no another populating strategy annotation, this strategy will be used.
+ * field has no another populating strategy, populator or value generator annotation, this strategy
+ * will be used.
  * <p>
  * An example of an annotation usage:
  *
@@ -25,7 +26,7 @@ import java.lang.annotation.Target;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-@StrategyAnnotation
+@PopulatingStrategyAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

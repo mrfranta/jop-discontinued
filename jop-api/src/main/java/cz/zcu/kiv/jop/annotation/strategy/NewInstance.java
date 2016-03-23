@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-@StrategyAnnotation
+@PopulatingStrategyAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
