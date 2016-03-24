@@ -27,6 +27,8 @@ import cz.zcu.kiv.jop.session.ClassLoaderSessionImpl;
 import cz.zcu.kiv.jop.session.ExtendedRandomGeneratorSessionImpl;
 import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSessionImpl;
+import cz.zcu.kiv.jop.strategy.PopulatingStrategyFactory;
+import cz.zcu.kiv.jop.strategy.PopulatingStrategyFactoryImpl;
 import cz.zcu.kiv.jop.util.Preconditions;
 
 /**
@@ -49,6 +51,7 @@ public final class CoreModule extends AbstractModule {
     bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
     bind(ValueGeneratorFactory.class).to(ValueGeneratorFactoryImpl.class);
     bind(InstanceMatcherFactory.class).to(InstanceMatcherFactoryImpl.class);
+    bind(PopulatingStrategyFactory.class).to(PopulatingStrategyFactoryImpl.class);
 
     // binding of interlayers
     bind(ClassProviderInvoker.class).to(ClassProviderInvokerImpl.class);
