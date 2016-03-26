@@ -22,7 +22,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * <p>
    * Maintainers must change this value if and only if the new version of this class is not
    * compatible with old versions. See Oracle docs for <a
-   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/ serialization/">details</a>.
+   * href="http://docs.oracle.com/javase/1.5.0/docs/guide/serialization/">details</a>.
    * <p>
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
