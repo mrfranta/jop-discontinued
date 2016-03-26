@@ -79,13 +79,6 @@ public class SearchInstanceStrategy implements PopulatingStrategy {
       catch (InstanceMatcherException exc) {
         throw new PopulatingStrategyException("Cannot apply " + getStrategyName(), exc);
       }
-
-      if (instance != null) { // check compatibility
-        Class<?> instanceType = instance.getClass();
-        if (!property.getType().isAssignableFrom(instanceType)) {
-          throw new PopulatingStrategyException("Class type " + instanceType.getName() + " of found instance is not compatible with property: " + property);
-        }
-      }
     }
     else {
       // use first compatible instance

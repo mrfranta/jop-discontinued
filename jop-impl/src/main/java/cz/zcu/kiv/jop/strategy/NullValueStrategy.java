@@ -59,8 +59,8 @@ public class NullValueStrategy implements PopulatingStrategy {
     logger.debug("Applying " + getStrategyName() + " to property: " + property);
 
     try {
+      Class<?> propertyType = property.getType();
       Setter<Object> setter = (Setter<Object>)property.getSetter();
-      Class<?> propertyType = setter.getPropertyType();
       setter.set(context.getCurrentObject(), Defaults.getDefaultValue(propertyType));
     }
     catch (Exception exc) {

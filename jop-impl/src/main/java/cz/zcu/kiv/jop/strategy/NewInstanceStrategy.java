@@ -70,11 +70,6 @@ public class NewInstanceStrategy implements PopulatingStrategy {
       logger.info("No class provider annotation present. Using declared class type: " + clazz.getName());
     }
 
-    // check compatibility
-    if (!property.getType().isAssignableFrom(clazz)) {
-      throw new PopulatingStrategyException("Class type " + clazz.getName() + " is not compatible with property: " + property);
-    }
-
     if (!context.canPopulate(clazz)) {
       logger.info("New instance of: " + clazz.getName() + " cannot be populated into property: " + property);
       return;
