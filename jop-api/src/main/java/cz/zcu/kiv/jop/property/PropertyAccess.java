@@ -28,7 +28,7 @@ public interface PropertyAccess<T> extends Serializable {
    *
    * @return Declared class type of property access.
    */
-  public Class<?> getPropertyType();
+  public Class<?> getType();
 
   /**
    * Returns the member used for access to property. This might be the field or method.

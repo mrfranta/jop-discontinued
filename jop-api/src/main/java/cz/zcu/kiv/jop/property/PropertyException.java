@@ -20,7 +20,7 @@ public class PropertyException extends JopException {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160206L;
+  private static final long serialVersionUID = 20160326L;
 
   /** Class type of a property owner. */
   protected final Class<?> declaringClass;

@@ -43,7 +43,7 @@ public class DirectAccessSetterTest {
     /*----- Verify attributes -----*/
     Assert.assertEquals(MockSuperObject.class, setter.getDeclaringClass());
     Assert.assertEquals(MockObject.PROPERTY1, setter.getPropertyName());
-    Assert.assertEquals(Boolean.TYPE, setter.getPropertyType());
+    Assert.assertEquals(Boolean.TYPE, setter.getType());
     Assert.assertEquals(setterField, setter.getMember());
     Assert.assertEquals(null, setter.getMethod());
     Assert.assertEquals(null, setter.getMethodName());

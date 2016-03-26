@@ -43,7 +43,7 @@ public class BasicSetterTest {
     /*----- Verify attributes -----*/
     Assert.assertEquals(MockSuperObject.class, setter.getDeclaringClass());
     Assert.assertEquals(MockObject.PROPERTY1, setter.getPropertyName());
-    Assert.assertEquals(Boolean.TYPE, setter.getPropertyType());
+    Assert.assertEquals(Boolean.TYPE, setter.getType());
     Assert.assertEquals(setterMethod, setter.getMember());
     Assert.assertEquals(setterMethod, setter.getMethod());
     Assert.assertEquals("setProperty1", setter.getMethodName());

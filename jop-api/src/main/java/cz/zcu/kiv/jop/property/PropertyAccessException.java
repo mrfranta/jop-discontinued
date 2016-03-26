@@ -120,10 +120,11 @@ public class PropertyAccessException extends PropertyException {
 
     // @formatter:off
     StringBuilder sb = new StringBuilder(StringUtils.hasText(message) ? message : "")
-        .append(isFromSetter() ? " setter for " : " getter for ")
-        .append(getDeclaringClassName())
-        .append(".")
-        .append(getPropertyName());
+        .append(isFromSetter() ? " setter for " : " getter for ");
+    if (getDeclaringClass() != null) {
+      sb.append(getDeclaringClassName()).append(".");
+    }
+    sb.append(getPropertyName());
     // @formatter:on
 
     return sb.toString();

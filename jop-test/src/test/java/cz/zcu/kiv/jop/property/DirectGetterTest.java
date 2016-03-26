@@ -43,7 +43,7 @@ public class DirectGetterTest {
     /*----- Verify attributes -----*/
     Assert.assertEquals(MockSuperObject.class, getter.getDeclaringClass());
     Assert.assertEquals(MockObject.PROPERTY1, getter.getPropertyName());
-    Assert.assertEquals(Boolean.TYPE, getter.getPropertyType());
+    Assert.assertEquals(Boolean.TYPE, getter.getType());
     Assert.assertEquals(getterField, getter.getMember());
     Assert.assertEquals(null, getter.getMethod());
     Assert.assertEquals(null, getter.getMethodName());

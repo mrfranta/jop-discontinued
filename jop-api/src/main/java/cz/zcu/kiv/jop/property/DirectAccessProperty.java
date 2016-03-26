@@ -27,7 +27,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160228L;
+  private static final long serialVersionUID = 20160326L;
 
   /**
    * Constructs a direct access property.
@@ -75,7 +75,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * property value.
    *
    * @author Mr.FrAnTA
-   * @since 1.0
+   * @since 1.0.0
    *
    * @param <T> Declared class type of property.
    */
@@ -91,7 +91,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = 20160228L;
+    private static final long serialVersionUID = 20160326L;
 
     /** Logger used for logging. */
     private static final Log logger = LogFactory.getLog(DirectAccessProperty.DirectGetter.class);
@@ -109,7 +109,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    public Class<?> getPropertyType() {
+    public Class<?> getType() {
       return member.getType();
     }
 
@@ -145,7 +145,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
    * property value.
    *
    * @author Mr.FrAnTA
-   * @since 1.0
+   * @since 1.0.0
    *
    * @param <T> Declared class type of property.
    */
@@ -161,7 +161,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
      * Not necessary to include in first version of the class, but included here as a reminder of
      * its importance.
      */
-    private static final long serialVersionUID = 20160228L;
+    private static final long serialVersionUID = 20160326L;
 
     /** Logger used for logging. */
     private static final Log logger = LogFactory.getLog(DirectAccessProperty.DirectSetter.class);
@@ -179,7 +179,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
     /**
      * {@inheritDoc}
      */
-    public Class<?> getPropertyType() {
+    public Class<?> getType() {
       return member.getType();
     }
 
@@ -203,7 +203,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
         throw createGetterAccessException("Illegal access occured during call of", exc);
       }
       catch (IllegalArgumentException exc) {
-        if (value == null && getPropertyType().isPrimitive()) {
+        if (value == null && getType().isPrimitive()) {
           throw createSetterAccessException("Null value was assigned to a property of primitive type while calling", exc);
         }
         else if (owner != null && !getDeclaringClass().isAssignableFrom(owner.getClass())) {
@@ -213,7 +213,7 @@ public class DirectAccessProperty<T> extends AbstractProperty<T> {
         }
         else {
           logger.error("Given incorrect value type for setter of property: " + getDeclaringClassName() + '.' + getPropertyName()
-              + " expected type: " + getPropertyType().getName() + ", given value type: " + (value == null ? null : value.getClass().getName()));
+              + " expected type: " + getType().getName() + ", given value type: " + (value == null ? null : value.getClass().getName()));
           throw createSetterAccessException("Given incorrect value type for", exc);
         }
       }

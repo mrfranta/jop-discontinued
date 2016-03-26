@@ -43,7 +43,7 @@ public class BasicGetterTest {
     /*----- Verify attributes -----*/
     Assert.assertEquals(MockSuperObject.class, getter.getDeclaringClass());
     Assert.assertEquals(MockObject.PROPERTY1, getter.getPropertyName());
-    Assert.assertEquals(Boolean.TYPE, getter.getPropertyType());
+    Assert.assertEquals(Boolean.TYPE, getter.getType());
     Assert.assertEquals(getterMethod, getter.getMember());
     Assert.assertEquals(getterMethod, getter.getMethod());
     Assert.assertEquals("isProperty1", getter.getMethodName());

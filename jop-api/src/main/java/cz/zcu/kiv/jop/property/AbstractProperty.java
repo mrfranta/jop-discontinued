@@ -27,7 +27,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Not necessary to include in first version of the class, but included here as a reminder of its
    * importance.
    */
-  private static final long serialVersionUID = 20160228L;
+  private static final long serialVersionUID = 20160326L;
 
   /** Class type of a property owner. */
   protected final Class<?> declaringClass;
@@ -38,7 +38,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    * Field for property which can be lazy loaded (when is required) - use getter {@link #getField()}
    * instead of direct access.
    */
-  transient Field field;
+  private transient Field field;
 
   /** Created getter for property. */
   protected transient Getter<T> getter;
@@ -72,6 +72,8 @@ public abstract class AbstractProperty<T> implements Property<T> {
 
   /**
    * {@inheritDoc}
+   *
+   * @throws PropertyRuntimeException If some error occurs during getting annotation for property.
    */
   public Class<?> getType() {
     try {
@@ -147,7 +149,11 @@ public abstract class AbstractProperty<T> implements Property<T> {
    *           <code>declaringClass</code>.
    */
   protected Field getField() throws PropertyNotFoundException {
-    return field == null ? field = getField(declaringClass, propertyName) : field;
+    if (field == null) {
+      field = getField(declaringClass, propertyName);
+    }
+
+    return field;
   }
 
   /**
@@ -197,8 +203,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
    */
   @Override
   public String toString() {
-    return getClass().getName() + " [declaringClass=" + (declaringClass == null ? null : declaringClass.getName()) +
-        ", propertyName=" + propertyName + "]";
+    return getClass().getName() + " [declaringClass=" + (declaringClass == null ? null : declaringClass.getName()) + ", propertyName=" + propertyName + "]";
   }
 
   /**
