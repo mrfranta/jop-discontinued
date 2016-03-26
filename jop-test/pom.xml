@@ -17,6 +17,7 @@
     <!-- project properties -->
     <project.build.source>1.6</project.build.source>
     <project.build.target>1.6</project.build.target>
+    <project.helperTestSourceDirectory>src/test-helpers/java</project.helperTestSourceDirectory>
 
     <!-- dependencies versions -->
     <log4j.version>1.2.17</log4j.version>
@@ -80,6 +81,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>${project.helperTestSourceDirectory}/**/*.java</include>
+          </includes>
+        </configuration>
       </plugin>
 
       <plugin>
@@ -119,7 +125,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>src/test-helpers/java</source>
+                <source>${project.helperTestSourceDirectory}</source>
               </sources>
             </configuration>
           </execution>
