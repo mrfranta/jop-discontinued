@@ -5,6 +5,9 @@ import java.lang.annotation.Annotation;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
 import cz.zcu.kiv.jop.annotation.matcher.CustomInstanceMatcher;
 import cz.zcu.kiv.jop.annotation.matcher.InstanceMatcherAnnotation;
@@ -27,6 +30,9 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
  */
 @Singleton
 public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
+
+  /** Logger used for logging. */
+  private static final Log logger = LogFactory.getLog(InstanceMatcherInvokerImpl.class);
 
   /** Constant for name of invocable method by this invoker. */
   protected static final String INVOCABLE_METHOD_NAME = "matches";
@@ -66,6 +72,13 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
       // instance matchers bound in instance matcher factory
       instanceMatcher = getBoundInstanceMatcher(params);
     }
+
+    // no class provider
+    if (instanceMatcher == null) {
+      throw new InstanceMatcherException("No such instance matcher");
+    }
+
+    logger.debug("Invoking class provider: " + instanceMatcher.getClass().getName() + "; with parameters: " + params + "; for property: " + property);
 
     for (Object obj : context.getPopulatedInstances()) {
       if (!instanceMatcher.supports(obj.getClass())) {
@@ -165,8 +178,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
       return customParams;
     }
     else {
-      throw new InstanceMatcherException("Incompatible custom parameters: " + customParamsType.getName() + " for instance matcher: "
-          + customInstanceMatcher.getName());
+      throw new InstanceMatcherException("Incompatible custom parameters: " + customParamsType.getName() + " for instance matcher: " + customInstanceMatcher.getName());
     }
   }
 

@@ -5,6 +5,9 @@ import java.lang.annotation.Annotation;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
 import cz.zcu.kiv.jop.annotation.class_provider.ClassProviderAnnotation;
 import cz.zcu.kiv.jop.annotation.class_provider.CustomClassProvider;
@@ -26,6 +29,9 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
  */
 @Singleton
 public class ClassProviderInvokerImpl implements ClassProviderInvoker {
+
+  /** Logger used for logging. */
+  private static final Log logger = LogFactory.getLog(ClassProviderInvokerImpl.class);
 
   /** Constant for name of invocable method by this invoker. */
   protected static final String INVOCABLE_METHOD_NAME = "get";
@@ -76,6 +82,14 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
       // class providers bound in class provider factory
       classProvider = getBoundClassProvider(params);
     }
+
+    // no class provider
+    if (classProvider == null) {
+      throw new ClassProviderException("No such class provider");
+    }
+
+    logger.debug("Invoking class provider: " + classProvider.getClass().getName() + "; with parameters: " + params + "; for property: " + property + "; for "
+        + count + " time(s)");
 
     Class<?>[] classes = new Class<?>[count];
     for (int i = 0; i < count; i++) {
@@ -170,8 +184,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
       return customParams;
     }
     else {
-      throw new ClassProviderException("Incompatible custom parameters: " + customParamsType.getName() + " for class provider: "
-          + customClassProvider.getName());
+      throw new ClassProviderException("Incompatible custom parameters: " + customParamsType.getName() + " for class provider: " + customClassProvider.getName());
     }
   }
 

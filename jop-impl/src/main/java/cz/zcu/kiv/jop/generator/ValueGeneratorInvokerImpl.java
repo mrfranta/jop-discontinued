@@ -5,6 +5,9 @@ import java.lang.annotation.Annotation;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
 import cz.zcu.kiv.jop.annotation.generator.CustomValueGenerator;
 import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
@@ -26,6 +29,9 @@ import cz.zcu.kiv.jop.util.ReflectionUtils;
  */
 @Singleton
 public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
+
+  /** Logger used for logging. */
+  private static final Log logger = LogFactory.getLog(ValueGeneratorInvokerImpl.class);
 
   /** Constant for name of invocable method by this invoker. */
   protected static final String INVOCABLE_METHOD_NAME = "getValue";
@@ -76,6 +82,14 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
       // value generators bound in value generator factory
       valueGenerator = getBoundValueGenerator(params);
     }
+
+    // no value generator
+    if (valueGenerator == null) {
+      throw new ValueGeneratorException("No such value generator");
+    }
+
+    logger.debug("Invoking value generator: " + valueGenerator.getClass().getName() + "; with parameters: " + params + "; for property: " + property + "; for "
+        + count + " time(s)");
 
     Object[] values = new Object[count];
     for (int i = 0; i < count; i++) {
@@ -170,8 +184,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
       return customParams;
     }
     else {
-      throw new ValueGeneratorException("Incompatible custom parameters: " + customParamsType.getName() + " for value generator: "
-          + customValueGenerator.getName());
+      throw new ValueGeneratorException("Incompatible custom parameters: " + customParamsType.getName() + " for value generator: " + customValueGenerator.getName());
     }
   }
 
