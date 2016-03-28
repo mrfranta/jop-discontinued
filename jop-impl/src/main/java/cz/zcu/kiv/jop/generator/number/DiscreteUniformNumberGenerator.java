@@ -22,7 +22,7 @@ public class DiscreteUniformNumberGenerator extends AbstractValueGenerator<Integ
    * {@inheritDoc}
    */
   public Class<Integer> getValueType() {
-    return Integer.TYPE;
+    return Integer.class;
   }
 
   /**

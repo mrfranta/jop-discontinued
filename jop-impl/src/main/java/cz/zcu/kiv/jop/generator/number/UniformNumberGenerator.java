@@ -19,7 +19,7 @@ public class UniformNumberGenerator extends AbstractValueGenerator<Double, Unifo
    * {@inheritDoc}
    */
   public Class<Double> getValueType() {
-    return Double.TYPE;
+    return Double.class;
   }
 
   /**

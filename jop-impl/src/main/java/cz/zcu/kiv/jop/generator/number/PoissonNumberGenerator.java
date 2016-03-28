@@ -21,7 +21,7 @@ public class PoissonNumberGenerator extends AbstractValueGenerator<Integer, Pois
    * {@inheritDoc}
    */
   public Class<Integer> getValueType() {
-    return Integer.TYPE;
+    return Integer.class;
   }
 
   /**

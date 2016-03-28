@@ -21,7 +21,7 @@ public class BinomialNumberGenerator extends AbstractValueGenerator<Integer, Bin
    * {@inheritDoc}
    */
   public Class<Integer> getValueType() {
-    return Integer.TYPE;
+    return Integer.class;
   }
 
   /**

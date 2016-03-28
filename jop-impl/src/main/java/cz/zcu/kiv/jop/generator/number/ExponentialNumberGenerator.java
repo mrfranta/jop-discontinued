@@ -21,7 +21,7 @@ public class ExponentialNumberGenerator extends AbstractValueGenerator<Double, E
    * {@inheritDoc}
    */
   public Class<Double> getValueType() {
-    return Double.TYPE;
+    return Double.class;
   }
 
   /**

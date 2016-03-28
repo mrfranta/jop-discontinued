@@ -21,7 +21,7 @@ public class GaussianNumberGenerator extends AbstractValueGenerator<Double, Gaus
    * {@inheritDoc}
    */
   public Class<Double> getValueType() {
-    return Double.TYPE;
+    return Double.class;
   }
 
   /**
