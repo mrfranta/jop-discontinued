@@ -18,6 +18,7 @@ import cz.zcu.kiv.jop.annotation.generator.number.ExponentialGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.GaussianGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.PoissonGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.UniformGenerator;
+import cz.zcu.kiv.jop.annotation.generator.string.RandomString;
 import cz.zcu.kiv.jop.factory.AbstractBindingFactory;
 import cz.zcu.kiv.jop.factory.FactoryException;
 import cz.zcu.kiv.jop.factory.binding.BindingException;
@@ -33,6 +34,7 @@ import cz.zcu.kiv.jop.generator.number.ExponentialNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.GaussianNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.PoissonNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.UniformNumberGenerator;
+import cz.zcu.kiv.jop.generator.string.RandomStringGenerator;
 import cz.zcu.kiv.jop.util.AnnotationUtils;
 
 /**
@@ -98,6 +100,9 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
     bind(GaussianGenerator.class).to(GaussianNumberGenerator.class);
     bind(PoissonGenerator.class).to(PoissonNumberGenerator.class);
     bind(UniformGenerator.class).to(UniformNumberGenerator.class);
+
+    // string generators
+    bind(RandomString.class).to(RandomStringGenerator.class);
   }
 
   /**

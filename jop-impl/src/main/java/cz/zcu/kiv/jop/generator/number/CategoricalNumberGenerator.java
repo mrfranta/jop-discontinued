@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import cz.zcu.kiv.jop.annotation.generator.number.CategoricalGenerator;
 
 /**
- * Implementation of categorical class generator for annotation {@link CategoricalGenerator}.
+ * Implementation of categorical number generator for annotation {@link CategoricalGenerator}.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
