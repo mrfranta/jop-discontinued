@@ -10,18 +10,22 @@ import cz.zcu.kiv.jop.annotation.class_provider.RandomClassForName;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClass;
 import cz.zcu.kiv.jop.annotation.class_provider.TargetClassForName;
 import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
+import cz.zcu.kiv.jop.annotation.generator.bool.ConstantBoolean;
 import cz.zcu.kiv.jop.annotation.generator.bool.RandomBoolean;
 import cz.zcu.kiv.jop.annotation.generator.number.BinomialGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.CategoricalGenerator;
+import cz.zcu.kiv.jop.annotation.generator.number.ConstantGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.DiscreteUniformGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.ExponentialGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.GaussianGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.PoissonGenerator;
 import cz.zcu.kiv.jop.annotation.generator.number.UniformGenerator;
+import cz.zcu.kiv.jop.annotation.generator.string.ConstantString;
 import cz.zcu.kiv.jop.annotation.generator.string.RandomString;
 import cz.zcu.kiv.jop.factory.AbstractBindingFactory;
 import cz.zcu.kiv.jop.factory.FactoryException;
 import cz.zcu.kiv.jop.factory.binding.BindingException;
+import cz.zcu.kiv.jop.generator.bool.ConstantBooleanGenerator;
 import cz.zcu.kiv.jop.generator.bool.RandomBooleanGenerator;
 import cz.zcu.kiv.jop.generator.clazz.RandomClassForNameGenerator;
 import cz.zcu.kiv.jop.generator.clazz.RandomClassGenerator;
@@ -29,11 +33,13 @@ import cz.zcu.kiv.jop.generator.clazz.TargetClassForNameGenerator;
 import cz.zcu.kiv.jop.generator.clazz.TargetClassGenerator;
 import cz.zcu.kiv.jop.generator.number.BinomialNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.CategoricalNumberGenerator;
+import cz.zcu.kiv.jop.generator.number.ConstantNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.DiscreteUniformNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.ExponentialNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.GaussianNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.PoissonNumberGenerator;
 import cz.zcu.kiv.jop.generator.number.UniformNumberGenerator;
+import cz.zcu.kiv.jop.generator.string.ConstantStringGenerator;
 import cz.zcu.kiv.jop.generator.string.RandomStringGenerator;
 import cz.zcu.kiv.jop.util.AnnotationUtils;
 
@@ -84,6 +90,7 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
   @Override
   protected final void configure() throws BindingException {
     // boolean value generators
+    bind(ConstantBoolean.class).to(ConstantBooleanGenerator.class);
     bind(RandomBoolean.class).to(RandomBooleanGenerator.class);
 
     // class type generators
@@ -95,6 +102,7 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
     // number generators
     bind(BinomialGenerator.class).to(BinomialNumberGenerator.class);
     bind(CategoricalGenerator.class).to(CategoricalNumberGenerator.class);
+    bind(ConstantGenerator.class).to(ConstantNumberGenerator.class);
     bind(DiscreteUniformGenerator.class).to(DiscreteUniformNumberGenerator.class);
     bind(ExponentialGenerator.class).to(ExponentialNumberGenerator.class);
     bind(GaussianGenerator.class).to(GaussianNumberGenerator.class);
@@ -102,6 +110,7 @@ public class ValueGeneratorFactoryImpl extends AbstractBindingFactory<ValueGener
     bind(UniformGenerator.class).to(UniformNumberGenerator.class);
 
     // string generators
+    bind(ConstantString.class).to(ConstantStringGenerator.class);
     bind(RandomString.class).to(RandomStringGenerator.class);
   }
 
