@@ -1,8 +1,10 @@
 package cz.zcu.kiv.jop.annotation;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.util.AnnotationUtils;
 
@@ -12,8 +14,9 @@ import cz.zcu.kiv.jop.util.AnnotationUtils;
  * @author Mr.FrAnTA
  */
 @Documented
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Complex {
+public @interface ComplexAnnotation {
 
   // --- Defaults --------------------------------------------------------------
 

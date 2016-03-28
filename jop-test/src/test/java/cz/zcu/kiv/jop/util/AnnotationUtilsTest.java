@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import cz.zcu.kiv.jop.annotation.Bar;
-import cz.zcu.kiv.jop.annotation.Complex;
+import cz.zcu.kiv.jop.annotation.ComplexAnnotation;
 import cz.zcu.kiv.jop.annotation.Foo;
 import cz.zcu.kiv.jop.annotation.FooImpl;
 import cz.zcu.kiv.jop.annotation.Marker;
@@ -206,10 +206,10 @@ public class AnnotationUtilsTest {
 
   // ---- Test of method getAnnotationProxy ------------------------------------
 
-  @Complex
+  @ComplexAnnotation
   private int fieldWithDefaults;
 
-  @Complex(value = "null", bool = false, integers = {0, 1, 2}, strings = {})
+  @ComplexAnnotation(value = "null", bool = false, integers = {0, 1, 2}, strings = {})
   private int fieldWithCustoms;
 
   /**
@@ -251,8 +251,8 @@ public class AnnotationUtilsTest {
    */
   @Test
   public void testGetAnnotationProxyForDefaultValuesWithNullParams() {
-    Complex expected = getAnnotationInstance("fieldWithDefaults", Complex.class);
-    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, null);
+    ComplexAnnotation expected = getAnnotationInstance("fieldWithDefaults", ComplexAnnotation.class);
+    ComplexAnnotation annotation = AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, null);
 
     Assert.assertEquals(expected.value(), annotation.value());
     Assert.assertEquals(expected.bool(), annotation.bool());
@@ -268,8 +268,8 @@ public class AnnotationUtilsTest {
    */
   @Test
   public void testGetAnnotationProxyForDefaultValuesWithEmptyParams() {
-    Complex expected = getAnnotationInstance("fieldWithDefaults", Complex.class);
-    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, new HashMap<String, Object>());
+    ComplexAnnotation expected = getAnnotationInstance("fieldWithDefaults", ComplexAnnotation.class);
+    ComplexAnnotation annotation = AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, new HashMap<String, Object>());
 
     Assert.assertEquals(expected.value(), annotation.value());
     Assert.assertEquals(expected.bool(), annotation.bool());
@@ -291,8 +291,8 @@ public class AnnotationUtilsTest {
     params.put("integers", new int[] {0, 1, 2});
     params.put("strings", new String[0]);
 
-    Complex expected = getAnnotationInstance("fieldWithCustoms", Complex.class);
-    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    ComplexAnnotation expected = getAnnotationInstance("fieldWithCustoms", ComplexAnnotation.class);
+    ComplexAnnotation annotation = AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
 
     Assert.assertEquals(expected.value(), annotation.value());
     Assert.assertEquals(expected.bool(), annotation.bool());
@@ -314,8 +314,8 @@ public class AnnotationUtilsTest {
     params.put("integers", new Integer[] {0, 1, 2});
     params.put("strings", new String[0]);
 
-    Complex expected = getAnnotationInstance("fieldWithCustoms", Complex.class);
-    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    ComplexAnnotation expected = getAnnotationInstance("fieldWithCustoms", ComplexAnnotation.class);
+    ComplexAnnotation annotation = AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
 
     Assert.assertEquals(expected.value(), annotation.value());
     Assert.assertEquals(expected.bool(), annotation.bool());
@@ -333,7 +333,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotationProxyForMissingParameter() {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("value", null);
-    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
   }
 
   /**
@@ -344,7 +344,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotationProxyForIncompatibleParameter() {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("bool", 1);
-    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
   }
 
   /**
@@ -356,7 +356,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotationProxyForIncompatibleNotArrayParameter() {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("bool", new boolean[0]);
-    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
   }
 
   /**
@@ -368,7 +368,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotationProxyForIncompatibleArrayParameter() {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("integers", "value");
-    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
   }
 
   /**
@@ -380,7 +380,7 @@ public class AnnotationUtilsTest {
   public void testGetAnnotationProxyForIncompatibleArrayParameter2() {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("integers", new String[0]);
-    AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
   }
 
   /**
@@ -394,7 +394,7 @@ public class AnnotationUtilsTest {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("integers", integers);
 
-    Complex annotation = AnnotationUtils.getAnnotationProxy(Complex.class, params);
+    ComplexAnnotation annotation = AnnotationUtils.getAnnotationProxy(ComplexAnnotation.class, params);
 
     integers[1] = 4; // change one value
 
