@@ -23,8 +23,8 @@ public interface ClassProviderInvoker {
   public boolean isAnnotationPresent(Property<?> property);
 
   /**
-   * Analyzes annotations for given property and then choose the proper class provider. The chosen
-   * class provider is invoked and then result of invocation is returned.
+   * Analyzes annotations for given property and then choose the proper class provider for
+   * invocation. The chosen class provider is invoked and then result of invocation is returned.
    *
    * @param property the property for which will be invoked the proper class provider.
    * @return The result of class provider invocation.
@@ -33,9 +33,9 @@ public interface ClassProviderInvoker {
   public Class<?> get(Property<?> property) throws ClassProviderException;
 
   /**
-   * Analyzes annotations for given property and then choose the proper class provider. The chosen
-   * class provider is invoked multiple times (parameter <code>count</code>) and then array of
-   * invocation results is returned.
+   * Analyzes annotations for given property and then choose the proper class provider for
+   * invocation. The chosen class provider is invoked multiple times (parameter <code>count</code>)
+   * and then array of invocation results is returned.
    *
    * @param property the property for which will be invoked the proper class provider.
    * @param count the number of class provider invocations.

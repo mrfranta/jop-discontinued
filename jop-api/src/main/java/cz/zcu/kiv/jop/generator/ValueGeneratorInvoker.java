@@ -23,8 +23,8 @@ public interface ValueGeneratorInvoker {
   public boolean isAnnotationPresent(Property<?> property);
 
   /**
-   * Analyzes annotations for given property and then choose the proper value generator. The chosen
-   * value generator is invoked and then result of invocation is returned.
+   * Analyzes annotations for given property and then choose the proper value generator for
+   * invocation. The chosen value generator is invoked and then result of invocation is returned.
    *
    * @param property the property for which will be invoked the proper value generator.
    * @return The result of value generator invocation.
@@ -33,9 +33,9 @@ public interface ValueGeneratorInvoker {
   public Object getValue(Property<?> property) throws ValueGeneratorException;
 
   /**
-   * Analyzes annotations for given property and then choose the proper value generator. The chosen
-   * value generator is invoked multiple times (parameter <code>count</code>) and then array of
-   * invocation results is returned.
+   * Analyzes annotations for given property and then choose the proper value generator for
+   * invocation. The chosen value generator is invoked multiple times (parameter <code>count</code>)
+   * and then array of invocation results is returned.
    *
    * @param property the property for which will be invoked the proper value generator.
    * @param count the number of value generator invocations.

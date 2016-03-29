@@ -24,10 +24,10 @@ public interface InstanceMatcherInvoker {
   public boolean isAnnotationPresent(Property<?> property);
 
   /**
-   * Analyzes annotations for given property and then choose the proper instance matcher. Then a
-   * chosen instance matcher is used for finding matching object from all already populated
-   * (generated) objects stored in given <code>context</code>. If no matching object is found, the
-   * <code>null</code> value is expected.
+   * Analyzes annotations for given property and then choose the proper instance matcher for
+   * invocation. Then a chosen instance matcher is used for finding matching object from all already
+   * populated (generated) objects stored in given <code>context</code>. If no matching object is
+   * found, the <code>null</code> value is expected.
    *
    * @param property the property for which will be found and used proper instance matcher.
    * @return The matching object for given property or <code>null</code>
