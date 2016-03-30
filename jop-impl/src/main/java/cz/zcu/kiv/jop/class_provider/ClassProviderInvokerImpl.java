@@ -136,6 +136,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
    */
   protected Annotation getCustomClassProviderParams(Property<?> property, Class<?> customClassProvider, Class<?> customAnnotation) throws ClassProviderException {
     // empty parameters
+
     if (ReflectionUtils.getMethod(customClassProvider, INVOCABLE_METHOD_NAME, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);
     }
@@ -164,7 +165,7 @@ public class ClassProviderInvokerImpl implements ClassProviderInvoker {
         }
       }
 
-      // no matching parameters not found
+      // no matching parameters found
       if (customParams == null) {
         for (int i = 0; i < customParameters.length; i++) {
           if (ReflectionUtils.getMethod(customClassProvider, INVOCABLE_METHOD_NAME, customParameters[i].annotationType()) != null) {

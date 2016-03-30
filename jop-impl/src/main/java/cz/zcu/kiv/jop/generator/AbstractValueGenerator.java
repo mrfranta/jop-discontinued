@@ -88,9 +88,9 @@ public abstract class AbstractValueGenerator<T, P extends Annotation> implements
    * }
    * </pre>
    *
-   * @param params the parameters of random generator which will be checked.
-   * @return Given parameters of random generator.
-   * @throws ValueGeneratorException If given parameters of random generator are <code>null</code>.
+   * @param params the parameters of value generator which will be checked.
+   * @return Given parameters of value generator.
+   * @throws ValueGeneratorException If given parameters of value generator are <code>null</code>.
    */
   public static <P extends Annotation> P checkParamsNotNull(P params) throws ValueGeneratorException {
     if (params == null) {
@@ -101,9 +101,9 @@ public abstract class AbstractValueGenerator<T, P extends Annotation> implements
   }
 
   /**
-   * Check whatever the parameters of random generators meet given <code>condition</code> and if
+   * Check whatever the parameters of value generators meet given <code>condition</code> and if
    * not, the {@link ValueGeneratorException} is thrown. This method is useful for single-line
-   * checking of random generator parameters. This method can be used in this way:
+   * checking of value generator parameters. This method can be used in this way:
    *
    * <pre>
    * public Integer getValue(RandomAge params) throws ValueGeneratorException {
@@ -125,9 +125,9 @@ public abstract class AbstractValueGenerator<T, P extends Annotation> implements
   }
 
   /**
-   * Check whatever the parameters of random generators meet given <code>condition</code> and if
+   * Check whatever the parameters of value generators meet given <code>condition</code> and if
    * not, the {@link ValueGeneratorException} with given error message is thrown. This method is
-   * useful for single-line checking of random generator parameters. This method can be used in this
+   * useful for single-line checking of value generator parameters. This method can be used in this
    * way:
    *
    * <pre>
@@ -152,9 +152,9 @@ public abstract class AbstractValueGenerator<T, P extends Annotation> implements
   }
 
   /**
-   * Check whatever the parameters of random generators meet given <code>condition</code> and if
+   * Check whatever the parameters of value generators meet given <code>condition</code> and if
    * not, the {@link ValueGeneratorException} with given formatted error message is thrown. This
-   * method is useful for single-line checking of random generator parameters. This method can be
+   * method is useful for single-line checking of value generator parameters. This method can be
    * used in this way:
    *
    * <pre>

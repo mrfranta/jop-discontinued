@@ -78,7 +78,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
       throw new InstanceMatcherException("No such instance matcher");
     }
 
-    logger.debug("Invoking class provider: " + instanceMatcher.getClass().getName() + "; with parameters: " + params + "; for property: " + property);
+    logger.debug("Invoking instance matcher: " + instanceMatcher.getClass().getName() + "; with parameters: " + params + "; for property: " + property);
 
     for (Object obj : context.getPopulatedInstances()) {
       if (!instanceMatcher.supports(obj.getClass())) {
@@ -130,6 +130,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
    */
   protected Annotation getCustomInstanceMatcherParams(Property<?> property, Class<?> customInstanceMatcher, Class<?> customAnnotation) throws InstanceMatcherException {
     // empty parameters
+
     if (ReflectionUtils.getMethod(customInstanceMatcher, INVOCABLE_METHOD_NAME, Object.class, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);
     }
@@ -158,7 +159,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
         }
       }
 
-      // no matching parameters not found
+      // no matching parameters found
       if (customParams == null) {
         for (int i = 0; i < customParameters.length; i++) {
           if (ReflectionUtils.getMethod(customInstanceMatcher, INVOCABLE_METHOD_NAME, Object.class, customParameters[i].annotationType()) != null) {

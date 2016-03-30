@@ -49,12 +49,13 @@ public class PopulatingStrategyInvokerImpl implements PopulatingStrategyInvoker 
 
     Annotation[] annotations = AnnotationUtils.getAnnotatedAnnotations(property, PopulatingStrategyAnnotation.class);
     if (annotations == null || annotations.length == 0) {
-      if (!defaultPopulatingStrategy.supports(property)) {
-        logger.warn("Default strategy " + defaultPopulatingStrategy.getClass().getName() + " doesn't support property (it will be skipped): " + property);
+      String strategyClassName = defaultPopulatingStrategy.getClass().getName();
+      if (defaultPopulatingStrategy.supports(property)) {
+        logger.debug("Invoking default populating strategy: " + strategyClassName + "; for property: " + property);
+        defaultPopulatingStrategy.applyStrategy(property, context);
       }
       else {
-        logger.debug("Invoking default populating strategy: " + defaultPopulatingStrategy.getClass().getName() + "; for property: " + property);
-        defaultPopulatingStrategy.applyStrategy(property, context);
+        logger.warn("Default strategy " + strategyClassName + " doesn't support property (it will be skipped): " + property);
       }
       return; // default strategy applied
     }

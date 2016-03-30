@@ -136,6 +136,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
    */
   protected Annotation getCustomValueGeneratorParams(Property<?> property, Class<?> customValueGenerator, Class<?> customAnnotation) throws ValueGeneratorException {
     // empty parameters
+
     if (ReflectionUtils.getMethod(customValueGenerator, INVOCABLE_METHOD_NAME, EmptyParameters.class) != null) {
       return AnnotationUtils.getAnnotationProxy(EmptyParameters.class, null);
     }
@@ -164,7 +165,7 @@ public class ValueGeneratorInvokerImpl implements ValueGeneratorInvoker {
         }
       }
 
-      // no matching parameters not found
+      // no matching parameters found
       if (customParams == null) {
         for (int i = 0; i < customParameters.length; i++) {
           if (ReflectionUtils.getMethod(customValueGenerator, INVOCABLE_METHOD_NAME, customParameters[i].annotationType()) != null) {
