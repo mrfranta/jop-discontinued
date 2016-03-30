@@ -27,8 +27,12 @@ import cz.zcu.kiv.jop.session.ClassLoaderSessionImpl;
 import cz.zcu.kiv.jop.session.ExtendedRandomGeneratorSessionImpl;
 import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSessionImpl;
+import cz.zcu.kiv.jop.strategy.DefaultStrategy;
+import cz.zcu.kiv.jop.strategy.PopulatingStrategy;
 import cz.zcu.kiv.jop.strategy.PopulatingStrategyFactory;
 import cz.zcu.kiv.jop.strategy.PopulatingStrategyFactoryImpl;
+import cz.zcu.kiv.jop.strategy.PopulatingStrategyInvoker;
+import cz.zcu.kiv.jop.strategy.PopulatingStrategyInvokerImpl;
 import cz.zcu.kiv.jop.util.Preconditions;
 
 /**
@@ -57,11 +61,15 @@ public final class CoreModule extends AbstractModule {
     bind(ClassProviderInvoker.class).to(ClassProviderInvokerImpl.class);
     bind(ValueGeneratorInvoker.class).to(ValueGeneratorInvokerImpl.class);
     bind(InstanceMatcherInvoker.class).to(InstanceMatcherInvokerImpl.class);
+    bind(PopulatingStrategyInvoker.class).to(PopulatingStrategyInvokerImpl.class);
 
     // binding of sessions
     bind(ClassLoaderSession.class).to(ClassLoaderSessionImpl.class);
     bind(RandomGeneratorSession.class).to(RandomGeneratorSessionImpl.class);
     bind(RandomGeneratorSession.class).annotatedWith(Names.named(NamedScopes.EXTENDED_IMPL)).to(ExtendedRandomGeneratorSessionImpl.class);
+
+    // binding of named implementations
+    bind(PopulatingStrategy.class).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultStrategy.class);
 
     // bind listener of classes implementing callback interfaces.
     bindListener(new SubclassesMatcher(Initializable.class), new TypeListener() {
