@@ -1,5 +1,11 @@
 package cz.zcu.kiv.jop.annotation.populator;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 import cz.zcu.kiv.jop.annotation.defaults.DefaultCharSequence;
 
 /**
@@ -11,6 +17,10 @@ import cz.zcu.kiv.jop.annotation.defaults.DefaultCharSequence;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
+@PropertyPopulatorAnnotation
+@Documented
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface StringValue {
 
   /**

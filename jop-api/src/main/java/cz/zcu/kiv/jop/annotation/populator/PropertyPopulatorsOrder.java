@@ -36,6 +36,14 @@ import java.lang.annotation.Target;
  * &#64;PopulatorOrder({ArrayValue.class, StringValue.class});
  * String[] identifiers;
  * </pre>
+ * <p>
+ * Also this annotations specifies which property populators will be used for annotated property. If
+ * some property annotated by this annotation is also annotated by 3 annotations for property
+ * populator and the order contains only 1 annotation, the remaining two annotations will be ignored
+ * (won't be used). On another hand this annotation should not ordering more annotations than
+ * property owns.
+ * <p>
+ * This annotation also shouldn't contains another than property populator annotations.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0

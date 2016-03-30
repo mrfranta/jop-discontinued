@@ -25,7 +25,7 @@ import cz.zcu.kiv.jop.annotation.defaults.DefaultCollection;
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ColllectionValue {
+public @interface CollectionValue {
 
   /**
    * Optional parameter for minimal size of populated collection property. Value of minimum has to

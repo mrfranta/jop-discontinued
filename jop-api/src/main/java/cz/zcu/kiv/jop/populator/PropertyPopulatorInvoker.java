@@ -4,11 +4,14 @@ import cz.zcu.kiv.jop.property.Property;
 
 /**
  * Interface which serves as interlayer between the property populators and another parts of this
- * library (including between chained property populators).
+ * library (including chained property populators).
  * <p>
  * Implementation of the {@link #populate} method should analyze the annotations of given property
- * and then should choose and invoke some property populator which populates the value of given
- * property.
+ * and then choose and invoke some property populator which populates the value of given property.
+ * <p>
+ * Implementation of the {@link #invokeNextPopulator} method should analyze the annotations of given
+ * property and then choose and invoke next (chained) property populator and then return the value
+ * of invocation.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
