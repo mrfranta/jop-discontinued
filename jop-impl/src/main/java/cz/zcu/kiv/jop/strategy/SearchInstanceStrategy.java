@@ -70,6 +70,14 @@ public class SearchInstanceStrategy implements PopulatingStrategy {
   public void applyStrategy(Property<?> property, PopulatingContext context) throws PopulatingStrategyException {
     logger.debug("Applying " + getStrategyName() + " to property: " + property);
 
+    if (property == null) {
+      throw new PopulatingStrategyException("Property cannot be null");
+    }
+
+    if (context == null) {
+      throw new PopulatingStrategyException("Populating context cannot be null");
+    }
+
     Object instance = null;
     if (instanceMatcherInvoker.isAnnotationPresent(property)) {
       // use the instance matcher invoker

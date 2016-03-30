@@ -58,6 +58,14 @@ public class NullValueStrategy implements PopulatingStrategy {
   public void applyStrategy(Property<?> property, PopulatingContext context) throws PopulatingStrategyException {
     logger.debug("Applying " + getStrategyName() + " to property: " + property);
 
+    if (property == null) {
+      throw new PopulatingStrategyException("Property cannot be null");
+    }
+
+    if (context == null) {
+      throw new PopulatingStrategyException("Populating context cannot be null");
+    }
+
     try {
       Class<?> propertyType = property.getType();
       Setter<Object> setter = (Setter<Object>)property.getSetter();
