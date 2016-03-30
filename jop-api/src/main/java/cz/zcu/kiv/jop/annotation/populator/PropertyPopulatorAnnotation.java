@@ -21,6 +21,6 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PopulatorAnnotation {
+public @interface PropertyPopulatorAnnotation {
 
 }

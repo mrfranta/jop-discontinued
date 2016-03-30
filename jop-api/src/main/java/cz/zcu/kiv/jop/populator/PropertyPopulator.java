@@ -18,23 +18,13 @@ import cz.zcu.kiv.jop.property.Property;
 public interface PropertyPopulator<P extends Annotation> {
 
   /**
-   * Returns information whether property populator can {@link #populate} property of the given
-   * {@code clazz}.
-   * <p>
-   * This method is <i>typically</i> implemented like so:
+   * Returns information whether property populator can {@link #populate} given property.
    *
-   * <pre class="code">
-   * return Foo.class.isAssignableFrom(clazz);
-   * </pre>
-   *
-   * Where {@code Foo} is the class (or superclass) of the actual object instance that is to be
-   * checked.
-   *
-   * @param clazz the the class type to check.
-   * @return <code>true</code> if property populator can {@link #populate} property of the given
-   *         class type; <code>false</code> otherwise.
+   * @param property the property to check.
+   * @return <code>true</code> if property populator can {@link #populate} given property;
+   *         <code>false</code> otherwise.
    */
-  public boolean supports(Class<?> clazz);
+  public boolean supports(Property<?> property);
 
   /**
    * Populates given property according to given parameters. Populator can use additional

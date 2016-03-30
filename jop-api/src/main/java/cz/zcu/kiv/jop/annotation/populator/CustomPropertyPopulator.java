@@ -20,11 +20,11 @@ import cz.zcu.kiv.jop.populator.PropertyPopulator;
  * @since 1.0.0
  */
 @CustomAnnotation
-@PopulatorAnnotation
+@PropertyPopulatorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CustomPopulator {
+public @interface CustomPropertyPopulator {
 
   /**
    * Required parameter for class type of property populator which populates annotated property.

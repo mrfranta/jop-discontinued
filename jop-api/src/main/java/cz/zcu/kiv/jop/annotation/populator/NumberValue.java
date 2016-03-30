@@ -16,7 +16,7 @@ import cz.zcu.kiv.jop.annotation.defaults.DefaultNumber;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-@PopulatorAnnotation
+@PropertyPopulatorAnnotation
 @Documented
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

@@ -11,7 +11,7 @@ import cz.zcu.kiv.jop.annotation.defaults.DefaultCharSequence;
  * @author Mr.FrAnTA
  * @since 1.0.0
  */
-public @interface CharSequencePopulator {
+public @interface StringValue {
 
   /**
    * Optional parameter for minimal length of populated string (character sequence) property. Value
