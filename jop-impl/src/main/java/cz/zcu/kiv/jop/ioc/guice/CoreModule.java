@@ -22,6 +22,8 @@ import cz.zcu.kiv.jop.matcher.InstanceMatcherFactory;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherFactoryImpl;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherInvoker;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherInvokerImpl;
+import cz.zcu.kiv.jop.populator.PropertyPopulatorInvoker;
+import cz.zcu.kiv.jop.populator.PropertyPopulatorInvokerImpl;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
 import cz.zcu.kiv.jop.session.ClassLoaderSessionImpl;
 import cz.zcu.kiv.jop.session.ExtendedRandomGeneratorSessionImpl;
@@ -61,6 +63,7 @@ public final class CoreModule extends AbstractModule {
     bind(ClassProviderInvoker.class).to(ClassProviderInvokerImpl.class);
     bind(ValueGeneratorInvoker.class).to(ValueGeneratorInvokerImpl.class);
     bind(InstanceMatcherInvoker.class).to(InstanceMatcherInvokerImpl.class);
+    bind(PropertyPopulatorInvoker.class).to(PropertyPopulatorInvokerImpl.class);
     bind(PopulatingStrategyInvoker.class).to(PopulatingStrategyInvokerImpl.class);
 
     // binding of sessions
