@@ -22,6 +22,10 @@ import cz.zcu.kiv.jop.matcher.InstanceMatcherFactory;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherFactoryImpl;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherInvoker;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherInvokerImpl;
+import cz.zcu.kiv.jop.populator.DefaultPropertyPopulator;
+import cz.zcu.kiv.jop.populator.PropertyPopulator;
+import cz.zcu.kiv.jop.populator.PropertyPopulatorFactory;
+import cz.zcu.kiv.jop.populator.PropertyPopulatorFactoryImpl;
 import cz.zcu.kiv.jop.populator.PropertyPopulatorInvoker;
 import cz.zcu.kiv.jop.populator.PropertyPopulatorInvokerImpl;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
@@ -57,6 +61,7 @@ public final class CoreModule extends AbstractModule {
     bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
     bind(ValueGeneratorFactory.class).to(ValueGeneratorFactoryImpl.class);
     bind(InstanceMatcherFactory.class).to(InstanceMatcherFactoryImpl.class);
+    bind(PropertyPopulatorFactory.class).to(PropertyPopulatorFactoryImpl.class);
     bind(PopulatingStrategyFactory.class).to(PopulatingStrategyFactoryImpl.class);
 
     // binding of interlayers
@@ -72,6 +77,7 @@ public final class CoreModule extends AbstractModule {
     bind(RandomGeneratorSession.class).annotatedWith(Names.named(NamedScopes.EXTENDED_IMPL)).to(ExtendedRandomGeneratorSessionImpl.class);
 
     // binding of named implementations
+    bind(new TypeLiteral<PropertyPopulator<?>>() {}).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultPropertyPopulator.class);
     bind(PopulatingStrategy.class).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultStrategy.class);
 
     // bind listener of classes implementing callback interfaces.

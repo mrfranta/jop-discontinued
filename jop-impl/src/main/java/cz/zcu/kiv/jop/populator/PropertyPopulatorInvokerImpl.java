@@ -73,7 +73,7 @@ public class PropertyPopulatorInvokerImpl implements PropertyPopulatorInvoker {
     List<Annotation> annotations = getOrderedAnnotations(property);
     if (annotations == null || annotations.isEmpty()) {
       String populatorClassName = defaultPropertyPopulator.getClass().getName();
-      if (!defaultPropertyPopulator.supports(property)) {
+      if (defaultPropertyPopulator.supports(property)) {
         logger.debug("Invoking default property populator: " + populatorClassName + "; for property: " + property);
         defaultPropertyPopulator.populate(property, owner, null); // no parameters
       }
