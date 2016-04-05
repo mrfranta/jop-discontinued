@@ -1,7 +1,7 @@
 package cz.zcu.kiv.jop.annotation.class_provider;
 
 /**
- * This interface contains constants for default three types of class loaders which may be for
+ * This interface contains constants for default three types of class loaders which may be used for
  * loading of classes. These constants may be used in annotations {@link TargetClassForName} or
  * {@link RandomClassForName} in parameter <code>classLoader</code>.
  *

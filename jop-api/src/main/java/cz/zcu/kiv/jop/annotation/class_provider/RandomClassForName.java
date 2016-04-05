@@ -11,10 +11,9 @@ import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 /**
  * Class provider annotation which will select random class name which will be searched in
  * <em>classpath</em> and which may be used for new instance creation. For selection of random class
- * will be used <em>Categorical
- * distribution</em> - it will be used one of {@link #value() values} based on specified
- * {@link #probabilities() probabilities}. This annotation is very similar to {@link RandomClass}
- * annotation.
+ * will be used <em>Categorical distribution</em> - it will be used one of {@link #value() values}
+ * based on specified {@link #probabilities() probabilities}. This annotation is very similar to
+ * {@link RandomClass} annotation.
  * <p>
  * This annotation can be also used as generator annotation which marks property for which will be
  * generated of class (<code>Class&lt;?&gt;</code>) value.
