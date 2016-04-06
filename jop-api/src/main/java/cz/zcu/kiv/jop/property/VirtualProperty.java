@@ -9,6 +9,7 @@ import java.util.Map;
 
 import cz.zcu.kiv.jop.util.Defaults;
 import cz.zcu.kiv.jop.util.Preconditions;
+import cz.zcu.kiv.jop.util.PrimitiveUtils;
 
 /**
  * Implementation of virtual property which has no declaring class (no owner) and holds only some
@@ -352,10 +353,12 @@ public class VirtualProperty<T> implements Property<T> {
     @SuppressWarnings("unchecked")
     public void set(Object owner, T value) throws PropertyAccessException {
       if (value != null) {
-        if (!getType().isAssignableFrom(value.getClass())) {
+        if (propertyType.isAssignableFrom(value.getClass()) || (propertyType.isPrimitive() && PrimitiveUtils.unwrap(value.getClass()) == propertyType)) {
+          property = value;
+        }
+        else {
           throw new PropertyAccessException("Given incorrect value type for", null, "virtual property '" + propertyName + "'", true);
         }
-        property = value;
       }
       else {
         property = (T)Defaults.getDefaultValue(getType());

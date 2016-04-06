@@ -100,7 +100,15 @@ public class PropertyPopulatorInvokerImpl implements PropertyPopulatorInvoker {
       throw new PropertyPopulatorException("No such property populator");
     }
 
-    logger.debug("Invoking property populator: " + propertyPopulator.getClass().getName() + "; with parameters: " + params + "; for property: " + property);
+    // class name of property populator
+    String populatorClassName = propertyPopulator.getClass().getName();
+
+    // check whatever the populator supports the given property
+    if (!propertyPopulator.supports(property)) {
+      throw new PropertyPopulatorException("Property populator " + populatorClassName + " doesn't support property: " + property);
+    }
+
+    logger.debug("Invoking property populator: " + populatorClassName + "; with parameters: " + params + "; for property: " + property);
 
     propertyPopulator.populate(property, owner, params);
   }
@@ -228,6 +236,22 @@ public class PropertyPopulatorInvokerImpl implements PropertyPopulatorInvoker {
 
     // remove actual property populator annotation
     propertyAnnotations.remove(0);
+
+    // add rest of annotations
+    Annotation[] annotations = property.getAnnotations();
+    for (Annotation annotation : annotations) {
+      // do not add annotations for property populators
+      if (AnnotationUtils.isAnnotatedAnnotation(annotation, PropertyPopulatorAnnotation.class)) {
+        continue;
+      }
+
+      // do not add annotation for populators order
+      if (annotation.annotationType() == PropertyPopulatorsOrder.class) {
+        continue;
+      }
+
+      propertyAnnotations.add(annotation);
+    }
 
     // prepare virtual property
     VirtualProperty<T> virtualProperty = new VirtualProperty<T>(property.getName(), targetClassType, propertyAnnotations);
