@@ -36,20 +36,49 @@ import cz.zcu.kiv.jop.property.Property;
  */
 public class JopBean extends AbstractBean {
 
+  /**
+   * Instance of object for which was created this bean descriptor. The field is not final because
+   * the instance may be "injected" by reflection.
+   */
+  private final Object instance;
   /** Parent of this bean. */
   protected final Bean parent;
   /** Declared properties of this bean. */
   protected final Map<String, Property<?>> properties;
 
   /**
-   * Construct a new bean for given class type.
+   * Construct a new bean for given class type. This constructor should be used only for creation of
+   * bean descriptor for lazy "injected" instance or for creation of skeleton descriptor.
    *
    * @param beanType the class type of bean.
    * @throws BeanException If given class type is not valid.
    */
-  public JopBean(Class<?> beanType) {
-    super(beanType);
+  protected JopBean(Class<?> beanType) {
+    this(null, beanType);
+  }
 
+  /**
+   * Constructs a new bean for given object (instance).
+   *
+   * @param instance the object for which will be created bean descriptor.
+   * @throws BeanException If given class type is not valid.
+   */
+  public JopBean(Object instance) {
+    this(instance, instance.getClass());
+  }
+
+  /**
+   * Constructs a new bean for given object (instance) and specific class type. This constructor
+   * should be used only for creation of parent beans.
+   *
+   * @param instance the object for which will be created bean descriptor.
+   * @param classType the specific class type for this bean descriptor.
+   * @throws BeanException If given class type is not valid.
+   */
+  protected JopBean(Object instance, Class<?> classType) {
+    super(classType);
+
+    this.instance = instance;
     parent = createParent();
     properties = createProperties();
   }
@@ -117,7 +146,7 @@ public class JopBean extends AbstractBean {
   protected Bean createParent() {
     Class<?> parentClass = getType().getSuperclass();
     if (parentClass != null && parentClass != Object.class) {
-      return new JopBean(parentClass);
+      return new JopBean(getInstance(), parentClass);
     }
 
     return null;
@@ -204,4 +233,29 @@ public class JopBean extends AbstractBean {
     return new ArrayList<Property<?>>(properties.values());
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Object getInstance() {
+    return instance;
+  }
+
+  /**
+   * Returns information whether the given class type is supported (valid) for this implementation
+   * of bean descriptor.
+   *
+   * @param clazz the class type to check.
+   * @return <code>true</code> if given class type is supported (valid); <code>false</code>
+   *         otherwise.
+   */
+  public static boolean isSupportedClassType(Class<?> clazz) {
+    try {
+      checkClassType(clazz);
+    }
+    catch (BeanException exc) {
+      return false;
+    }
+
+    return true;
+  }
 }

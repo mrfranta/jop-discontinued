@@ -34,39 +34,11 @@ public abstract class AbstractBean implements Bean {
   public AbstractBean(Class<?> beanType) {
     checkClassType(beanType);
 
-    this.beanType = beanType;
-  }
-
-  /**
-   * Checks the given class type whatever is valid for bean.
-   *
-   * @param clazz the class type to check.
-   */
-  protected void checkClassType(Class<?> clazz) {
-    if (clazz == null) {
-      throw new BeanException("Class type of bean cannot be null");
-    }
-    else if (clazz.isInterface()) {
-      throw new BeanException("Class type of bean cannot be interface");
-    }
-    else if (clazz.isAnnotation()) {
-      throw new BeanException("Class type of bean cannot be annotation");
-    }
-    else if (clazz.isArray()) {
-      throw new BeanException("Class type of bean cannot be array");
-    }
-    else if (clazz.isEnum()) {
-      throw new BeanException("Class type of bean cannot be enumeration");
-    }
-    else if (clazz.isPrimitive()) {
-      throw new BeanException("Class type of bean cannot be primitive");
-    }
-    else if (clazz.isSynthetic()) {
-      throw new BeanException("Class type of bean cannot be synthetic");
-    }
-    else if (clazz == Object.class) {
+    if (beanType == Object.class) {
       logger.warn("Class type of bean is Object which has no properties");
     }
+
+    this.beanType = beanType;
   }
 
   /**
@@ -159,6 +131,35 @@ public abstract class AbstractBean implements Bean {
   @Override
   public String toString() {
     return getClass().getName() + " [beanType=" + (getType() != null ? getType().getName() : null) + "]";
+  }
+
+  /**
+   * Checks the given class type whatever is valid for bean.
+   *
+   * @param clazz the class type to check.
+   */
+  protected static void checkClassType(Class<?> clazz) {
+    if (clazz == null) {
+      throw new BeanException("Class type of bean cannot be null");
+    }
+    else if (clazz.isInterface()) {
+      throw new BeanException("Class type of bean cannot be interface");
+    }
+    else if (clazz.isAnnotation()) {
+      throw new BeanException("Class type of bean cannot be annotation");
+    }
+    else if (clazz.isArray()) {
+      throw new BeanException("Class type of bean cannot be array");
+    }
+    else if (clazz.isEnum()) {
+      throw new BeanException("Class type of bean cannot be enumeration");
+    }
+    else if (clazz.isPrimitive()) {
+      throw new BeanException("Class type of bean cannot be primitive");
+    }
+    else if (clazz.isSynthetic()) {
+      throw new BeanException("Class type of bean cannot be synthetic");
+    }
   }
 
 }

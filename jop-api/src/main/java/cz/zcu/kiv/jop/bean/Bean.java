@@ -116,4 +116,11 @@ public interface Bean extends AnnotatedElement {
    */
   public List<Property<?>> getDeclaredProperties();
 
+  /**
+   * Returns instance of object for which was created this bean. It may return <code>null</code> for
+   * bean descriptors which was created only for bean class type.
+   *
+   * @return Instance of this bean which may be <code>null</code>.
+   */
+  public Object getInstance();
 }
