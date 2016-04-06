@@ -60,14 +60,19 @@ public class VirtualProperty<T> implements Property<T> {
    * @param propertyName the property name.
    * @param propertyType the property class type.
    */
+  @SuppressWarnings("unchecked")
   public VirtualProperty(String propertyName, Class<T> propertyType) {
     this.propertyName = Preconditions.checkArgumentNotNull(propertyName, "Name of property cannot be null");
     this.propertyType = Preconditions.checkArgumentNotNull(propertyType, "Declared type of property cannot be null");
+
+    // prepares default value of property
+    this.property = (T)Defaults.getDefaultValue(propertyType);
 
     this.annotations = new LinkedHashMap<Class<? extends Annotation>, Annotation>();
     this.declaredAnnotations = new LinkedHashMap<Class<? extends Annotation>, Annotation>();
 
     this.access = new VirtualPropertyAccess();
+
   }
 
   /**
