@@ -12,7 +12,7 @@ import cz.zcu.kiv.jop.matcher.InstanceMatcher;
 /**
  * Objects (instances) matcher annotation which determines the specific instance of
  * {@link InstanceMatcher matcher} which decides which already generated object (instance) can be
- * set into populated field. The parameters for given instance matcher may be set in separated
+ * set into annotated field. The parameters for given instance matcher may be set in separated
  * annotation for property.
  *
  * @see InstanceMatcher

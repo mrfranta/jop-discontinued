@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation "remaps" variable (field) name for evaluation of {@link Expression Expressions}.
+ * This annotation "re-maps" variable (field) name for evaluation of {@link Expression Expressions}.
  * If this annotation is not used, the name of field is used as variable name.
  *
  * @author Mr.FrAnTA

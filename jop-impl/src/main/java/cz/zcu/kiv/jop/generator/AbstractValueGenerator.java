@@ -131,11 +131,12 @@ public abstract class AbstractValueGenerator<T, P extends Annotation> implements
    * way:
    *
    * <pre>
-   * public void setAge(int age) {
+   * public Integer getValue(RandomAge params) throws ValueGeneratorException {
    *   checkParams(params.minAge() &gt; 0, &quot;Minimal age is too low&quot;); // minimal possible age
    *   checkParams(params.maxAge() &lt;= 130, &quot;Maximal age is too high&quot;); // maximal possible age
    *
    *   Random rand = getRandomGenerator(params);
+   *
    *   return params.minAge() + rand.nextInt(params.maxAge() - params.minAge() + 1);
    * }
    * </pre>
