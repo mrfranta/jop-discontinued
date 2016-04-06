@@ -11,7 +11,7 @@ import cz.zcu.kiv.jop.annotation.generator.ValueGeneratorAnnotation;
 /**
  * This annotation marks property for which will be generated random string value with
  * <em>Categorical distribution</em> - as value of property will be used one of value from
- * {@link #values() values} based on their {@link #probabilities() probabilities}.
+ * {@link #value() values} based on their {@link #probabilities() probabilities}.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
@@ -26,7 +26,7 @@ public @interface RandomString {
    * Required parameter for outcome values of generator where each value has a probability of
    * occurrence in parameter {@link #probabilities() probabilities} on same index like value.
    */
-  public String[] values();
+  public String[] value();
 
   /**
    * Optional parameter for probabilities of outcome values. If the probabilities won't be set the
