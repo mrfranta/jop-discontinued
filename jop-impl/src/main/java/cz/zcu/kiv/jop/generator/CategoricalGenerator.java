@@ -119,19 +119,21 @@ public abstract class CategoricalGenerator<T, P extends Annotation> extends Abst
   }
 
   /**
-   * {@inheritDoc}
+   * Returns generated value with categorical distribution according to given parameters.
    * <p>
    * This method uses reflection to read required values from parameters and then returns one value
    * with categorical distribution. The values has to be stored in annotation parameter
    * <code>value()</code> or <code>values()</code>. Probabilities has to be stored in annotation
    * parameter <code>probabilities()</code> which has to return array of floats or doubles.
    *
+   * @param params the parameters for generation of value.
+   * @return Generated value.
    * @throws ValueGeneratorException If given annotations are <code>null</code>, if the annotation
    *           doesn't contain required parameters or the parameters doesn't contain the correct
    *           values (if the <code>value()</code> contains no values, if probabilities are not
    *           array of floats or doubles).
    */
-  public T getValue(P params) throws ValueGeneratorException {
+  protected T getRandomValue(P params) throws ValueGeneratorException {
     checkParamsNotNull(params); // check not null
 
     T[] values = getValues(params);
