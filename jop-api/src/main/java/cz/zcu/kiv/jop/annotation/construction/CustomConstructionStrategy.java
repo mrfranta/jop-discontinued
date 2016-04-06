@@ -18,7 +18,7 @@ import cz.zcu.kiv.jop.construction.ConstructionStrategy;
  * @since 1.0.0
  */
 @Documented
-@Target(ElementType.PARAMETER)
+@Target({ElementType.PARAMETER, ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CustomConstructionStrategy {
 
