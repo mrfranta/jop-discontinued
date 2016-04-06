@@ -43,12 +43,23 @@ public abstract class ClassLoaderUtils {
   }
 
   /**
+   * Returns class loader of class type which called this method.
+   *
+   * @return Caller's class loader.
+   */
+  public static ClassLoader getCallerClassLoader() {
+    Class<?> caller = getCallerClass(0);
+
+    return caller.getClassLoader();
+  }
+
+  /**
    * This method selects the "best" class loader instance to be used for class/resource loading by
    * whoever calls this method. The decision typically involves choosing between the caller's
    * current, thread context, system, and other classloaders in the JVM and is made by the
    * {@link ClassLoaderProvider} instance established by the last call to {@link #setStrategy}.
    *
-   * @return classloader to be used by the caller ['null' indicates the primordial loader]
+   * @return Class loader to be used by the caller ['null' indicates the primordial loader].
    */
   public static synchronized ClassLoader getClassLoader() {
     Class<?> caller = getCallerClass(0);
@@ -62,6 +73,7 @@ public abstract class ClassLoaderUtils {
    *
    * @param callerOffset extra call context depth offset to pass into method
    *          {@link #getCallerClass(int)}.
+   * @return Class loader to be used by the caller ['null' indicates the primordial loader].
    */
   static synchronized ClassLoader getClassLoader(int callerOffset) {
     Class<?> caller = getCallerClass(callerOffset);
@@ -73,6 +85,7 @@ public abstract class ClassLoaderUtils {
    * Returns class type which called this method.
    *
    * @param callerOffset the extra call context depth offset to pass into this method.
+   * @return Class type which called this method.
    */
   static Class<?> getCallerClass(int callerOffset) {
     if (CALLER_RESOLVER == null) {

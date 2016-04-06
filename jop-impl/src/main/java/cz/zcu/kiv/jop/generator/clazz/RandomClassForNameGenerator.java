@@ -64,7 +64,7 @@ public class RandomClassForNameGenerator extends AbstractValueGenerator<Class<?>
     // class loaders
     ClassLoader classLoader = null;
     if (ClassLoaderConst.CALLER.equalsIgnoreCase(classLoaderName)) {
-      classLoader = ClassLoaderUtils.getClassLoader(); // default for caller
+      classLoader = ClassLoaderUtils.getCallerClassLoader(); // default for caller
     }
     else if (ClassLoaderConst.CONTEXT.equalsIgnoreCase(classLoaderName)) {
       classLoader = Thread.currentThread().getContextClassLoader();
@@ -75,8 +75,8 @@ public class RandomClassForNameGenerator extends AbstractValueGenerator<Class<?>
     else {
       classLoader = classLoaderSession.getClassLoader(classLoaderName);
       if (classLoader == null) {
-        logger.warn("No class loader found for name '" + classLoaderName + "', it will be used called class loader.");
-        classLoader = ClassLoaderUtils.getClassLoader(); // default for caller
+        logger.warn("No class loader found for name '" + classLoaderName + "', it will be used best matching class loader.");
+        classLoader = ClassLoaderUtils.getClassLoader(); // the best matching
       }
     }
 
