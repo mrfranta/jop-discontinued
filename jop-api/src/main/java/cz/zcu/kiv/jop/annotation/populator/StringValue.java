@@ -25,36 +25,45 @@ public @interface StringValue {
 
   /**
    * Optional parameter for minimal length of populated string (character sequence) property. Value
-   * of minimum has to be lesser than or equals to {@link #maxLength() maximum} and has to be
+   * of minimum has to be lesser than or equals to {@link #maxLength() maximal length} and has to be
    * greater than or equals to 0. The default value is 0.
    * <p>
-   * In case that populated value has lesser length than minimal length the value will be extended
-   * by spaces.
+   * In case that populated value has lesser length than minimal length the value will be expanded
+   * by by character from {@link #fill()} parameter.
    */
   public int minLength() default 0;
 
   /**
    * Optional parameter for maximal length of populated string (character sequence) property. Value
-   * of maximum has to be greater than or equals to {@link #minLength() minimum} with one exception
-   * - if the value is lower than 0. The default value is -1.
-   * <p>
-   * In case that maximum value is positive the populated value may be cropped to maximum length.
+   * of maximum has to be greater than or equals to {@link #minLength() minimal length}.
    */
-  public int maxLength() default -1;
+  public int maxLength() default Integer.MAX_VALUE;
 
   /**
    * Optional parameter for exact length of populated string (character sequence) property. If the
    * value of this parameter is greater than or equals to 0, parameters for {@link #minLength()
-   * minimum} and {@link #maxLength() maximum} are ignored. The default value is -1.
+   * minimal length} and {@link #maxLength() maximal length} are ignored. The default value is -1.
    * <p>
    * In case that exact length is specified, the populated value may be cropped or expanded by
-   * spaces to exact length of string (char sequence).
+   * character from {@link #fill()} parameter to exact length of string (char sequence).
    */
   public int length() default -1;
 
   /**
-   * Optional parameter which can specify the target number class populated into annotated property.
-   * This annotation is useful in case that property is declared by abstract numeric type.
+   * Optional parameter for filling character which will be used in case that the exact length is
+   * specified and the populated string (character sequence) has to be expanded.
+   */
+  public char fill() default ' ';
+
+  /**
+   * Optional parameter which may specify the target char sequence implementation which will be
+   * populated into annotated property. This annotation is useful in case that property is declared
+   * as {@link Object} or {@link CharSequence}.
+   * <p>
+   * If the default value {@link DefaultCharSequence} is used, the declared class of property will
+   * be used. In case that the property is declared as {@link Object} or {@link CharSequence} and
+   * this parameter contains default value, the class type returned by
+   * {@link DefaultCharSequence#getDefaultClass()} will be used.
    */
   public Class<? extends CharSequence> target() default DefaultCharSequence.class;
 
