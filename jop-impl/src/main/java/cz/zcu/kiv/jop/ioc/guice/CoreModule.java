@@ -12,6 +12,10 @@ import cz.zcu.kiv.jop.class_provider.ClassProviderFactory;
 import cz.zcu.kiv.jop.class_provider.ClassProviderFactoryImpl;
 import cz.zcu.kiv.jop.class_provider.ClassProviderInvoker;
 import cz.zcu.kiv.jop.class_provider.ClassProviderInvokerImpl;
+import cz.zcu.kiv.jop.construction.ConstructionStrategy;
+import cz.zcu.kiv.jop.construction.ConstructionStrategyFactory;
+import cz.zcu.kiv.jop.construction.ConstructionStrategyFactoryImpl;
+import cz.zcu.kiv.jop.construction.ConstructionStrategyImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactory;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactoryImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorInvoker;
@@ -59,6 +63,7 @@ public final class CoreModule extends AbstractModule {
   public void configure() {
     // binding of factories
     bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
+    bind(ConstructionStrategyFactory.class).to(ConstructionStrategyFactoryImpl.class);
     bind(ValueGeneratorFactory.class).to(ValueGeneratorFactoryImpl.class);
     bind(InstanceMatcherFactory.class).to(InstanceMatcherFactoryImpl.class);
     bind(PropertyPopulatorFactory.class).to(PropertyPopulatorFactoryImpl.class);
@@ -77,8 +82,9 @@ public final class CoreModule extends AbstractModule {
     bind(RandomGeneratorSession.class).annotatedWith(Names.named(NamedScopes.EXTENDED_IMPL)).to(ExtendedRandomGeneratorSessionImpl.class);
 
     // binding of named implementations
-    bind(new TypeLiteral<PropertyPopulator<?>>() {}).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultPropertyPopulator.class);
     bind(PopulatingStrategy.class).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultStrategy.class);
+    bind(new TypeLiteral<PropertyPopulator<?>>() {}).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultPropertyPopulator.class);
+    bind(ConstructionStrategy.class).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(ConstructionStrategyImpl.class);
 
     // bind listener of classes implementing callback interfaces.
     bindListener(new SubclassesMatcher(Initializable.class), new TypeListener() {
