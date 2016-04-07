@@ -16,6 +16,8 @@ import cz.zcu.kiv.jop.construction.ConstructionStrategy;
 import cz.zcu.kiv.jop.construction.ConstructionStrategyFactory;
 import cz.zcu.kiv.jop.construction.ConstructionStrategyFactoryImpl;
 import cz.zcu.kiv.jop.construction.ConstructionStrategyImpl;
+import cz.zcu.kiv.jop.construction.ConstructionStrategyInvoker;
+import cz.zcu.kiv.jop.construction.ConstructionStrategyInvokerImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactory;
 import cz.zcu.kiv.jop.generator.ValueGeneratorFactoryImpl;
 import cz.zcu.kiv.jop.generator.ValueGeneratorInvoker;
@@ -71,6 +73,7 @@ public final class CoreModule extends AbstractModule {
 
     // binding of interlayers
     bind(ClassProviderInvoker.class).to(ClassProviderInvokerImpl.class);
+    bind(ConstructionStrategyInvoker.class).to(ConstructionStrategyInvokerImpl.class);
     bind(ValueGeneratorInvoker.class).to(ValueGeneratorInvokerImpl.class);
     bind(InstanceMatcherInvoker.class).to(InstanceMatcherInvokerImpl.class);
     bind(PropertyPopulatorInvoker.class).to(PropertyPopulatorInvokerImpl.class);
