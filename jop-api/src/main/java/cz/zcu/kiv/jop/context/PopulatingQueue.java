@@ -2,11 +2,13 @@ package cz.zcu.kiv.jop.context;
 
 import java.util.List;
 
+import cz.zcu.kiv.jop.bean.Bean;
+
 /**
- * Interface for populating queue which contains the class types which was or will be populated. The
- * queue contains classes (dependencies) to populate. This queue may be part of
- * {@link PopulatingContext} which enqueues classes (dependencies) into queue and then are dequeued
- * by {@link cz.zcu.kiv.jop.ObjectPopulator ObjectPopulator} to populate.
+ * Interface for populating queue which contains the bean descriptors of dependencies which will be
+ * populated. This queue may be part of {@link PopulatingContext} which enqueues dependencies into
+ * queue. These dependencies are dequeued by {@link cz.zcu.kiv.jop.ObjectPopulator ObjectPopulator}
+ * for population.
  *
  * @author Mr.FrAnTA
  * @since 1.0.0
@@ -14,31 +16,31 @@ import java.util.List;
 public interface PopulatingQueue {
 
   /**
-   * Tries to enqueue given (dependency) class into queue and returns information whether was given
-   * class enqueued successfully.
+   * Tries to enqueue given bean descriptor of dependency into queue and returns information whether
+   * was given class enqueued successfully. The bean descriptor has to contains the instance of
+   * described object.
    *
-   * @param dependency the (dependency) class to enqueue.
-   * @return <code>true</code> if given (dependency) class was enqueued; <code>false</code>
-   *         otherwise.
+   * @param dependency the bean descriptor of dependency to enqueue.
+   * @return <code>true</code> if given dependency was enqueued; <code>false</code> otherwise.
    */
-  public boolean enqueue(Class<?> dependency);
+  public boolean enqueue(Bean dependency);
 
   /**
-   * Removes and returns the first class (dependency) in queue.
+   * Removes and returns the bean descriptor of first dependency in queue.
    *
-   * @return The first class in queue.
+   * @return The bean descriptor of first dependency in queue.
    */
-  public Class<?> dequeue();
+  public Bean dequeue();
 
   /**
-   * Returns the first class (dependency) in queue without removal.
+   * Returns the bean descriptor of first dependency in queue without removal.
    *
-   * @return The first class in queue.
+   * @return The bean descriptor of first dependency in queue.
    */
-  public Class<?> front();
+  public Bean front();
 
   /**
-   * Returns size of queue - number of classes (dependencies).
+   * Returns size of queue - number of dependencies.
    *
    * @return Size of populating queue.
    */
@@ -53,10 +55,10 @@ public interface PopulatingQueue {
   public boolean isEmpty();
 
   /**
-   * Return list of all classes (dependencies) in queue.
+   * Return list of bean descriptors of all dependencies waiting for population.
    *
-   * @return List of classes in queue.
+   * @return List of bean descriptors of dependencies waiting for population.
    */
-  public List<Class<?>> values();
+  public List<Bean> values();
 
 }
