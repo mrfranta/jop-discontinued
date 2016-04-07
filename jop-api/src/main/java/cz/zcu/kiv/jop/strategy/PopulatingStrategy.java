@@ -15,6 +15,16 @@ import cz.zcu.kiv.jop.property.Property;
 public interface PopulatingStrategy {
 
   /**
+   * Returns information whether the populating strategy is lazy. Lazy strategies are usually
+   * invoked in the end of poulating process but it depends on implementation of actual
+   * {@link PopulatingContext}. Lazy strategies cannot enqueue new objects (dependencies) for
+   * population.
+   *
+   * @return <code>true</code> if populating strategy is lazy; <code>false</code> otherwise.
+   */
+  public boolean isLazyStrategy();
+
+  /**
    * Returns information whether populating strategy may be {@link #applyStrategy applied} to given
    * property.
    *

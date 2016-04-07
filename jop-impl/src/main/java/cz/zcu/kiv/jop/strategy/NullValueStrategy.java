@@ -47,6 +47,15 @@ public class NullValueStrategy implements PopulatingStrategy {
   }
 
   /**
+   * {@inheritDoc}
+   * <p>
+   * This strategy returns always <code>false</code> because it isn't lazy.
+   */
+  public boolean isLazyStrategy() {
+    return false;
+  }
+
+  /**
    * Poupulates given property by <code>null</code> value in case of property for non-primitive
    * types. In case that property is for primitive type this method fills it by default value.
    * Generally this strategy uses the call of {@link Defaults#getDefaultValue(Class)} method.

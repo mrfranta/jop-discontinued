@@ -82,6 +82,12 @@ public class PopulatingStrategyInvokerImpl implements PopulatingStrategyInvoker 
       return;
     }
 
+    // check whatever the populating strategy is lazy
+    if (populatingStrategy.isLazyStrategy()) {
+      context.addLazyPopulatingStrategyInvocation(property, populatingStrategy);
+      return;
+    }
+
     logger.debug("Invoking populating strategy: " + populatingStrategy.getClass().getName() + "; for property: " + property);
 
     populatingStrategy.applyStrategy(property, context);

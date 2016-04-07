@@ -35,6 +35,15 @@ public class IgnoreStrategy implements PopulatingStrategy {
   /**
    * {@inheritDoc}
    * <p>
+   * This strategy returns always <code>false</code> because it isn't lazy.
+   */
+  public boolean isLazyStrategy() {
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>
    * This method returns always <code>true</code> because this strategy may be applied to all
    * properties.
    */

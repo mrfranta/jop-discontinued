@@ -43,12 +43,23 @@ public class SearchInstanceStrategy implements PopulatingStrategy {
   public boolean supports(Property<?> property) {
     Class<?> propertyType = property.getType();
 
+    // @formatter:off
     return (!propertyType.isAnnotation() // annotation type is not supported
         && !propertyType.isArray() // array is not supported for version 1.0.0
         && !propertyType.isEnum() // enumeration is not supported for version 1.0.0
         && !propertyType.isPrimitive() // primitive types cannot be instanced
         && !propertyType.isSynthetic() // synthetic class types are not supported
     );
+    // @formatter:on
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>
+   * This strategy returns always <code>true</code> because it is lazy
+   */
+  public boolean isLazyStrategy() {
+    return true;
   }
 
   /**
@@ -92,7 +103,7 @@ public class SearchInstanceStrategy implements PopulatingStrategy {
       // use first compatible instance
       Class<?> propertyType = property.getType();
       logger.info("No instance matcher annotation present. Searching for first instance of: " + propertyType.getName());
-      for (Object obj : context.getPopulatedInstances()) {
+      for (Object obj : context.getPopulatedInstances(true)) {
         if (obj != null && propertyType.isAssignableFrom(obj.getClass())) {
           instance = obj;
           break;
