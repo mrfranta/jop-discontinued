@@ -1,7 +1,5 @@
 package cz.zcu.kiv.jop.context;
 
-import java.util.Iterator;
-
 import cz.zcu.kiv.jop.bean.Bean;
 
 /**
@@ -15,11 +13,25 @@ import cz.zcu.kiv.jop.bean.Bean;
 public interface PopulatingContextHandler {
 
   /**
-   * Returns iterator for iterating bean descriptors in populating queue.
+   * Returns populating context handled by this handler.
    *
-   * @return Iterator for iterating populating queue.
+   * @return Populating context.
    */
-  public Iterator<Bean> getPopulatingQueueIterator();
+  public PopulatingContext getPopulatingContext();
+
+  /**
+   * Sets root bean descriptor of object for which started the population into populating context.
+   *
+   * @param rootBean the root bean to set.
+   */
+  public void setRootBean(Bean rootBean);
+
+  /**
+   * Returns iterator for iterating through the populating queue of handled populating context.
+   *
+   * @return Iterator for populating queue of handled populating context.
+   */
+  public PopulatingQueueIterator getPopulatingQueueIterator();
 
   /**
    * Stores given instance into session of populated instances.
@@ -27,12 +39,5 @@ public interface PopulatingContextHandler {
    * @param instance the instance to add (store).
    */
   public void addPopulatedInstance(Object instance);
-
-  /**
-   * Returns populating context handled by this handler.
-   *
-   * @return Populating context.
-   */
-  public PopulatingContext getPopulatingContext();
 
 }
