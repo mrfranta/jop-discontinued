@@ -29,15 +29,15 @@ import cz.zcu.kiv.jop.strategy.PopulatingStrategyException;
 public interface PopulatingContext {
 
   /**
-   * Returns instance of currently populated object (bean). It may returns <code>null</code> in case
-   * that there is no object to populate.
+   * Returns instance of currently populated object. It may returns <code>null</code> in case that
+   * there is no object to populate.
    *
    * @return Instance of currently populated object or <code>null</code>.
    */
   public Object getCurrentObject();
 
   /**
-   * Returns currently populated bean descriptor for currently populated object returned by method
+   * Returns bean descriptor for currently populated object returned by method
    * {@link #getCurrentObject()}. It may returns <code>null</code> in case that there is no object
    * to populate.
    *
