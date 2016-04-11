@@ -2,7 +2,7 @@ package cz.zcu.kiv.jop.bean;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +91,7 @@ public class JopBean extends AbstractBean {
    * @return Map of declared properties of this bean.
    */
   protected Map<String, Property<?>> createProperties() {
-    Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+    Map<String, Property<?>> properties = new LinkedHashMap<String, Property<?>>();
 
     // access type for properties
     Access access = getAnnotation(Access.class);
@@ -248,7 +248,7 @@ public class JopBean extends AbstractBean {
    * @return <code>true</code> if given class type is supported (valid); <code>false</code>
    *         otherwise.
    */
-  public static boolean isSupportedClassType(Class<?> clazz) {
+  public static boolean isSupported(Class<?> clazz) {
     try {
       checkClassType(clazz);
     }

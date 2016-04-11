@@ -134,7 +134,7 @@ public class ConstructionStrategyImpl implements ConstructionStrategy {
    */
   @SuppressWarnings("unchecked")
   public <T> T constructObject(Class<T> objClass, PopulatingContext context) throws ConstructionStrategyException {
-    if (!JopBean.isSupportedClassType(objClass)) {
+    if (!JopBean.isSupported(objClass)) {
       throw new ConstructionStrategyException("Unsupported class type: " + objClass.getName());
     }
 

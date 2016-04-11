@@ -87,10 +87,10 @@ public class ConstructionStrategyInvokerImpl implements ConstructionStrategyInvo
     }
     catch (Exception exc) {
       if (!(exc instanceof ConstructionStrategyException)) {
-        throw (ConstructionStrategyException)exc;
+        throw new ConstructionStrategyException("Cannot create new instance of class: " + clazz.getName(), exc);
       }
       else {
-        throw new ConstructionStrategyException("Cannot create new instance of class: " + clazz.getName(), exc);
+        throw (ConstructionStrategyException)exc;
       }
     }
 
