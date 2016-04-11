@@ -128,7 +128,9 @@ public class NewInstanceStrategy implements PopulatingStrategy {
       Bean bean = constructionStrategyInvoker.constructObject(clazz, customConstructionStrategy, context);
 
       // enqueue bean for population
-      context.populate(bean);
+      if (!context.populate(bean)) {
+        logger.warn("Instance of " + bean + " cannot be enqueued for population");
+      }
 
       // store instance into property
       Setter<Object> setter = (Setter<Object>)property.getSetter();
