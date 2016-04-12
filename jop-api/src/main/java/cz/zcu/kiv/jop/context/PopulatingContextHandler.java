@@ -40,4 +40,12 @@ public interface PopulatingContextHandler {
    */
   public void addPopulatedInstance(Object instance);
 
+  /**
+   * Invokes all lazy populating strategies which was added into handled populating context.
+   *
+   * @throws PopulatingContextException If some error occurs during invocation of lazy populating
+   *           strategies.
+   */
+  public void invokeLazyPopulatingStrategies() throws PopulatingContextException;
+
 }
