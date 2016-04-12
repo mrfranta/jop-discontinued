@@ -28,7 +28,8 @@ public class PopulatingContextHandlerImpl implements PopulatingContextHandler {
   /**
    * Constructs new handler of populating context.
    *
-   * @param populateDependencies information whether may be populated dependencies of
+   * @param populateDependencies information whether may be populated dependencies of populated
+   *          object(s).
    * @param globalSession the instance of session which contains all already populated instances.
    */
   public PopulatingContextHandlerImpl(boolean populateDependencies, PopulatingSession globalSession) {
