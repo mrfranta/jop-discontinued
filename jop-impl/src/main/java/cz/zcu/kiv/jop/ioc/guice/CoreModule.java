@@ -8,6 +8,8 @@ import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
+import cz.zcu.kiv.jop.ObjectPopulator;
+import cz.zcu.kiv.jop.ObjectPopulatorImpl;
 import cz.zcu.kiv.jop.class_provider.ClassProviderFactory;
 import cz.zcu.kiv.jop.class_provider.ClassProviderFactoryImpl;
 import cz.zcu.kiv.jop.class_provider.ClassProviderInvoker;
@@ -37,6 +39,8 @@ import cz.zcu.kiv.jop.populator.PropertyPopulatorInvokerImpl;
 import cz.zcu.kiv.jop.session.ClassLoaderSession;
 import cz.zcu.kiv.jop.session.ClassLoaderSessionImpl;
 import cz.zcu.kiv.jop.session.ExtendedRandomGeneratorSessionImpl;
+import cz.zcu.kiv.jop.session.GlobalPopulatingSession;
+import cz.zcu.kiv.jop.session.PopulatingSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSession;
 import cz.zcu.kiv.jop.session.RandomGeneratorSessionImpl;
 import cz.zcu.kiv.jop.strategy.DefaultStrategy;
@@ -63,6 +67,9 @@ public final class CoreModule extends AbstractModule {
    */
   @Override
   public void configure() {
+    // binding for object populator
+    bind(ObjectPopulator.class).to(ObjectPopulatorImpl.class);
+
     // binding of factories
     bind(ClassProviderFactory.class).to(ClassProviderFactoryImpl.class);
     bind(ConstructionStrategyFactory.class).to(ConstructionStrategyFactoryImpl.class);
@@ -83,6 +90,7 @@ public final class CoreModule extends AbstractModule {
     bind(ClassLoaderSession.class).to(ClassLoaderSessionImpl.class);
     bind(RandomGeneratorSession.class).to(RandomGeneratorSessionImpl.class);
     bind(RandomGeneratorSession.class).annotatedWith(Names.named(NamedScopes.EXTENDED_IMPL)).to(ExtendedRandomGeneratorSessionImpl.class);
+    bind(PopulatingSession.class).to(GlobalPopulatingSession.class);
 
     // binding of named implementations
     bind(PopulatingStrategy.class).annotatedWith(Names.named(NamedScopes.DEFAULT_IMPL)).to(DefaultStrategy.class);

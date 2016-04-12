@@ -15,6 +15,7 @@ import com.google.inject.Guice;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.ProvisionException;
+import com.google.inject.Stage;
 import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
 
@@ -72,7 +73,7 @@ public class GuiceInjector implements Injector {
     }
 
     try {
-      injector = Guice.createInjector(modules);
+      injector = Guice.createInjector(Stage.PRODUCTION, modules);
     }
     catch (CreationException exc) {
       throw new InjectorException(exc);
