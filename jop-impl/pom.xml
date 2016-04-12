@@ -31,7 +31,7 @@
       <artifactId>guice</artifactId>
     </dependency>
 
-    <!-- random generators -->
+    <!-- random number generators -->
     <dependency>
       <groupId>org.uncommons.maths</groupId>
       <artifactId>uncommons-maths</artifactId>
@@ -41,6 +41,11 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
     </dependency>
   </dependencies>
 
