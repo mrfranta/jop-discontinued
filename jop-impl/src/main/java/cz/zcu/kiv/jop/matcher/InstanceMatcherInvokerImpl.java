@@ -80,7 +80,7 @@ public class InstanceMatcherInvokerImpl implements InstanceMatcherInvoker {
 
     logger.debug("Invoking instance matcher: " + instanceMatcher.getClass().getName() + "; with parameters: " + params + "; for property: " + property);
 
-    for (Object obj : context.getPopulatedInstances()) {
+    for (Object obj : context.getPopulatedInstances(true)) {
       if (!instanceMatcher.supports(obj.getClass())) {
         continue;
       }
