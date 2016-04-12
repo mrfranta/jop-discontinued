@@ -75,7 +75,7 @@ public class SearchInstanceStrategy implements PopulatingStrategy {
    * Lookups for instance matcher annotation which annotates the given property. If annotation is
    * present, uses the {@link InstanceMatcherInvoker} for searching of matching instance which will
    * be populated into property. If no annotation was found then it's searched for first assignable
-   * instance in {@link PopulatingContext#getPopulatedInstances() list of populated instances}.
+   * instance in {@link PopulatingContext#getPopulatedInstances list of populated instances}.
    */
   @SuppressWarnings("unchecked")
   public void applyStrategy(Property<?> property, PopulatingContext context) throws PopulatingStrategyException {
