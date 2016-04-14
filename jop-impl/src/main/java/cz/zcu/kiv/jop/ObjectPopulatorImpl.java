@@ -162,7 +162,7 @@ public class ObjectPopulatorImpl implements ObjectPopulator {
   }
 
   /**
-   * Clears global session of all generated and populated objects.
+   * {@inheritDoc}
    */
   public void clearPopulatingSession() {
     populatingSession.clear();

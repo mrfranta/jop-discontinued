@@ -59,4 +59,8 @@ public interface ObjectPopulator {
    */
   public <T> List<T> populateSingle(Class<T> clazz, int instancesCount) throws ObjectPopulatorException;
 
+  /**
+   * Clears global session of all generated and populated objects.
+   */
+  public void clearPopulatingSession();
 }
