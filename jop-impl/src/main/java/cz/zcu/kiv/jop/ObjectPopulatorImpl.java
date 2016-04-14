@@ -32,6 +32,8 @@ public class ObjectPopulatorImpl implements ObjectPopulator {
   /** Logger used for logging. */
   private static final Log logger = LogFactory.getLog(ObjectPopulatorImpl.class);
 
+  protected boolean globalSessionUsed = true;
+
   /**
    * Constructs object populator.
    */
@@ -108,7 +110,7 @@ public class ObjectPopulatorImpl implements ObjectPopulator {
     }
 
     // create populating context handler
-    PopulatingContextHandler contextHandler = createPopulatingContextHandler(populateDependencies);
+    PopulatingContextHandler contextHandler = createPopulatingContextHandler(globalSessionUsed ? populateDependencies : null);
     // get populating context
     PopulatingContext context = contextHandler.getPopulatingContext();
 
@@ -159,6 +161,14 @@ public class ObjectPopulatorImpl implements ObjectPopulator {
    */
   protected PopulatingContextHandler createPopulatingContextHandler(boolean populateDependencies) {
     return new PopulatingContextHandlerImpl(populateDependencies, populatingSession);
+  }
+
+  public boolean isGlobalSessionUsed() {
+    return globalSessionUsed;
+  }
+
+  public void setGlobalSessionUsed(boolean globalSessionUsed) {
+    this.globalSessionUsed = globalSessionUsed;
   }
 
   /**
