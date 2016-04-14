@@ -5,10 +5,7 @@ import java.lang.annotation.Annotation;
 import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.annotation.CustomAnnotation;
-import cz.zcu.kiv.jop.annotation.populator.ArrayValue;
-import cz.zcu.kiv.jop.annotation.populator.NumberValue;
 import cz.zcu.kiv.jop.annotation.populator.PropertyPopulatorAnnotation;
-import cz.zcu.kiv.jop.annotation.populator.StringValue;
 import cz.zcu.kiv.jop.factory.AbstractBindingFactory;
 import cz.zcu.kiv.jop.factory.FactoryException;
 import cz.zcu.kiv.jop.factory.binding.BindingException;
@@ -61,9 +58,7 @@ public class PropertyPopulatorFactoryImpl extends AbstractBindingFactory<Propert
    */
   @Override
   protected final void configure() throws BindingException {
-    bind(ArrayValue.class).to(ArrayValuePopulator.class);
-    bind(NumberValue.class).to(NumberValuePopulator.class);
-    bind(StringValue.class).to(StringValuePopulator.class);
+    // TODO: add bindings
   }
 
   /**

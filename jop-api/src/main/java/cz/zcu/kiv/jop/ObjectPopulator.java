@@ -59,14 +59,4 @@ public interface ObjectPopulator {
    */
   public <T> List<T> populateSingle(Class<T> clazz, int instancesCount) throws ObjectPopulatorException;
 
-
-  public boolean isGlobalSessionUsed();
-
-  public void setGlobalSessionUsed(boolean globalSessionUsed);
-
-  /**
-   * Clears global session of all generated and populated objects.
-   */
-  public void clearPopulatingSession();
-
 }
