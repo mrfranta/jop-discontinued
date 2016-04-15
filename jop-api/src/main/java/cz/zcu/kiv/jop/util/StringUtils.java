@@ -95,4 +95,40 @@ public abstract class StringUtils {
     return hasText((CharSequence)str);
   }
 
+  /**
+   * Expands or crops given string to given length.
+   *
+   * @param str the string which will be expanded.
+   * @param len the target length of string.
+   * @param fill the character which will be used for expansion.
+   * @return Expanded or cropped string.
+   */
+  public static String expandOrCrop(String str, int len, char fill) {
+    Preconditions.checkArgument(len >= 0, "Target length of string cannot be negative");
+
+    if (len == 0) {
+      return new String();
+    }
+
+    int strlen = 0;
+    if (hasLength(str)) {
+      strlen = str.length();
+    }
+
+    if (strlen > len) {
+      return str.substring(0, len);
+    }
+    else if (strlen == len) {
+      return new String(str);
+    }
+
+    StringBuilder sb = new StringBuilder(len);
+    sb.append(str == null ? "" : str);
+    for (int i = strlen; i < len; i++) {
+      sb.append(fill);
+    }
+
+    return sb.toString();
+  }
+
 }
