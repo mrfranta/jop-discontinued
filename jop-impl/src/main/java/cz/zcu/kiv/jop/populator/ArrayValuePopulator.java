@@ -156,6 +156,10 @@ public class ArrayValuePopulator extends AbstractPropertyPopulator<ArrayValue> {
           // doesn't matter
         }
       }
+
+      if (job.getError() != null) {
+        throw job.getError();
+      }
     }
   }
 
@@ -228,6 +232,16 @@ public class ArrayValuePopulator extends AbstractPropertyPopulator<ArrayValue> {
         this.error = error;
       }
     }
+
+    /**
+     * Returns stored error which occured during filling (population) of array. If there is no
+     * error, returns <code>null</code>.
+     *
+     * @return Stored filling (populating) error.
+     */
+    public PropertyPopulatorException getError() {
+      return error;
+    }
   }
 
   /**
@@ -259,7 +273,6 @@ public class ArrayValuePopulator extends AbstractPropertyPopulator<ArrayValue> {
     public void run() {
       int index = -1;
       while ((index = job.next()) >= 0) {
-        System.err.println(index);
         try {
           Object value = propertyPopulatorInvoker.invokeNextPopulator(job.property, job.componentType);
           Array.set(job.array, index, value);
