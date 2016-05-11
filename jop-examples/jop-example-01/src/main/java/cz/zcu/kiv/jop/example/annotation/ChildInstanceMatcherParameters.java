@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 import cz.zcu.kiv.jop.annotation.matcher.CustomInstanceMatcher;
 import cz.zcu.kiv.jop.annotation.parameters.CustomParameters;
-import cz.zcu.kiv.jop.example.obj.Gender;
+import cz.zcu.kiv.jop.example.domain.Gender;
 
 /**
  * Parameters for {@link cz.zcu.kiv.jop.example.matcher.ChildInstanceMatcher ChildInstanceMatcher}

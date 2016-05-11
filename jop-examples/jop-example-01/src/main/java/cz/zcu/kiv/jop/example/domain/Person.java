@@ -1,4 +1,4 @@
-package cz.zcu.kiv.jop.example.obj;
+package cz.zcu.kiv.jop.example.domain;
 
 import java.awt.Color;
 import java.text.DateFormat;

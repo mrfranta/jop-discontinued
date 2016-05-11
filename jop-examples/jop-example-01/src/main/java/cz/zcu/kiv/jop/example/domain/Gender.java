@@ -1,4 +1,4 @@
-package cz.zcu.kiv.jop.example.obj;
+package cz.zcu.kiv.jop.example.domain;
 
 /**
  * The gender of person.

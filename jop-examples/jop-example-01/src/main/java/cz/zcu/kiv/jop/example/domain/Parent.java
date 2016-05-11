@@ -1,4 +1,4 @@
-package cz.zcu.kiv.jop.example.obj;
+package cz.zcu.kiv.jop.example.domain;
 
 import cz.zcu.kiv.jop.annotation.Constructor;
 import cz.zcu.kiv.jop.annotation.matcher.CustomInstanceMatcher;

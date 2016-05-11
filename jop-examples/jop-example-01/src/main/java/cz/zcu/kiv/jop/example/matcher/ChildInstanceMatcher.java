@@ -3,7 +3,7 @@ package cz.zcu.kiv.jop.example.matcher;
 import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.example.annotation.ChildInstanceMatcherParameters;
-import cz.zcu.kiv.jop.example.obj.Child;
+import cz.zcu.kiv.jop.example.domain.Child;
 import cz.zcu.kiv.jop.matcher.InstanceMatcher;
 import cz.zcu.kiv.jop.matcher.InstanceMatcherException;
 

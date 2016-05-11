@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.inject.Singleton;
 
 import cz.zcu.kiv.jop.annotation.parameters.EmptyParameters;
-import cz.zcu.kiv.jop.example.obj.Gender;
+import cz.zcu.kiv.jop.example.domain.Gender;
 import cz.zcu.kiv.jop.generator.AbstractValueGenerator;
 import cz.zcu.kiv.jop.generator.ValueGeneratorException;
 

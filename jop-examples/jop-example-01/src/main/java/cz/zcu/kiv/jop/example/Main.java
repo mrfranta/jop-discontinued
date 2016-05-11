@@ -4,8 +4,8 @@ import java.util.List;
 
 import cz.zcu.kiv.jop.ObjectPopulator;
 import cz.zcu.kiv.jop.ObjectPopulatorProvider;
-import cz.zcu.kiv.jop.example.obj.Child;
-import cz.zcu.kiv.jop.example.obj.Parent;
+import cz.zcu.kiv.jop.example.domain.Child;
+import cz.zcu.kiv.jop.example.domain.Parent;
 
 /**
  * The runnable main class of this example.
