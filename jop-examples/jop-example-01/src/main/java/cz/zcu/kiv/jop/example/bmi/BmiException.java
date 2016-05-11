@@ -1,7 +1,7 @@
 package cz.zcu.kiv.jop.example.bmi;
 
 /**
- * The exception which may be thrown in case that some object is not valid.
+ * The exception which may be thrown in case that calculation of BMI fails.
  *
  * @author Mr.FrAnTA
  */
@@ -20,7 +20,7 @@ public class BmiException extends Exception {
   private static final long serialVersionUID = 20160511;
 
   /**
-   * Constructs a new bmi calculation exception with <code>null</code> as its detail message. The
+   * Constructs a new BMI calculation exception with <code>null</code> as its detail message. The
    * cause is not initialized, and may subsequently be initialized by a call to {@link #initCause}.
    */
   public BmiException() {
@@ -28,7 +28,7 @@ public class BmiException extends Exception {
   }
 
   /**
-   * Constructs a new bmi calculation exception with the specified detail message. The cause is not
+   * Constructs a new BMI calculation exception with the specified detail message. The cause is not
    * initialized, and may subsequently be initialized by a call to {@link #initCause}.
    *
    * @param message the detail message. The detail message is saved for later retrieval by the
@@ -39,7 +39,7 @@ public class BmiException extends Exception {
   }
 
   /**
-   * Constructs a new bmi calculation exception with the specified cause and <code>null</code> as
+   * Constructs a new BMI calculation exception with the specified cause and <code>null</code> as
    * its detail message.
    *
    * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method).
@@ -51,7 +51,7 @@ public class BmiException extends Exception {
   }
 
   /**
-   * Constructs a new bmi calculation exception with the specified detail message and cause.
+   * Constructs a new BMI calculation exception with the specified detail message and cause.
    * <p>
    * Note that the detail message associated with <code>cause</code> is <i>not</i> automatically
    * incorporated in this exception's detail message.
